@@ -60,7 +60,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-    "allauth.account.middleware.AccountMiddleware",
     "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -183,8 +182,8 @@ if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
 else:
     CORS_ALLOWED_ORIGINS = [
-        "http://localhost:3000/",
-        "http://127.0.0.1:3000/",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
     ]
 
 # Google OAuth configuration
