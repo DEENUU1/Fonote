@@ -3,7 +3,6 @@ from dj_rest_auth.registration.views import RegisterView
 from dj_rest_auth.views import LoginView, LogoutView, UserDetailsView
 from django.urls import path
 from rest_framework_simplejwt.views import TokenVerifyView
-from allauth.socialaccount.views import signup
 from .views import GoogleLogin
 
 urlpatterns = [
