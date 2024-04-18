@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import plan, order, price, user_subscription
+from .models import plan, price, user_subscription
 
 
 class PlanAdmin(admin.ModelAdmin):

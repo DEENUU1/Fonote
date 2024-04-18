@@ -8,6 +8,7 @@ class UserSubscriptionInputSerializer(ModelSerializer):
         model = UserSubscription
         fields = (
             "subscription_id",
+            "session_id",
             "plan",
         )
 
@@ -20,6 +21,7 @@ class UserSubscriptionOutputSerializer(ModelSerializer):
         fields = (
             "id",
             "user",
+            "session_id",
             "subscription_id",
             "plan",
             "start_date",

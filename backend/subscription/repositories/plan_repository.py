@@ -10,3 +10,7 @@ class PlanRepository:
         plans = self.model.objects.filter(active=True).all()
         serializer = PlanOutputSerializer(plans, many=True).data
         return serializer
+
+    def get_plan_by_price_id(self, price_id: str):
+        plan = self.model.objects.get(price_id=price_id)
+        return PlanOutputSerializer(plan).data

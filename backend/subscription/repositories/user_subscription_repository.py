@@ -25,3 +25,10 @@ class UserSubscriptionRepository:
         subscription.status = status
         subscription.save()
         return UserSubscriptionOutputSerializer(subscription)
+
+    def get_by_subscription_id(self, subscription_id: str) -> UserSubscriptionOutputSerializer:
+        subscription = self.model.objects.get(subscription_id=subscription_id)
+        return UserSubscriptionOutputSerializer(subscription)
+
+    def user_subscription_exists_by_subscription_id(self, subscription_id: str) -> bool:
+        return self.model.objects.filter(subscription_id=subscription_id).exists()

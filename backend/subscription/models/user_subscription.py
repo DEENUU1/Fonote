@@ -7,6 +7,7 @@ from .plan import Plan
 
 class UserSubscription(BaseModel):
     STATUS = (
+        ("PENDING", "PENDING"),
         ("ACTIVE", "ACTIVE"),
         ("CANCELED", "CANCELED"),
         ("EXPIRED", "EXPIRED"),
@@ -17,4 +18,5 @@ class UserSubscription(BaseModel):
     plan = models.OneToOneField(Plan, on_delete=models.SET_NULL, null=True)
     start_date = models.DateField(null=False)
     end_date = models.DateField(null=False)
-    status = models.CharField(max_length=25, choices=STATUS, default="ACTIVE")
+    status = models.CharField(max_length=25, choices=STATUS, default="PENDING")
+    session_id = models.CharField(max_length=255, null=False, blank=False)
