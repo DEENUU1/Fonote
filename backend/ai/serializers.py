@@ -21,5 +21,6 @@ class InputDataOutputSerializer(ModelSerializer):
             "audio_length",
             "source_title",
             "source_url",
-            "status"
+            "status",
+            "user"  # TODO change this later
         )

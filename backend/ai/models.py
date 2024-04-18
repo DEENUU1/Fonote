@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from utils.base_model import BaseModel
+from django.contrib.auth.backends import UserModel
 
 
 class InputData(BaseModel):
@@ -24,8 +25,9 @@ class InputData(BaseModel):
     transcription_type = models.CharField(max_length=25, choices=TRANSCRIPTION_TYPE, null=False)
     audio_length = models.IntegerField(null=True, blank=True)  # Value in seconds
     source_title = models.CharField(max_length=255, null=True, blank=True)
-    source_url = models.URLField(null=True, blank=True)
+    source_url = models.URLField(null=False)
     status = models.CharField(max_length=25, choices=STATUS, null=False, default="NEW")
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True, blank=True)
 
 
 
