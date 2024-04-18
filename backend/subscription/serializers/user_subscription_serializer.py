@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from ..models.user_subscription import UserSubscription
+from .plan_serializer import PlanOutputSerializer
 
 
 class UserSubscriptionInputSerializer(ModelSerializer):
@@ -12,6 +13,8 @@ class UserSubscriptionInputSerializer(ModelSerializer):
 
 
 class UserSubscriptionOutputSerializer(ModelSerializer):
+    plan = PlanOutputSerializer()
+
     class Meta:
         model = UserSubscription
         fields = (
