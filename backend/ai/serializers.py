@@ -1,4 +1,4 @@
-from .models import InputData
+from .models.input_data import InputData
 from rest_framework.serializers import ModelSerializer, DateTimeField
 
 

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import InputData
+from .models.input_data import InputData
+from .models.result import Result
 
 
 class InputDataAdmin(admin.ModelAdmin):
@@ -7,4 +8,10 @@ class InputDataAdmin(admin.ModelAdmin):
     list_filter = ('status', 'source', 'transcription_type')
 
 
+class ResultAdmin(admin.ModelAdmin):
+    list_display = ('id', 'result_type', 'status', 'input')
+    list_filter = ('status', 'result_type')
+
+
 admin.site.register(InputData, InputDataAdmin)
+admin.site.register(Result, ResultAdmin)
