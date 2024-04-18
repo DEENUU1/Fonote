@@ -1,5 +1,5 @@
 from .models import InputData
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, DateTimeField
 
 
 class InputDataInputSerializer(ModelSerializer):
@@ -12,6 +12,9 @@ class InputDataInputSerializer(ModelSerializer):
 
 
 class InputDataOutputSerializer(ModelSerializer):
+    created_at = DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)
+    updated_at = DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)
+
     class Meta:
         model = InputData
         fields = (
@@ -22,5 +25,8 @@ class InputDataOutputSerializer(ModelSerializer):
             "source_title",
             "source_url",
             "status",
-            "user"  # TODO change this later
+            "user",
+            "created_at",
+            "updated_at"
         )
+
