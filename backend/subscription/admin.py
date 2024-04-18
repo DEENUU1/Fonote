@@ -8,7 +8,7 @@ class PlanAdmin(admin.ModelAdmin):
 
 
 class PriceAdmin(admin.ModelAdmin):
-    list_display = ("price", "prev_prive")
+    list_display = ("price", "prev_price")
 
 
 admin.site.register(plan.Plan, PlanAdmin)
