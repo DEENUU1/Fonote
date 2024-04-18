@@ -1,3 +1,4 @@
+import uuid
 from utils.base_model import BaseModel
 from django.db import models
 from django.contrib.auth.backends import UserModel
@@ -10,6 +11,7 @@ class Order(BaseModel):
         ("COMPLETED", "COMPLETED"),
         ("CANCELLED", "CANCELLED"),
     )
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(UserModel, on_delete=models.SET_NULL, null=True)
     plan = models.OneToOneField(Plan, on_delete=models.SET_NULL, null=True)
     status = models.CharField(max_length=25, choices=STATUS, default="PENDING")

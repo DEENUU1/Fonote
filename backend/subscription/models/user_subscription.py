@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from utils.base_model import BaseModel
 from django.contrib.auth.backends import UserModel
@@ -10,7 +11,7 @@ class UserSubscription(BaseModel):
         ("CANCELED", "CANCELED"),
         ("EXPIRED", "EXPIRED"),
     )
-
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(UserModel, on_delete=models.SET_NULL, null=True)
     subscription_id = models.CharField(max_length=255, unique=True)
     plan = models.OneToOneField(Plan, on_delete=models.SET_NULL, null=True)
