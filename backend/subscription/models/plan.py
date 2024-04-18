@@ -11,3 +11,4 @@ class Plan(models.Model):
     max_result = models.IntegerField(null=False, default=2)
     duration = models.IntegerField(null=False)
     price = models.ForeignKey(Price, on_delete=models.CASCADE)
+    active = models.BooleanField(default=True)
