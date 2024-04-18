@@ -1,7 +1,9 @@
 import stripe
 from django.conf import settings
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from rest_framework.views import APIView
+import json
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 webhook_secret = settings.STRIPE_WEBHOOK_SECRET
@@ -35,8 +37,8 @@ class WebHook(APIView):
             :return: returns event details as json response .
         """
         request_data = json.loads(request.body)
+
         if webhook_secret:
-            # Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
             signature = request.META['HTTP_STRIPE_SIGNATURE']
             try:
                 event = stripe.Webhook.construct_event(
@@ -45,6 +47,7 @@ class WebHook(APIView):
                     secret=webhook_secret
                 )
                 data = event['data']
+                print(f"event: {event}")
             except ValueError as err:
                 raise err
             except stripe.error.SignatureVerificationError as err:
@@ -52,8 +55,10 @@ class WebHook(APIView):
             # Get the type of webhook event sent - used to check the status of PaymentIntents.
             event_type = event['type']
         else:
+            print(f"requested data: {request_data}")
             data = request_data['data']
             event_type = request_data['type']
+
         data_object = data['object']
 
         if event_type == 'checkout.session.completed':
@@ -73,4 +78,4 @@ class WebHook(APIView):
         else:
             print('Unhandled event type {}'.format(event_type))
 
-        return JsonResponse(success=True, safe=False)
+        return JsonResponse(data={"status": "success"})
