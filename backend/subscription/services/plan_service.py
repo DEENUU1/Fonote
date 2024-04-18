@@ -1,4 +1,3 @@
-from ..serializers.plan_serializer import PlanOutputSerializer
 from ..repositories.plan_repository import PlanRepository
 
 
