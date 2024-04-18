@@ -4,9 +4,21 @@ from django.http import JsonResponse
 from django.shortcuts import redirect
 from rest_framework.views import APIView
 import json
+from .services.plan_service import PlanService
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 webhook_secret = settings.STRIPE_WEBHOOK_SECRET
+
+
+class PlanListAPIView(APIView):
+    permission_classes = (AllowAny, )
+
+    def get(self, request):
+        plans = PlanService().get_active_plan_list()
+        return Response(plans, status=status.HTTP_200_OK)
 
 
 class CreateSubscription(APIView):
