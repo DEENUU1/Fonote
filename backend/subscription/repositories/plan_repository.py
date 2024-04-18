@@ -7,6 +7,6 @@ class PlanRepository:
         self.model = Plan
 
     def get_active_plan_list(self):
-        plans = self.model.objects.filter(active=True)
-        serializer = PlanOutputSerializer(plans, many=True)
-        return serializer.data
+        plans = self.model.objects.filter(active=True).all()
+        serializer = PlanOutputSerializer(plans, many=True).data
+        return serializer
