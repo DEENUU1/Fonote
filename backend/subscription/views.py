@@ -10,13 +10,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers.order_serializer import OrderInputSerializer
+from .serializers.order_serializer import OrderOutputSerializer
+from .serializers.plan_serializer import PlanOutputSerializer
 from .serializers.user_subscription_serializer import UserSubscriptionInputSerializer
 from .services.order_service import OrderService
 from .services.plan_service import PlanService
 from .services.user_subscription_service import UserSubscriptionService
-from .serializers.plan_serializer import PlanOutputSerializer
-from .serializers.order_serializer import OrderOutputSerializer
-
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 webhook_secret = settings.STRIPE_WEBHOOK_SECRET
@@ -44,6 +43,29 @@ class OrderDetailsAPIView(APIView):
     def get(self, request, pk):
         order = OrderService().get_order_details(pk, request.user.id)
         return Response(OrderOutputSerializer(order).data, status=status.HTTP_200_OK)
+
+
+class CancelSubscription(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    _user_service = UserSubscriptionService()
+
+    def post(self, request):
+        user_current_plan = self._user_service.get_current_subscription_by_user(request.user)
+
+        if user_current_plan and user_current_plan.status != "ACTIVE":
+            return Response(
+                {"message": "You don't have an active subscription"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            stripe.Subscription.cancel(user_current_plan.subscription_id)
+            self._user_service.change_status(user_current_plan.pk, "CANCELED")
+        except Exception as e:
+            raise e
+
+        return Response(status=status.HTTP_200_OK)
 
 
 class CreateSubscription(APIView):
@@ -157,7 +179,10 @@ class WebHook(APIView):
                 order = self._order_service.create(order_serializer.validated_data, user)
                 self._user_subscription_service.change_status(user_subscription.pk, "ACTIVE")
                 self._user_subscription_service.set_order_object(user_subscription.pk, order)
-
+                self._user_subscription_service.set_subscription_id(
+                    user_subscription.pk,
+                    event.get("data").get("object").get("subscription")
+                )
         elif event_type == 'invoice.paid':
             print("Paid")
             print("Add this later - works only in production mode")

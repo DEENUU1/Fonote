@@ -43,3 +43,8 @@ class UserSubscriptionRepository:
         subscription.save()
         return
 
+    def set_subscription_id(self, subscription: UserSubscription, subscription_id: str) -> None:
+        subscription.subscription_id = subscription_id
+        subscription.save()
+        return
+

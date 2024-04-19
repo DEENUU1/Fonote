@@ -33,6 +33,14 @@ class UserSubscriptionService:
 
         return self.user_subscription_repository.set_order_object(user_subscription, order)
 
+    def set_subscription_id(self, _id: UUID, subscription_id: str) -> None:
+        if not self.user_subscription_repository.user_subscription_exists_by_uuid(_id):
+            return None
+
+        user_subscription = self.user_subscription_repository.get_user_subscription_by_uuid(_id)
+
+        return self.user_subscription_repository.set_subscription_id(user_subscription, subscription_id)
+
     def get_by_subscription_id(self, subscription_id: str) -> Optional[UserSubscription]:
         if not self.user_subscription_repository.user_subscription_exists_by_subscription_id(subscription_id):
             return None
