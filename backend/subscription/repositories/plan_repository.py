@@ -1,6 +1,8 @@
 from ..models.plan import Plan
 from typing import List
 
+from uuid import UUID
+
 
 class PlanRepository:
     def __init__(self):
@@ -16,3 +18,8 @@ class PlanRepository:
     def plan_exists_by_price_id(self, price_id: str) -> bool:
         return self.model.objects.filter(price__stripe_id=price_id).exists()
 
+    def get_plan_by_uuid(self, _id: UUID) -> Plan:
+        return self.model.objects.get(id=_id)
+
+    def plan_exists_by_uuid(self, _id: UUID) -> bool:
+        return self.model.objects.filter(id=_id).exists()

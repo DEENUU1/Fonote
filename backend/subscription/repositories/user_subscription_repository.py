@@ -1,5 +1,5 @@
 from ..models.user_subscription import UserSubscription
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from django.contrib.auth.backends import UserModel
 from uuid import UUID
 
@@ -24,6 +24,6 @@ class UserSubscriptionRepository:
     def get_user_subscription_by_uuid(self, _id: UUID) -> UserSubscription:
         return self.model.objects.get(id=_id)
 
-    def get_current_subscription_by_user(self, user: UserModel) -> UserSubscription:
+    def get_current_subscription_by_user(self, user: UserModel) -> Optional[UserSubscription]:
         return self.model.objects.filter(user=user).first()
 

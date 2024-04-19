@@ -27,7 +27,7 @@ class InputData(BaseModel):
     source_title = models.CharField(max_length=255, null=True, blank=True)
     source_url = models.URLField(null=False)
     status = models.CharField(max_length=25, choices=STATUS, null=False, default="NEW")
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.id}-{self.status}"
