@@ -5,6 +5,7 @@ from ..repositories.user_subscription_repository import UserSubscriptionReposito
 from typing import Dict, Any
 from uuid import UUID
 from rest_framework.exceptions import NotFound
+from datetime import date
 
 
 class UserSubscriptionService:
@@ -24,3 +25,16 @@ class UserSubscriptionService:
         user_subscription = self.user_subscription_repository.get_user_subscription_by_uuid(user_subscription_id)
 
         return self.user_subscription_repository.partial_update(user_subscription, data)
+
+    @staticmethod
+    def subscription_is_valid(user_subscription: UserSubscription) -> bool:
+        today = date.today()
+
+        if user_subscription.start_date or user_subscription.end_date is None:
+            return False
+
+        if user_subscription.start_date >= today or user_subscription.end_date <= today:
+            return False
+
+        return True
+

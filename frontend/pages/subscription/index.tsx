@@ -5,7 +5,7 @@ export default function Home() {
 
 const handleSubscription = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/subscription/create/', {
+      const response = await fetch('http://localhost:8000/api/subscription/checkout/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
