@@ -2,7 +2,6 @@ import json
 
 import stripe
 from django.conf import settings
-from django.contrib.auth.backends import UserModel
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -12,10 +11,12 @@ from rest_framework.views import APIView
 from .serializers.order_serializer import OrderInputSerializer
 from .serializers.order_serializer import OrderOutputSerializer
 from .serializers.plan_serializer import PlanOutputSerializer
-from .serializers.user_subscription_serializer import UserSubscriptionInputSerializer
+from .serializers.user_subscription_serializer import UserSubscriptionInputSerializer, UserSubscriptionUpdateSerializer
 from .services.order_service import OrderService
 from .services.plan_service import PlanService
 from .services.user_subscription_service import UserSubscriptionService
+from authentication.services.user_service import UserService
+
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 webhook_secret = settings.STRIPE_WEBHOOK_SECRET
@@ -120,6 +121,7 @@ class CreateSubscription(APIView):
 class WebHook(APIView):
     _user_subscription_service = UserSubscriptionService()
     _order_service = OrderService()
+    _user_service = UserService()
 
     def post(self, request):
         """
@@ -138,7 +140,6 @@ class WebHook(APIView):
                     sig_header=signature,
                     secret=webhook_secret
                 )
-
             except ValueError as err:
                 raise err
             except stripe.error.SignatureVerificationError as err:
@@ -153,43 +154,63 @@ class WebHook(APIView):
                 user_id = event.get("data").get("object").get("metadata").get("user_id")
                 user_subscription = self._user_subscription_service.get_current_subscription_by_user(int(user_id))
 
+                # Create Order object
+                object_data = event.get("data").get("object")
+                customer_details_data = object_data.get("customer_details")
                 data = {
-                    "currency": event.get("data").get("object").get("currency"),
-                    "customer": event.get("data").get("object").get("customer"),
-                    "city": event.get("data").get("object").get("customer_details").get("address").get("city"),
-                    "country": event.get("data").get("object").get("customer_details").get("address").get("country"),
-                    "line1": event.get("data").get("object").get("customer_details").get("address").get("line1"),
-                    "line2": event.get("data").get("object").get("customer_details").get("address").get("line2"),
-                    "postal_code": event.get("data").get("object").get("customer_details").get("address").get(
-                        "postal_code"),
-                    "state": event.get("data").get("object").get("customer_details").get("address").get("state"),
-                    "email": event.get("data").get("object").get("customer_details").get("email"),
-                    "name": event.get("data").get("object").get("customer_details").get("name"),
-                    "phone": event.get("data").get("object").get("customer_details").get("phone"),
-                    "total_amount": event.get("data").get("object").get("amount_total"),
-                    "invoice_id": event.get("data").get("object").get("invoice"),
+                    "currency": object_data.get("currency"),
+                    "customer": object_data.get("customer"),
+                    "city": customer_details_data.get("address").get("city"),
+                    "country": customer_details_data.get("address").get("country"),
+                    "line1": customer_details_data.get("address").get("line1"),
+                    "line2": customer_details_data.get("address").get("line2"),
+                    "postal_code": customer_details_data.get("address").get("postal_code"),
+                    "state": customer_details_data.get("address").get("state"),
+                    "email": customer_details_data.get("email"),
+                    "name": customer_details_data.get("name"),
+                    "phone": customer_details_data.get("phone"),
+                    "total_amount": object_data.get("amount_total"),
+                    "invoice_id": object_data.get("invoice"),
                 }
                 order_serializer = OrderInputSerializer(data=data)
                 order_serializer.is_valid(raise_exception=True)
+                order = self._order_service.create(order_serializer.validated_data, user_subscription.user)
 
-                user = UserModel.objects.get(id=user_id)
-
-                order = self._order_service.create(order_serializer.validated_data, user)
-                self._user_subscription_service.change_status(user_subscription.pk, "ACTIVE")
-                self._user_subscription_service.set_order_object(user_subscription.pk, order)
-                self._user_subscription_service.set_subscription_id(
-                    user_subscription.pk,
-                    event.get("data").get("object").get("subscription")
+                # Update UserSubscription object
+                user_subscription_update_data = {
+                    "status": "ACTIVE",
+                    "order": order.pk,
+                    "subscription_id": object_data.get("subscription")
+                }
+                user_subscription_update_serializer = UserSubscriptionUpdateSerializer(
+                    data=user_subscription_update_data
                 )
+                user_subscription_update_serializer.is_valid(raise_exception=True)
+                self._user_subscription_service.partial_update(
+                    user_subscription.pk,
+                    user_subscription_update_serializer.validated_data
+                )
+
         elif event_type == 'invoice.paid':
-            print("Paid")
-            print("Add this later - works only in production mode")
+            pass
 
         elif event_type == 'invoice.payment_failed':
             if event:
+                # Update UserSubscription object
+
                 user_id = event.get("data").get("object").get("metadata").get("user_id")
                 user_subscription = self._user_subscription_service.get_current_subscription_by_user(int(user_id))
-                self._user_subscription_service.change_status(user_subscription.pk, "FAILED")
+                user_subscription_update_data = {
+                    "status": "ACTIVE",
+                }
+                user_subscription_update_serializer = UserSubscriptionUpdateSerializer(
+                    data=user_subscription_update_data
+                )
+                user_subscription_update_serializer.is_valid(raise_exception=True)
+                self._user_subscription_service.partial_update(
+                    user_subscription.pk,
+                    user_subscription_update_serializer.validated_data
+                )
         else:
             pass
 

@@ -7,9 +7,18 @@ class UserSubscriptionInputSerializer(ModelSerializer):
     class Meta:
         model = UserSubscription
         fields = (
-            # "subscription_id",
             "session_id",
             "plan",
+        )
+
+
+class UserSubscriptionUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = UserSubscription
+        fields = (
+            "status",
+            "order",
+            "subscription_id"
         )
 
 
@@ -26,5 +35,6 @@ class UserSubscriptionOutputSerializer(ModelSerializer):
             "plan",
             "start_date",
             "end_date",
-            "status"
+            "status",
+            "order"
         )

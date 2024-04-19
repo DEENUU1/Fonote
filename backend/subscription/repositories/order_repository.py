@@ -26,12 +26,6 @@ class OrderRepository:
         serializer.update(order, data)
         return order
 
-    def get_order_by_invoice_id(self, invoice_id: str) -> Order:
-        return self.model.objects.get(invoice_id=invoice_id)
-
-    def order_exists_by_invoice_id(self, invoice_id: str) -> bool:
-        return self.model.objects.filter(invoice_id=invoice_id).exists()
-
     def get_order_list_by_user(self, user_id: int) -> List[Order]:
         return self.model.objects.filter(user_id=user_id)
 

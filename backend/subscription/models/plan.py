@@ -19,3 +19,4 @@ class Plan(models.Model):
     class Meta:
         verbose_name = "Plan"
         verbose_name_plural = "Plans"
+

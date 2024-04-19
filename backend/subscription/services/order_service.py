@@ -22,13 +22,6 @@ class OrderService:
         order = self.order_repository.get_order_object_by_uuid(uuid)
         return self.order_repository.partial_update(data, order)
 
-    def partial_update_by_invoice_id(self, data: Dict[str, Any], invoice_id: str) -> Optional[Order]:
-        if not self.order_repository.order_exists_by_invoice_id(invoice_id):
-            return None
-
-        order = self.order_repository.get_order_by_invoice_id(invoice_id)
-        return self.order_repository.partial_update(data, order)
-
     def get_order_list_by_user(self, user_id: int) -> List[Order]:
         return self.order_repository.get_order_list_by_user(user_id)
 

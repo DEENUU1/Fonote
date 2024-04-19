@@ -12,4 +12,3 @@ class PlanRepository:
 
     def get_plan_by_price_id(self, price_id: str) -> Plan:
         return self.model.objects.get(price__stripe_id=price_id)
-
