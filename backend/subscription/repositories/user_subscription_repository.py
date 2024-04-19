@@ -26,3 +26,4 @@ class UserSubscriptionRepository:
 
     def get_current_subscription_by_user(self, user: UserModel) -> UserSubscription:
         return self.model.objects.filter(user=user).first()
+

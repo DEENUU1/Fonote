@@ -5,7 +5,8 @@ from .views import (
     PlanListAPIView,
     OrderListAPIView,
     OrderDetailsAPIView,
-    CancelSubscription
+    CancelSubscription,
+    GetInvoice
 )
 
 
@@ -13,6 +14,7 @@ urlpatterns = [
     path("plan/", PlanListAPIView.as_view(), name="plan_list"),
     path("order/", OrderListAPIView.as_view(), name="order_list"),
     path("order/<str:pk>/", OrderDetailsAPIView.as_view(), name="order_details"),
+    path("invoice/<str:pk>/", GetInvoice.as_view(), name="get_invoice"),
     path('create/', CreateSubscription.as_view(), name='create_subscription'),
     path('cancel/', CancelSubscription.as_view(), name='cancel_subscription'),
     path('webhook-test/', WebHook.as_view()),
