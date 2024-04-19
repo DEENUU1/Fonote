@@ -15,13 +15,6 @@ class OrderService:
     def create(self, data: Dict[str, Any], user: UserModel) -> Order:
         return self.order_repository.create(data, user)
 
-    def partial_update_by_uuid(self, data: Dict[str, Any], uuid: UUID) -> Order:
-        if not self.order_repository.order_object_exists_by_uuid(uuid):
-            raise NotFound(detail="Order not found")
-
-        order = self.order_repository.get_order_object_by_uuid(uuid)
-        return self.order_repository.partial_update(data, order)
-
     def get_order_list_by_user(self, user_id: int) -> List[Order]:
         return self.order_repository.get_order_list_by_user(user_id)
 
