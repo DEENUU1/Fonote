@@ -12,3 +12,10 @@ class Plan(models.Model):
     duration = models.IntegerField(null=False)
     price = models.ForeignKey(Price, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Plan"
+        verbose_name_plural = "Plans"

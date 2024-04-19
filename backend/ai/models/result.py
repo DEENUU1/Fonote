@@ -21,3 +21,11 @@ class Result(BaseModel):
     result_type = models.CharField(max_length=25, choices=RESULT, null=False)
     status = models.CharField(max_length=25, choices=STATUS, null=False, default="NEW")
     input = models.ForeignKey(InputData, on_delete=models.CASCADE, related_name='results')
+
+    def __str__(self):
+        return f"{self.id}-{self.status}"
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = "Result"
+        verbose_name_plural = "Results"

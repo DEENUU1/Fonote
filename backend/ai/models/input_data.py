@@ -28,3 +28,11 @@ class InputData(BaseModel):
     source_url = models.URLField(null=False)
     status = models.CharField(max_length=25, choices=STATUS, null=False, default="NEW")
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.id}-{self.status}"
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = "InputData"
+        verbose_name_plural = "InputDatas"

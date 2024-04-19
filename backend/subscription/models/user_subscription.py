@@ -24,3 +24,11 @@ class UserSubscription(BaseModel):
     status = models.CharField(max_length=25, choices=STATUS, default="PENDING")
     session_id = models.CharField(max_length=255, null=False, blank=False)
     order = models.OneToOneField(Order, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f"{self.user}-{self.status}"
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = "UserSubscription"
+        verbose_name_plural = "UserSubscriptions"
