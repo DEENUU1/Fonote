@@ -17,9 +17,7 @@ class OrderInputSerializer(ModelSerializer):
             "email",
             "name",
             "phone",
-            "stripe_id",
             "total_amount",
-            "invoice_url",
             "invoice_id",
         )
 
@@ -43,7 +41,6 @@ class OrderOutputSerializer(ModelSerializer):
             "email",
             "phone",
             "total_amount",
-            "invoice_url",
             "created_at",
             "updated_at"
         )

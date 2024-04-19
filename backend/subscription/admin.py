@@ -12,7 +12,7 @@ class PriceAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("user", "total_amount", "invoice_url")
+    list_display = ("user", "total_amount", "invoice_id")
 
 
 class UserSubscriptionAdmin(admin.ModelAdmin):

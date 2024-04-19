@@ -18,9 +18,7 @@ class Order(BaseModel):
     email = models.EmailField(max_length=100, null=True, blank=True)
     name = models.CharField(max_length=250, null=True, blank=True)
     phone = models.CharField(max_length=250, null=True, blank=True)
-    stripe_id = models.CharField(max_length=250, null=True, blank=True)
     total_amount = models.DecimalField(decimal_places=2, max_digits=10, null=True, blank=True)
-    invoice_url = models.URLField(max_length=250, null=True, blank=True)
     invoice_id = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):

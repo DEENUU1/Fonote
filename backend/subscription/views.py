@@ -166,9 +166,7 @@ class WebHook(APIView):
                     "email": event.get("data").get("object").get("customer_details").get("email"),
                     "name": event.get("data").get("object").get("customer_details").get("name"),
                     "phone": event.get("data").get("object").get("customer_details").get("phone"),
-                    # "stripe_id": ...,  # TODO: stripe_id
                     "total_amount": event.get("data").get("object").get("amount_total"),
-                    # "invoice_url": ...,  # TODO: invoice_url
                     "invoice_id": event.get("data").get("object").get("invoice"),
                 }
                 order_serializer = OrderInputSerializer(data=data)
