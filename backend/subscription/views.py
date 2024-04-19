@@ -14,6 +14,9 @@ from .serializers.user_subscription_serializer import UserSubscriptionInputSeria
 from .services.order_service import OrderService
 from .services.plan_service import PlanService
 from .services.user_subscription_service import UserSubscriptionService
+from .serializers.plan_serializer import PlanOutputSerializer
+from .serializers.order_serializer import OrderOutputSerializer
+
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 webhook_secret = settings.STRIPE_WEBHOOK_SECRET
@@ -24,7 +27,23 @@ class PlanListAPIView(APIView):
 
     def get(self, request):
         plans = PlanService().get_active_plan_list()
-        return Response(plans, status=status.HTTP_200_OK)
+        return Response(PlanOutputSerializer(plans, many=True).data, status=status.HTTP_200_OK)
+
+
+class OrderListAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        orders = OrderService().get_order_list_by_user(request.user)
+        return Response(OrderOutputSerializer(orders, many=True).data, status=status.HTTP_200_OK)
+
+
+class OrderDetailsAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, pk):
+        order = OrderService().get_order_details(pk, request.user.id)
+        return Response(OrderOutputSerializer(order).data, status=status.HTTP_200_OK)
 
 
 class CreateSubscription(APIView):
@@ -142,11 +161,6 @@ class WebHook(APIView):
         elif event_type == 'invoice.paid':
             print("Paid")
             print("Add this later - works only in production mode")
-            # if event:
-            #
-            #     user_id = event.get("data").get("object").get("metadata").get("user_id")
-            #     user_subscription = self._user_subscription_service.get_current_subscription_by_user(int(user_id))
-            #     self._user_subscription_service.change_status(user_subscription.pk, "PAID")
 
         elif event_type == 'invoice.payment_failed':
             if event:

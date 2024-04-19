@@ -1,4 +1,4 @@
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 
 from django.contrib.auth.backends import UserModel
 
@@ -28,3 +28,17 @@ class OrderService:
 
         order = self.order_repository.get_order_by_invoice_id(invoice_id)
         return self.order_repository.partial_update(data, order)
+
+    def get_order_list_by_user(self, user_id: int) -> List[Order]:
+        return self.order_repository.get_order_list_by_user(user_id)
+
+    def get_order_details(self, uuid: UUID, user_id: int) -> Optional[Order]:
+        if not self.order_repository.order_object_exists_by_uuid(uuid):
+            return None
+
+        order = self.order_repository.get_order_object_by_uuid(uuid)
+
+        if not self.order_repository.order_belongs_to_user(order, user_id):
+            return None
+
+        return order

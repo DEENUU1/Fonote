@@ -43,5 +43,7 @@ class OrderOutputSerializer(ModelSerializer):
             "email",
             "phone",
             "total_amount",
-            "invoice_url"
+            "invoice_url",
+            "created_at",
+            "updated_at"
         )
