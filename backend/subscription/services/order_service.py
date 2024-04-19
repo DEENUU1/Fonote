@@ -1,5 +1,5 @@
-from typing import Dict, Any, Optional, List
-
+from typing import Dict, Any, List
+from rest_framework.exceptions import PermissionDenied, NotFound
 from django.contrib.auth.backends import UserModel
 
 from uuid import UUID
@@ -15,9 +15,9 @@ class OrderService:
     def create(self, data: Dict[str, Any], user: UserModel) -> Order:
         return self.order_repository.create(data, user)
 
-    def partial_update_by_uuid(self, data: Dict[str, Any], uuid: UUID) -> Optional[Order]:
+    def partial_update_by_uuid(self, data: Dict[str, Any], uuid: UUID) -> Order:
         if not self.order_repository.order_object_exists_by_uuid(uuid):
-            return None
+            raise NotFound(detail="Order not found")
 
         order = self.order_repository.get_order_object_by_uuid(uuid)
         return self.order_repository.partial_update(data, order)
@@ -25,13 +25,13 @@ class OrderService:
     def get_order_list_by_user(self, user_id: int) -> List[Order]:
         return self.order_repository.get_order_list_by_user(user_id)
 
-    def get_order_details(self, uuid: UUID, user_id: int) -> Optional[Order]:
+    def get_order_details(self, uuid: UUID, user_id: int) -> Order:
         if not self.order_repository.order_object_exists_by_uuid(uuid):
-            return None
+            raise NotFound(detail="Order not found")
 
         order = self.order_repository.get_order_object_by_uuid(uuid)
 
         if not self.order_repository.order_belongs_to_user(order, user_id):
-            return None
+            raise PermissionDenied(detail="You are not allowed to access this order")
 
         return order
