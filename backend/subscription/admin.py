@@ -13,3 +13,4 @@ class PriceAdmin(admin.ModelAdmin):
 
 admin.site.register(plan.Plan, PlanAdmin)
 admin.site.register(price.Price, PriceAdmin)
+admin.site.register(user_subscription.UserSubscription)

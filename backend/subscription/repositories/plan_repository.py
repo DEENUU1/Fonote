@@ -12,5 +12,5 @@ class PlanRepository:
         return serializer
 
     def get_plan_by_price_id(self, price_id: str):
-        plan = self.model.objects.get(price_id=price_id)
+        plan = self.model.objects.get(price__stripe_id=price_id)
         return PlanOutputSerializer(plan).data

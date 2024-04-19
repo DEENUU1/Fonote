@@ -18,7 +18,7 @@ class UserSubscriptionRepository:
 
     def get_current_subscription_by_user(self, user: UserModel) -> UserSubscriptionOutputSerializer:
         subscription = self.model.objects.filter(user=user).first()
-        return UserSubscriptionOutputSerializer(subscription)
+        return UserSubscriptionOutputSerializer(subscription).data
 
     def change_status(self, _id: UUID, status: str) -> UserSubscriptionOutputSerializer:
         subscription = self.model.objects.get(id=_id)
@@ -32,3 +32,10 @@ class UserSubscriptionRepository:
 
     def user_subscription_exists_by_subscription_id(self, subscription_id: str) -> bool:
         return self.model.objects.filter(subscription_id=subscription_id).exists()
+
+    def get_by_session_id(self, session_id: str) -> UserSubscriptionOutputSerializer:
+        subscription = self.model.objects.get(session_id=session_id)
+        return UserSubscriptionOutputSerializer(subscription)
+
+    def user_subscription_exists_by_session_id(self, session_id: str) -> bool:
+        return self.model.objects.filter(session_id=session_id).exists()

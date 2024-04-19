@@ -7,7 +7,7 @@ class UserSubscriptionInputSerializer(ModelSerializer):
     class Meta:
         model = UserSubscription
         fields = (
-            "subscription_id",
+            # "subscription_id",
             "session_id",
             "plan",
         )
