@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import plan, price, user_subscription
+from .models import plan, price, user_subscription, order
 
 
 class PlanAdmin(admin.ModelAdmin):
@@ -14,3 +14,4 @@ class PriceAdmin(admin.ModelAdmin):
 admin.site.register(plan.Plan, PlanAdmin)
 admin.site.register(price.Price, PriceAdmin)
 admin.site.register(user_subscription.UserSubscription)
+admin.site.register(order.Order)

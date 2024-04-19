@@ -2,15 +2,18 @@ import json
 
 import stripe
 from django.conf import settings
+from django.contrib.auth.backends import UserModel
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .serializers.order_serializer import OrderInputSerializer
+from .serializers.user_subscription_serializer import UserSubscriptionInputSerializer
+from .services.order_service import OrderService
 from .services.plan_service import PlanService
 from .services.user_subscription_service import UserSubscriptionService
-from .serializers.user_subscription_serializer import UserSubscriptionInputSerializer
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 webhook_secret = settings.STRIPE_WEBHOOK_SECRET
@@ -33,7 +36,7 @@ class CreateSubscription(APIView):
     def post(self, request):
         user_current_plan = self._service.get_current_subscription_by_user(request.user)
 
-        if user_current_plan.get("status") == "ACTIVE":
+        if user_current_plan and user_current_plan.status == "ACTIVE":
             return Response(
                 {"message": "User already have active subscription"},
                 status=status.HTTP_400_BAD_REQUEST
@@ -49,7 +52,7 @@ class CreateSubscription(APIView):
                         'quantity': 1
                     }
                 ],
-                metadata = {
+                metadata={
                     "user_id": request.user.id
                 },
                 mode='subscription',
@@ -61,7 +64,7 @@ class CreateSubscription(APIView):
             serializer = UserSubscriptionInputSerializer(
                 data={
                     "session_id": checkout_session.id,
-                    "plan": plan.get("id")
+                    "plan": plan.pk,
                 }
             )
             serializer.is_valid(raise_exception=True)
@@ -75,6 +78,7 @@ class CreateSubscription(APIView):
 
 class WebHook(APIView):
     _user_subscription_service = UserSubscriptionService()
+    _order_service = OrderService()
 
     def post(self, request):
         """
@@ -84,9 +88,6 @@ class WebHook(APIView):
         """
         request_data = json.loads(request.body)
         event = None
-
-        with open("request_data.txt", "w") as file:
-            file.write(str(request_data))
 
         if webhook_secret:
             signature = request.META['HTTP_STRIPE_SIGNATURE']
@@ -110,20 +111,48 @@ class WebHook(APIView):
             if event:
                 user_id = event.get("data").get("object").get("metadata").get("user_id")
                 user_subscription = self._user_subscription_service.get_current_subscription_by_user(int(user_id))
-                self._user_subscription_service.change_status(user_subscription.get("id"), "ACTIVE")
-                # Create order object here
-        elif event_type == 'invoice.paid':
-            if event:
 
-                user_id = event.get("data").get("object").get("metadata").get("user_id")
-                user_subscription = self._user_subscription_service.get_current_subscription_by_user(int(user_id))
-                self._user_subscription_service.change_status(user_subscription.get("id"), "PAID")
-                # Update invoice here
+                data = {
+                    "currency": event.get("data").get("object").get("currency"),
+                    "customer": event.get("data").get("object").get("customer"),
+                    "city": event.get("data").get("object").get("customer_details").get("address").get("city"),
+                    "country": event.get("data").get("object").get("customer_details").get("address").get("country"),
+                    "line1": event.get("data").get("object").get("customer_details").get("address").get("line1"),
+                    "line2": event.get("data").get("object").get("customer_details").get("address").get("line2"),
+                    "postal_code": event.get("data").get("object").get("customer_details").get("address").get(
+                        "postal_code"),
+                    "state": event.get("data").get("object").get("customer_details").get("address").get("state"),
+                    "email": event.get("data").get("object").get("customer_details").get("email"),
+                    "name": event.get("data").get("object").get("customer_details").get("name"),
+                    "phone": event.get("data").get("object").get("customer_details").get("phone"),
+                    # "stripe_id": ...,  # TODO: stripe_id
+                    "total_amount": event.get("data").get("object").get("amount_total"),
+                    # "invoice_url": ...,  # TODO: invoice_url
+                    "invoice_id": event.get("data").get("object").get("invoice"),
+                }
+                order_serializer = OrderInputSerializer(data=data)
+                order_serializer.is_valid(raise_exception=True)
+
+                user = UserModel.objects.get(id=user_id)
+
+                order = self._order_service.create(order_serializer.validated_data, user)
+                self._user_subscription_service.change_status(user_subscription.pk, "ACTIVE")
+                self._user_subscription_service.set_order_object(user_subscription.pk, order)
+
+        elif event_type == 'invoice.paid':
+            print("Paid")
+            print("Add this later - works only in production mode")
+            # if event:
+            #
+            #     user_id = event.get("data").get("object").get("metadata").get("user_id")
+            #     user_subscription = self._user_subscription_service.get_current_subscription_by_user(int(user_id))
+            #     self._user_subscription_service.change_status(user_subscription.pk, "PAID")
+
         elif event_type == 'invoice.payment_failed':
             if event:
                 user_id = event.get("data").get("object").get("metadata").get("user_id")
                 user_subscription = self._user_subscription_service.get_current_subscription_by_user(int(user_id))
-                self._user_subscription_service.change_status(user_subscription.get("id"), "FAILED")
+                self._user_subscription_service.change_status(user_subscription.pk, "FAILED")
         else:
             pass
 

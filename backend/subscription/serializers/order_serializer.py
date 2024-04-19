@@ -8,7 +8,6 @@ class OrderInputSerializer(ModelSerializer):
         fields = (
             "currency",
             "customer",
-            "customer",
             "city",
             "country",
             "line1",

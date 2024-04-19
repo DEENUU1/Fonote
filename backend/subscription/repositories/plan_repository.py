@@ -1,16 +1,15 @@
 from ..models.plan import Plan
-from ..serializers.plan_serializer import PlanOutputSerializer
+from typing import List
 
 
 class PlanRepository:
     def __init__(self):
         self.model = Plan
 
-    def get_active_plan_list(self):
+    def get_active_plan_list(self) -> List[Plan]:
         plans = self.model.objects.filter(active=True).all()
-        serializer = PlanOutputSerializer(plans, many=True).data
-        return serializer
+        return plans
 
-    def get_plan_by_price_id(self, price_id: str):
-        plan = self.model.objects.get(price__stripe_id=price_id)
-        return PlanOutputSerializer(plan).data
+    def get_plan_by_price_id(self, price_id: str) -> Plan:
+        return self.model.objects.get(price__stripe_id=price_id)
+
