@@ -1,0 +1,3117 @@
+[
+    {
+        "text": "so when I first started getting into",
+        "start": 0.04,
+        "duration": 4.4
+    },
+    {
+        "text": "working with data for the company I was",
+        "start": 2.24,
+        "duration": 4.4
+    },
+    {
+        "text": "working for at the time I had a few",
+        "start": 4.44,
+        "duration": 4.84
+    },
+    {
+        "text": "choices I got put through an Excel",
+        "start": 6.64,
+        "duration": 4.36
+    },
+    {
+        "text": "course and that was fine but this was",
+        "start": 9.28,
+        "duration": 3.16
+    },
+    {
+        "text": "around about the time that I was",
+        "start": 11.0,
+        "duration": 4.24
+    },
+    {
+        "text": "starting to teach myself Python and I",
+        "start": 12.44,
+        "duration": 4.599
+    },
+    {
+        "text": "could see that there was a clear divide",
+        "start": 15.24,
+        "duration": 4.08
+    },
+    {
+        "text": "in between the two now I had the option",
+        "start": 17.039,
+        "duration": 4.681
+    },
+    {
+        "text": "to go ahead and carry on my Excel course",
+        "start": 19.32,
+        "duration": 4.4
+    },
+    {
+        "text": "and learn more about quow query and this",
+        "start": 21.72,
+        "duration": 4.36
+    },
+    {
+        "text": "was kind of like the decided path for",
+        "start": 23.72,
+        "duration": 3.799
+    },
+    {
+        "text": "the sort of company that I was working",
+        "start": 26.08,
+        "duration": 3.199
+    },
+    {
+        "text": "for at the time we didn't really do a",
+        "start": 27.519,
+        "duration": 3.84
+    },
+    {
+        "text": "whole load of data analysis it was",
+        "start": 29.279,
+        "duration": 3.8
+    },
+    {
+        "text": "basically just to look at our own",
+        "start": 31.359,
+        "duration": 3.2
+    },
+    {
+        "text": "customer data and figure out where we",
+        "start": 33.079,
+        "duration": 3.361
+    },
+    {
+        "text": "can improve things but as I started to",
+        "start": 34.559,
+        "duration": 4.081
+    },
+    {
+        "text": "learn more Python and learn about where",
+        "start": 36.44,
+        "duration": 4.32
+    },
+    {
+        "text": "the data actually came from through the",
+        "start": 38.64,
+        "duration": 4.8
+    },
+    {
+        "text": "apis through competitor analysis and web",
+        "start": 40.76,
+        "duration": 4.2
+    },
+    {
+        "text": "scraping which is kind of what I built",
+        "start": 43.44,
+        "duration": 3.92
+    },
+    {
+        "text": "my channel around it became clear to me",
+        "start": 44.96,
+        "duration": 5.48
+    },
+    {
+        "text": "that I didn't want to actually export",
+        "start": 47.36,
+        "duration": 5.76
+    },
+    {
+        "text": "that data out and then repport it into",
+        "start": 50.44,
+        "duration": 5.48
+    },
+    {
+        "text": "Excel to work with it in power query or",
+        "start": 53.12,
+        "duration": 5.279
+    },
+    {
+        "text": "do anything like that now we had no",
+        "start": 55.92,
+        "duration": 5.2
+    },
+    {
+        "text": "proprietary business like bi tools or",
+        "start": 58.399,
+        "duration": 4.84
+    },
+    {
+        "text": "anything like that I was allowed to make",
+        "start": 61.12,
+        "duration": 5.44
+    },
+    {
+        "text": "the decision myself so having watched a",
+        "start": 63.239,
+        "duration": 5.52
+    },
+    {
+        "text": "few videos it was clear to me the option",
+        "start": 66.56,
+        "duration": 4.48
+    },
+    {
+        "text": "of being able to pull the data down from",
+        "start": 68.759,
+        "duration": 5.441
+    },
+    {
+        "text": "the API from our company system and then",
+        "start": 71.04,
+        "duration": 5.32
+    },
+    {
+        "text": "actually go ahead and scrape competitor",
+        "start": 74.2,
+        "duration": 5.0
+    },
+    {
+        "text": "data from their websites and pull all of",
+        "start": 76.36,
+        "duration": 5.88
+    },
+    {
+        "text": "that into a panda's data frame and",
+        "start": 79.2,
+        "duration": 5.44
+    },
+    {
+        "text": "analyze and analyze it there it was just",
+        "start": 82.24,
+        "duration": 4.519
+    },
+    {
+        "text": "a no-brainer for me that that was the",
+        "start": 84.64,
+        "duration": 4.56
+    },
+    {
+        "text": "choice that I was going to go for I also",
+        "start": 86.759,
+        "duration": 5.201
+    },
+    {
+        "text": "didn't have a load of fun with Excel",
+        "start": 89.2,
+        "duration": 5.12
+    },
+    {
+        "text": "when it came to lots and lots of rows",
+        "start": 91.96,
+        "duration": 4.28
+    },
+    {
+        "text": "and manipulating and even doing the most",
+        "start": 94.32,
+        "duration": 4.479
+    },
+    {
+        "text": "basic things was really challenging and",
+        "start": 96.24,
+        "duration": 4.12
+    },
+    {
+        "text": "even simple things like when you're",
+        "start": 98.799,
+        "duration": 3.241
+    },
+    {
+        "text": "working with it in when working with a",
+        "start": 100.36,
+        "duration": 3.32
+    },
+    {
+        "text": "load of data in pandas you create",
+        "start": 102.04,
+        "duration": 4.24
+    },
+    {
+        "text": "multiple data frames you don't chop up",
+        "start": 103.68,
+        "duration": 5.2
+    },
+    {
+        "text": "your original data you just build from",
+        "start": 106.28,
+        "duration": 4.839
+    },
+    {
+        "text": "that uh little things like that made my",
+        "start": 108.88,
+        "duration": 4.36
+    },
+    {
+        "text": "choice very clear so in this video what",
+        "start": 111.119,
+        "duration": 4.32
+    },
+    {
+        "text": "I want to show you is how to is how I",
+        "start": 113.24,
+        "duration": 3.76
+    },
+    {
+        "text": "kind of started with that I want to take",
+        "start": 115.439,
+        "duration": 3.201
+    },
+    {
+        "text": "some data that I've scraped from the",
+        "start": 117.0,
+        "duration": 3.6
+    },
+    {
+        "text": "from from the uh internet and I'm going",
+        "start": 118.64,
+        "duration": 4.479
+    },
+    {
+        "text": "to pull it all into a data frame and I'm",
+        "start": 120.6,
+        "duration": 4.08
+    },
+    {
+        "text": "going to show you just how simply you",
+        "start": 123.119,
+        "duration": 4.36
+    },
+    {
+        "text": "can work with it to actually show off",
+        "start": 124.68,
+        "duration": 5.199
+    },
+    {
+        "text": "how pandas or in this case polers which",
+        "start": 127.479,
+        "duration": 4.201
+    },
+    {
+        "text": "is very similar just a different sort of",
+        "start": 129.879,
+        "duration": 3.881
+    },
+    {
+        "text": "approach but basically the same thing I",
+        "start": 131.68,
+        "duration": 4.24
+    },
+    {
+        "text": "just prefer the words and terminology",
+        "start": 133.76,
+        "duration": 4.04
+    },
+    {
+        "text": "for the functions that it uses how you",
+        "start": 135.92,
+        "duration": 3.319
+    },
+    {
+        "text": "can actually take that and you can then",
+        "start": 137.8,
+        "duration": 3.76
+    },
+    {
+        "text": "present that to your boss or whoever and",
+        "start": 139.239,
+        "duration": 4.64
+    },
+    {
+        "text": "say hey look this is what I've done this",
+        "start": 141.56,
+        "duration": 3.84
+    },
+    {
+        "text": "might help us out here this will help us",
+        "start": 143.879,
+        "duration": 2.72
+    },
+    {
+        "text": "out there and then you're obviously",
+        "start": 145.4,
+        "duration": 3.0
+    },
+    {
+        "text": "going to help yourself out in the long",
+        "start": 146.599,
+        "duration": 3.801
+    },
+    {
+        "text": "in the long run too so let's get some",
+        "start": 148.4,
+        "duration": 3.88
+    },
+    {
+        "text": "data going let's load up our data frame",
+        "start": 150.4,
+        "duration": 3.28
+    },
+    {
+        "text": "and I'll show you how we can start to",
+        "start": 152.28,
+        "duration": 3.679
+    },
+    {
+        "text": "look at insights for the data that we",
+        "start": 153.68,
+        "duration": 4.279
+    },
+    {
+        "text": "have making the choice to Learn Python",
+        "start": 155.959,
+        "duration": 4.0
+    },
+    {
+        "text": "for data became my path but if you're",
+        "start": 157.959,
+        "duration": 3.92
+    },
+    {
+        "text": "interested in working with data in any",
+        "start": 159.959,
+        "duration": 3.721
+    },
+    {
+        "text": "capacity then it's all about how you",
+        "start": 161.879,
+        "duration": 3.64
+    },
+    {
+        "text": "look at it and how to find those useful",
+        "start": 163.68,
+        "duration": 4.08
+    },
+    {
+        "text": "insights this is where today's sponsor",
+        "start": 165.519,
+        "duration": 4.201
+    },
+    {
+        "text": "brilliant can really make a difference",
+        "start": 167.76,
+        "duration": 3.92
+    },
+    {
+        "text": "they make it easy for anyone to pick up",
+        "start": 169.72,
+        "duration": 3.879
+    },
+    {
+        "text": "and get started and with their learn by",
+        "start": 171.68,
+        "duration": 4.24
+    },
+    {
+        "text": "doing and Hands-On lessons give you the",
+        "start": 173.599,
+        "duration": 3.761
+    },
+    {
+        "text": "opportunity to play around with the",
+        "start": 175.92,
+        "duration": 3.52
+    },
+    {
+        "text": "concepts it will help you build up a",
+        "start": 177.36,
+        "duration": 4.44
+    },
+    {
+        "text": "solid foundation and power up your all",
+        "start": 179.44,
+        "duration": 4.92
+    },
+    {
+        "text": "important problem solving skills this is",
+        "start": 181.8,
+        "duration": 4.48
+    },
+    {
+        "text": "by far the most effective way to learn",
+        "start": 184.36,
+        "duration": 3.799
+    },
+    {
+        "text": "and is way more interesting and",
+        "start": 186.28,
+        "duration": 4.519
+    },
+    {
+        "text": "captivating than watching lecture videos",
+        "start": 188.159,
+        "duration": 4.481
+    },
+    {
+        "text": "there's thousands of interactive lessons",
+        "start": 190.799,
+        "duration": 4.041
+    },
+    {
+        "text": "in maths data analysis programming and",
+        "start": 192.64,
+        "duration": 4.679
+    },
+    {
+        "text": "AI already to help you regardless of",
+        "start": 194.84,
+        "duration": 4.16
+    },
+    {
+        "text": "your skill level and completing just a",
+        "start": 197.319,
+        "duration": 3.681
+    },
+    {
+        "text": "few minutes each day will quickly become",
+        "start": 199.0,
+        "duration": 4.0
+    },
+    {
+        "text": "a habit and become that powerful growth",
+        "start": 201.0,
+        "duration": 4.64
+    },
+    {
+        "text": "tool beats mindless scrolling there's a",
+        "start": 203.0,
+        "duration": 4.44
+    },
+    {
+        "text": "ton of new data content now too",
+        "start": 205.64,
+        "duration": 3.959
+    },
+    {
+        "text": "including how to explore data visually",
+        "start": 207.44,
+        "duration": 3.359
+    },
+    {
+        "text": "which which is where I went to brush up",
+        "start": 209.599,
+        "duration": 3.161
+    },
+    {
+        "text": "my skills on things like aggregating",
+        "start": 210.799,
+        "duration": 4.0
+    },
+    {
+        "text": "filtering and grouping data like we're",
+        "start": 212.76,
+        "duration": 5.16
+    },
+    {
+        "text": "going to do later on in this video so to",
+        "start": 214.799,
+        "duration": 4.761
+    },
+    {
+        "text": "try everything brilliant has to offer",
+        "start": 217.92,
+        "duration": 4.399
+    },
+    {
+        "text": "for free for a full 30 days visit",
+        "start": 219.56,
+        "duration": 5.16
+    },
+    {
+        "text": "brilliant.org johnwatson Rooney or click",
+        "start": 222.319,
+        "duration": 4.28
+    },
+    {
+        "text": "on the link in the description you'll",
+        "start": 224.72,
+        "duration": 4.36
+    },
+    {
+        "text": "also get 20% off an annual premium",
+        "start": 226.599,
+        "duration": 4.64
+    },
+    {
+        "text": "subscription so we are in our Jupiter",
+        "start": 229.08,
+        "duration": 3.76
+    },
+    {
+        "text": "notebook now in my project folder I'm",
+        "start": 231.239,
+        "duration": 3.521
+    },
+    {
+        "text": "going to leave some instructions for you",
+        "start": 232.84,
+        "duration": 4.2
+    },
+    {
+        "text": "of how to actually get to this point uh",
+        "start": 234.76,
+        "duration": 3.64
+    },
+    {
+        "text": "save me just running through it and just",
+        "start": 237.04,
+        "duration": 3.0
+    },
+    {
+        "text": "boring everybody so the first thing we",
+        "start": 238.4,
+        "duration": 3.36
+    },
+    {
+        "text": "want to do is we want to import in",
+        "start": 240.04,
+        "duration": 5.72
+    },
+    {
+        "text": "polers and we do this as PL like so now",
+        "start": 241.76,
+        "duration": 5.8
+    },
+    {
+        "text": "we want to create our data frame so we",
+        "start": 245.76,
+        "duration": 5.679
+    },
+    {
+        "text": "do DF and we're going to do pl. read CSV",
+        "start": 247.56,
+        "duration": 6.36
+    },
+    {
+        "text": "now what's great about this is we can",
+        "start": 251.439,
+        "duration": 7.841
+    },
+    {
+        "text": "actually read in a all the csvs in our",
+        "start": 253.92,
+        "duration": 8.719
+    },
+    {
+        "text": "folder just by this one command so we",
+        "start": 259.28,
+        "duration": 7.16
+    },
+    {
+        "text": "just do star. CSV like so and then if we",
+        "start": 262.639,
+        "duration": 8.201
+    },
+    {
+        "text": "hit DF do shape you can see I have 33",
+        "start": 266.44,
+        "duration": 7.199
+    },
+    {
+        "text": "columns and",
+        "start": 270.84,
+        "duration": 5.24
+    },
+    {
+        "text": "6,227 rows the next thing I want to do",
+        "start": 273.639,
+        "duration": 5.881
+    },
+    {
+        "text": "is want to have a look at DF do describe",
+        "start": 276.08,
+        "duration": 5.08
+    },
+    {
+        "text": "um just so we can see a little bit more",
+        "start": 279.52,
+        "duration": 4.239
+    },
+    {
+        "text": "about what's going on here and this will",
+        "start": 281.16,
+        "duration": 5.0
+    },
+    {
+        "text": "show us some of the information so we",
+        "start": 283.759,
+        "duration": 6.481
+    },
+    {
+        "text": "can see these columns the count uh of",
+        "start": 286.16,
+        "duration": 6.24
+    },
+    {
+        "text": "items so we start looking for null",
+        "start": 290.24,
+        "duration": 3.64
+    },
+    {
+        "text": "values you can see here these ones I've",
+        "start": 292.4,
+        "duration": 3.239
+    },
+    {
+        "text": "got have high null values because",
+        "start": 293.88,
+        "duration": 6.08
+    },
+    {
+        "text": "there's only 675 as opposed to 6,000 and",
+        "start": 295.639,
+        "duration": 5.721
+    },
+    {
+        "text": "so on and so forth and you can see",
+        "start": 299.96,
+        "duration": 4.88
+    },
+    {
+        "text": "there's lots of null values here as well",
+        "start": 301.36,
+        "duration": 7.04
+    },
+    {
+        "text": "now obviously I was only able to do this",
+        "start": 304.84,
+        "duration": 5.68
+    },
+    {
+        "text": "because all of my CSV files were the",
+        "start": 308.4,
+        "duration": 3.84
+    },
+    {
+        "text": "same if you have them at a different",
+        "start": 310.52,
+        "duration": 3.119
+    },
+    {
+        "text": "number of columns or whatever you need",
+        "start": 312.24,
+        "duration": 4.28
+    },
+    {
+        "text": "to um import them in separately create",
+        "start": 313.639,
+        "duration": 4.921
+    },
+    {
+        "text": "their own data frames and then go from",
+        "start": 316.52,
+        "duration": 4.519
+    },
+    {
+        "text": "there so now we have this in one last",
+        "start": 318.56,
+        "duration": 3.96
+    },
+    {
+        "text": "thing to check which is the schema it's",
+        "start": 321.039,
+        "duration": 3.121
+    },
+    {
+        "text": "always useful to see I don't need the",
+        "start": 322.52,
+        "duration": 3.959
+    },
+    {
+        "text": "parentheses here we can see the names of",
+        "start": 324.16,
+        "duration": 4.36
+    },
+    {
+        "text": "all the columns so there's going to be a",
+        "start": 326.479,
+        "duration": 3.761
+    },
+    {
+        "text": "few main commands that we're going use",
+        "start": 328.52,
+        "duration": 4.72
+    },
+    {
+        "text": "there's going to be uh filter Group by",
+        "start": 330.24,
+        "duration": 6.799
+    },
+    {
+        "text": "and uh select so select is going to",
+        "start": 333.24,
+        "duration": 5.6
+    },
+    {
+        "text": "select columns filter is going to filter",
+        "start": 337.039,
+        "duration": 3.361
+    },
+    {
+        "text": "rows and group by is going to basically",
+        "start": 338.84,
+        "duration": 3.56
+    },
+    {
+        "text": "group the data together based on the",
+        "start": 340.4,
+        "duration": 4.68
+    },
+    {
+        "text": "criteria that we give it so if we do DF",
+        "start": 342.4,
+        "duration": 5.84
+    },
+    {
+        "text": "do um let's do select first and let's",
+        "start": 345.08,
+        "duration": 5.52
+    },
+    {
+        "text": "have a look at pl. call to select the",
+        "start": 348.24,
+        "duration": 4.92
+    },
+    {
+        "text": "column and let's have a look at the",
+        "start": 350.6,
+        "duration": 5.599
+    },
+    {
+        "text": "price column to start with like so now",
+        "start": 353.16,
+        "duration": 5.68
+    },
+    {
+        "text": "this is going to be our our shape is the",
+        "start": 356.199,
+        "duration": 4.56
+    },
+    {
+        "text": "correct amount of row uh rows with one",
+        "start": 358.84,
+        "duration": 3.88
+    },
+    {
+        "text": "column obviously the price we can see",
+        "start": 360.759,
+        "duration": 3.72
+    },
+    {
+        "text": "them all there and it's telling us that",
+        "start": 362.72,
+        "duration": 3.36
+    },
+    {
+        "text": "this is an",
+        "start": 364.479,
+        "duration": 4.601
+    },
+    {
+        "text": "I64 which is exactly what we wanted it",
+        "start": 366.08,
+        "duration": 6.16
+    },
+    {
+        "text": "to be now if it wasn't we would need to",
+        "start": 369.08,
+        "duration": 5.28
+    },
+    {
+        "text": "change this and we may need to do this",
+        "start": 372.24,
+        "duration": 4.12
+    },
+    {
+        "text": "later on but you can do we could do DF",
+        "start": 374.36,
+        "duration": 6.239
+    },
+    {
+        "text": "do cast and then within our uh",
+        "start": 376.36,
+        "duration": 6.6
+    },
+    {
+        "text": "parentheses we create some brackets we",
+        "start": 380.599,
+        "duration": 4.0
+    },
+    {
+        "text": "give it the column",
+        "start": 382.96,
+        "duration": 3.799
+    },
+    {
+        "text": "price and then what we want it to be so",
+        "start": 384.599,
+        "duration": 5.121
+    },
+    {
+        "text": "we could do PL dot I think it's float 60",
+        "start": 386.759,
+        "duration": 4.761
+    },
+    {
+        "text": "before then if we were to find the price",
+        "start": 389.72,
+        "duration": 3.28
+    },
+    {
+        "text": "in this bearing in mind that we haven't",
+        "start": 391.52,
+        "duration": 3.56
+    },
+    {
+        "text": "saved this this is just its own thing",
+        "start": 393.0,
+        "duration": 3.52
+    },
+    {
+        "text": "here we can see now that the price is a",
+        "start": 395.08,
+        "duration": 4.0
+    },
+    {
+        "text": "float um if we were wanted to make this",
+        "start": 396.52,
+        "duration": 4.48
+    },
+    {
+        "text": "permanent we could just do DF is equal",
+        "start": 399.08,
+        "duration": 3.64
+    },
+    {
+        "text": "to DF but I don't want the price to be a",
+        "start": 401.0,
+        "duration": 3.88
+    },
+    {
+        "text": "float I want it to be an integer uh we",
+        "start": 402.72,
+        "duration": 4.4
+    },
+    {
+        "text": "might work with this later but this is a",
+        "start": 404.88,
+        "duration": 3.68
+    },
+    {
+        "text": "good opportunity to just have a look at",
+        "start": 407.12,
+        "duration": 3.199
+    },
+    {
+        "text": "the data in fact what I'll do is we'll",
+        "start": 408.56,
+        "duration": 5.6
+    },
+    {
+        "text": "just do DF do head to look at the top",
+        "start": 410.319,
+        "duration": 6.521
+    },
+    {
+        "text": "four uh five rows and we can see that",
+        "start": 414.16,
+        "duration": 4.879
+    },
+    {
+        "text": "there is an added this is actually a",
+        "start": 416.84,
+        "duration": 3.96
+    },
+    {
+        "text": "date stream but it's come through as an",
+        "start": 419.039,
+        "duration": 4.401
+    },
+    {
+        "text": "I64 number you would probably want to",
+        "start": 420.8,
+        "duration": 3.88
+    },
+    {
+        "text": "convert this but I'm not going to be",
+        "start": 423.44,
+        "duration": 2.72
+    },
+    {
+        "text": "doing anything with the date in this",
+        "start": 424.68,
+        "duration": 4.12
+    },
+    {
+        "text": "analysis so um that' be one thing that I",
+        "start": 426.16,
+        "duration": 4.4
+    },
+    {
+        "text": "would going to leave out but we want to",
+        "start": 428.8,
+        "duration": 3.48
+    },
+    {
+        "text": "sort of figure out what columns we",
+        "start": 430.56,
+        "duration": 3.72
+    },
+    {
+        "text": "actually want here so we definitely want",
+        "start": 432.28,
+        "duration": 3.359
+    },
+    {
+        "text": "the number of beds that's going to be",
+        "start": 434.28,
+        "duration": 2.599
+    },
+    {
+        "text": "useful for",
+        "start": 435.639,
+        "duration": 3.68
+    },
+    {
+        "text": "us and coming across here we're going to",
+        "start": 436.879,
+        "duration": 4.201
+    },
+    {
+        "text": "want the post code this is going to be",
+        "start": 439.319,
+        "duration": 5.241
+    },
+    {
+        "text": "interesting obviously the price and the",
+        "start": 441.08,
+        "duration": 6.48
+    },
+    {
+        "text": "property type as well um this is going",
+        "start": 444.56,
+        "duration": 4.079
+    },
+    {
+        "text": "to be the information that we're going",
+        "start": 447.56,
+        "duration": 2.96
+    },
+    {
+        "text": "to work with so I've decided what I'm",
+        "start": 448.639,
+        "duration": 3.201
+    },
+    {
+        "text": "going to do is I'm going to look see if",
+        "start": 450.52,
+        "duration": 4.079
+    },
+    {
+        "text": "there's a correlation between um the",
+        "start": 451.84,
+        "duration": 4.96
+    },
+    {
+        "text": "type of the property either like a house",
+        "start": 454.599,
+        "duration": 4.6
+    },
+    {
+        "text": "or a flat or whatever the price and then",
+        "start": 456.8,
+        "duration": 4.36
+    },
+    {
+        "text": "the postcode location and we need to",
+        "start": 459.199,
+        "duration": 4.4
+    },
+    {
+        "text": "work with that now obviously there is",
+        "start": 461.16,
+        "duration": 3.68
+    },
+    {
+        "text": "going to be some but you know it's going",
+        "start": 463.599,
+        "duration": 3.481
+    },
+    {
+        "text": "to be interesting for us to see as we go",
+        "start": 464.84,
+        "duration": 4.319
+    },
+    {
+        "text": "forward um how we can pull this",
+        "start": 467.08,
+        "duration": 4.92
+    },
+    {
+        "text": "information out and have a look so to",
+        "start": 469.159,
+        "duration": 5.44
+    },
+    {
+        "text": "select those columns we would just do DF",
+        "start": 472.0,
+        "duration": 6.52
+    },
+    {
+        "text": "do select pl. call and we can then say",
+        "start": 474.599,
+        "duration": 5.481
+    },
+    {
+        "text": "we want the best",
+        "start": 478.52,
+        "duration": 4.72
+    },
+    {
+        "text": "we want the price what else do we say we",
+        "start": 480.08,
+        "duration": 4.519
+    },
+    {
+        "text": "want to forget the columns when I'm",
+        "start": 483.24,
+        "duration": 3.359
+    },
+    {
+        "text": "doing this I tend to do this with the",
+        "start": 484.599,
+        "duration": 4.201
+    },
+    {
+        "text": "schema let's get the schema back up",
+        "start": 486.599,
+        "duration": 4.28
+    },
+    {
+        "text": "because it's nice and easy to see like",
+        "start": 488.8,
+        "duration": 4.2
+    },
+    {
+        "text": "so we can just copy The Columns over",
+        "start": 490.879,
+        "duration": 4.76
+    },
+    {
+        "text": "that we wanted property",
+        "start": 493.0,
+        "duration": 5.319
+    },
+    {
+        "text": "type and the post code which is out here",
+        "start": 495.639,
+        "duration": 4.4
+    },
+    {
+        "text": "somewhere we hit enter you see now we",
+        "start": 498.319,
+        "duration": 4.361
+    },
+    {
+        "text": "have our own new our new own data frame",
+        "start": 500.039,
+        "duration": 4.88
+    },
+    {
+        "text": "which is obviously separate um that",
+        "start": 502.68,
+        "duration": 3.88
+    },
+    {
+        "text": "we've just created with this piece of",
+        "start": 504.919,
+        "duration": 2.96
+    },
+    {
+        "text": "information and is there anything else",
+        "start": 506.56,
+        "duration": 3.919
+    },
+    {
+        "text": "that we going to want from this",
+        "start": 507.879,
+        "duration": 4.921
+    },
+    {
+        "text": "possibly not we'll leave it like this",
+        "start": 510.479,
+        "duration": 5.161
+    },
+    {
+        "text": "for now we might come back and revisit",
+        "start": 512.8,
+        "duration": 5.719
+    },
+    {
+        "text": "that um but this will do for now so what",
+        "start": 515.64,
+        "duration": 4.24
+    },
+    {
+        "text": "I'm going to do is I'm just going to I'm",
+        "start": 518.519,
+        "duration": 4.4
+    },
+    {
+        "text": "going to save this as um post code I'm",
+        "start": 519.88,
+        "duration": 4.32
+    },
+    {
+        "text": "going to save it like this and that",
+        "start": 522.919,
+        "duration": 3.521
+    },
+    {
+        "text": "means that now I have this subset data",
+        "start": 524.2,
+        "duration": 4.28
+    },
+    {
+        "text": "frame here with just this information",
+        "start": 526.44,
+        "duration": 3.24
+    },
+    {
+        "text": "from it and if we were to look at the",
+        "start": 528.48,
+        "duration": 3.4
+    },
+    {
+        "text": "main data frame here's everything back",
+        "start": 529.68,
+        "duration": 4.279
+    },
+    {
+        "text": "again so this is how we can easily sort",
+        "start": 531.88,
+        "duration": 4.639
+    },
+    {
+        "text": "of like me manage all our different data",
+        "start": 533.959,
+        "duration": 4.44
+    },
+    {
+        "text": "frames like instead of having to have",
+        "start": 536.519,
+        "duration": 3.361
+    },
+    {
+        "text": "different sheets or whatever whatever on",
+        "start": 538.399,
+        "duration": 3.68
+    },
+    {
+        "text": "our Excel page or however you want to",
+        "start": 539.88,
+        "duration": 4.76
+    },
+    {
+        "text": "handle it there so now we've got our",
+        "start": 542.079,
+        "duration": 4.361
+    },
+    {
+        "text": "data narrowed down a bit there's a few",
+        "start": 544.64,
+        "duration": 3.879
+    },
+    {
+        "text": "things that we still want to do as you",
+        "start": 546.44,
+        "duration": 4.079
+    },
+    {
+        "text": "can see we have this property type here",
+        "start": 548.519,
+        "duration": 3.841
+    },
+    {
+        "text": "now we're going to want to use this to",
+        "start": 550.519,
+        "duration": 4.201
+    },
+    {
+        "text": "sort of figure out um the different",
+        "start": 552.36,
+        "duration": 4.0
+    },
+    {
+        "text": "types of properties that have different",
+        "start": 554.72,
+        "duration": 3.44
+    },
+    {
+        "text": "costs and values obviously different",
+        "start": 556.36,
+        "duration": 3.719
+    },
+    {
+        "text": "prices we also need to split up the",
+        "start": 558.16,
+        "duration": 5.0
+    },
+    {
+        "text": "postcode at the moment this is a UK set",
+        "start": 560.079,
+        "duration": 4.681
+    },
+    {
+        "text": "of data set so this is obviously a UK",
+        "start": 563.16,
+        "duration": 3.919
+    },
+    {
+        "text": "postcode but the whole thing is quite a",
+        "start": 564.76,
+        "duration": 4.639
+    },
+    {
+        "text": "specific location we only want the first",
+        "start": 567.079,
+        "duration": 4.241
+    },
+    {
+        "text": "three so we'll be chopping this up but",
+        "start": 569.399,
+        "duration": 3.801
+    },
+    {
+        "text": "first of all let's have a quick look at",
+        "start": 571.32,
+        "duration": 5.04
+    },
+    {
+        "text": "doing unique this is quite a good way of",
+        "start": 573.2,
+        "duration": 5.4
+    },
+    {
+        "text": "being able",
+        "start": 576.36,
+        "duration": 5.599
+    },
+    {
+        "text": "to sort of see the unique value so we do",
+        "start": 578.6,
+        "duration": 6.4
+    },
+    {
+        "text": "subset is equal to and this is a list",
+        "start": 581.959,
+        "duration": 4.481
+    },
+    {
+        "text": "and I'm just going to put property type",
+        "start": 585.0,
+        "duration": 2.8
+    },
+    {
+        "text": "in here and this is just going to show",
+        "start": 586.44,
+        "duration": 3.56
+    },
+    {
+        "text": "me all of the unique values that there",
+        "start": 587.8,
+        "duration": 3.719
+    },
+    {
+        "text": "are for the property type so you can see",
+        "start": 590.0,
+        "duration": 4.12
+    },
+    {
+        "text": "we have eight in this case here so we",
+        "start": 591.519,
+        "duration": 4.081
+    },
+    {
+        "text": "know what we're kind of looking at and",
+        "start": 594.12,
+        "duration": 4.36
+    },
+    {
+        "text": "we can now filter these down um a bit",
+        "start": 595.6,
+        "duration": 6.0
+    },
+    {
+        "text": "more should we need to uh we could also",
+        "start": 598.48,
+        "duration": 4.68
+    },
+    {
+        "text": "for example if you put beds in here",
+        "start": 601.6,
+        "duration": 3.32
+    },
+    {
+        "text": "you'll see you know one of these",
+        "start": 603.16,
+        "duration": 4.72
+    },
+    {
+        "text": "properties has 12 beds or 20 I mean",
+        "start": 604.92,
+        "duration": 4.64
+    },
+    {
+        "text": "that's land so that's a bit different so",
+        "start": 607.88,
+        "duration": 3.639
+    },
+    {
+        "text": "that's kind of a we probably won't want",
+        "start": 609.56,
+        "duration": 4.959
+    },
+    {
+        "text": "to look at that but for example you know",
+        "start": 611.519,
+        "duration": 5.32
+    },
+    {
+        "text": "nine bed house it's pretty pretty",
+        "start": 614.519,
+        "duration": 4.921
+    },
+    {
+        "text": "something there I suppose so as you can",
+        "start": 616.839,
+        "duration": 5.401
+    },
+    {
+        "text": "tell so let's have uh another look oh",
+        "start": 619.44,
+        "duration": 3.72
+    },
+    {
+        "text": "there's one more thing I want to show",
+        "start": 622.24,
+        "duration": 2.76
+    },
+    {
+        "text": "you which is Glimpse Glimpse is kind of",
+        "start": 623.16,
+        "duration": 3.919
+    },
+    {
+        "text": "useful as well you get to have a kind of",
+        "start": 625.0,
+        "duration": 4.64
+    },
+    {
+        "text": "a quick look at the data um in kind of",
+        "start": 627.079,
+        "duration": 5.241
+    },
+    {
+        "text": "more of a raw State um you can see like",
+        "start": 629.64,
+        "duration": 3.84
+    },
+    {
+        "text": "it's got all this information here so",
+        "start": 632.32,
+        "duration": 2.959
+    },
+    {
+        "text": "that's kind of useful as well so let's",
+        "start": 633.48,
+        "duration": 4.24
+    },
+    {
+        "text": "go ahead and start uh actually clear",
+        "start": 635.279,
+        "duration": 5.481
+    },
+    {
+        "text": "clearing this up a little bit so we have",
+        "start": 637.72,
+        "duration": 5.799
+    },
+    {
+        "text": "um something better to work with so",
+        "start": 640.76,
+        "duration": 4.16
+    },
+    {
+        "text": "let's get rid of this and we're going to",
+        "start": 643.519,
+        "duration": 3.32
+    },
+    {
+        "text": "do they're going to split the post code",
+        "start": 644.92,
+        "duration": 4.039
+    },
+    {
+        "text": "up first so we'll do post code I've",
+        "start": 646.839,
+        "duration": 3.881
+    },
+    {
+        "text": "called this data frame post codes not",
+        "start": 648.959,
+        "duration": 4.68
+    },
+    {
+        "text": "ideal and we'll dowi columns this is",
+        "start": 650.72,
+        "duration": 5.32
+    },
+    {
+        "text": "another um one of the methods that we",
+        "start": 653.639,
+        "duration": 5.041
+    },
+    {
+        "text": "use on our data frame this is basically",
+        "start": 656.04,
+        "duration": 4.039
+    },
+    {
+        "text": "what it says going to be working with",
+        "start": 658.68,
+        "duration": 3.56
+    },
+    {
+        "text": "some columns and changing or adding data",
+        "start": 660.079,
+        "duration": 4.2
+    },
+    {
+        "text": "in some way so we're going to select the",
+        "start": 662.24,
+        "duration": 3.839
+    },
+    {
+        "text": "postcode column because this is the one",
+        "start": 664.279,
+        "duration": 4.081
+    },
+    {
+        "text": "we want to work with post",
+        "start": 666.079,
+        "duration": 4.481
+    },
+    {
+        "text": "code and we going to do do string",
+        "start": 668.36,
+        "duration": 4.159
+    },
+    {
+        "text": "because this is string in this post code",
+        "start": 670.56,
+        "duration": 4.8
+    },
+    {
+        "text": "see down here string and now we can do",
+        "start": 672.519,
+        "duration": 4.44
+    },
+    {
+        "text": "do split and I'm going to split this on",
+        "start": 675.36,
+        "duration": 4.12
+    },
+    {
+        "text": "a space so you can see that the the data",
+        "start": 676.959,
+        "duration": 3.921
+    },
+    {
+        "text": "has a space in the middle so that's",
+        "start": 679.48,
+        "duration": 4.159
+    },
+    {
+        "text": "going to work just fine for me and then",
+        "start": 680.88,
+        "duration": 4.72
+    },
+    {
+        "text": "again we can chain these again chain",
+        "start": 683.639,
+        "duration": 3.76
+    },
+    {
+        "text": "these together so we can do with columns",
+        "start": 685.6,
+        "duration": 5.52
+    },
+    {
+        "text": "again and again pl. and the",
+        "start": 687.399,
+        "duration": 7.081
+    },
+    {
+        "text": "same column and then it's a list because",
+        "start": 691.12,
+        "duration": 4.719
+    },
+    {
+        "text": "we will have split it up in fact I'll",
+        "start": 694.48,
+        "duration": 3.24
+    },
+    {
+        "text": "show you this in just a second and we",
+        "start": 695.839,
+        "duration": 5.0
+    },
+    {
+        "text": "want to get the zero index like so we",
+        "start": 697.72,
+        "duration": 5.559
+    },
+    {
+        "text": "need get here",
+        "start": 700.839,
+        "duration": 7.161
+    },
+    {
+        "text": "like we need list. get my B list. get",
+        "start": 703.279,
+        "duration": 6.721
+    },
+    {
+        "text": "right so if I was to just I'm just going",
+        "start": 708.0,
+        "duration": 3.399
+    },
+    {
+        "text": "to remove this bit for the moment if we",
+        "start": 710.0,
+        "duration": 3.639
+    },
+    {
+        "text": "run just this like it is you see we",
+        "start": 711.399,
+        "duration": 4.281
+    },
+    {
+        "text": "return this list back here because we've",
+        "start": 713.639,
+        "duration": 3.921
+    },
+    {
+        "text": "done split split is obviously just like",
+        "start": 715.68,
+        "duration": 4.08
+    },
+    {
+        "text": "the python split we are split witing and",
+        "start": 717.56,
+        "duration": 5.16
+    },
+    {
+        "text": "it returns us a list now that's fine but",
+        "start": 719.76,
+        "duration": 5.24
+    },
+    {
+        "text": "by changing the Expressions here we're",
+        "start": 722.72,
+        "duration": 3.88
+    },
+    {
+        "text": "basically saying we're going to do with",
+        "start": 725.0,
+        "duration": 4.16
+    },
+    {
+        "text": "columns again same column but because",
+        "start": 726.6,
+        "duration": 5.16
+    },
+    {
+        "text": "it's now a list see list we can do",
+        "start": 729.16,
+        "duration": 5.119
+    },
+    {
+        "text": "list.get and I'm asking for the index of",
+        "start": 731.76,
+        "duration": 4.6
+    },
+    {
+        "text": "zero if I put the index of one you see",
+        "start": 734.279,
+        "duration": 3.641
+    },
+    {
+        "text": "we get the second half which we don't",
+        "start": 736.36,
+        "duration": 4.919
+    },
+    {
+        "text": "want we want the zero index like this so",
+        "start": 737.92,
+        "duration": 6.0
+    },
+    {
+        "text": "now I have my property type and my post",
+        "start": 741.279,
+        "duration": 4.761
+    },
+    {
+        "text": "code narrow my post code in a more of a",
+        "start": 743.92,
+        "duration": 3.8
+    },
+    {
+        "text": "general area so we can actually think",
+        "start": 746.04,
+        "duration": 3.2
+    },
+    {
+        "text": "about you know having a look at the",
+        "start": 747.72,
+        "duration": 3.16
+    },
+    {
+        "text": "differences in prices in different",
+        "start": 749.24,
+        "duration": 3.44
+    },
+    {
+        "text": "locations so again I'm just going to",
+        "start": 750.88,
+        "duration": 3.319
+    },
+    {
+        "text": "override my data frame here and just",
+        "start": 752.68,
+        "duration": 3.56
+    },
+    {
+        "text": "save it like this I don't need to do",
+        "start": 754.199,
+        "duration": 4.401
+    },
+    {
+        "text": "this anymore so now we have this let's",
+        "start": 756.24,
+        "duration": 6.24
+    },
+    {
+        "text": "have a look at the mean values for uh",
+        "start": 758.6,
+        "duration": 6.4
+    },
+    {
+        "text": "each of these kind of like groups of",
+        "start": 762.48,
+        "duration": 4.799
+    },
+    {
+        "text": "postcodes so to do that we need to do",
+        "start": 765.0,
+        "duration": 5.56
+    },
+    {
+        "text": "filter so let's do postcode do filter",
+        "start": 767.279,
+        "duration": 5.0
+    },
+    {
+        "text": "and we're going to be looking at pl.",
+        "start": 770.56,
+        "duration": 3.639
+    },
+    {
+        "text": "call this is one of the things I like",
+        "start": 772.279,
+        "duration": 4.721
+    },
+    {
+        "text": "about um polers actually it's really",
+        "start": 774.199,
+        "duration": 4.481
+    },
+    {
+        "text": "straightforward is saying oh this is",
+        "start": 777.0,
+        "duration": 3.199
+    },
+    {
+        "text": "looking for column so it's pretty",
+        "start": 778.68,
+        "duration": 3.32
+    },
+    {
+        "text": "straightforward and easy to do then",
+        "start": 780.199,
+        "duration": 3.281
+    },
+    {
+        "text": "we're going to take our property type",
+        "start": 782.0,
+        "duration": 3.16
+    },
+    {
+        "text": "like this we're going to say this is",
+        "start": 783.48,
+        "duration": 3.12
+    },
+    {
+        "text": "going to be equal",
+        "start": 785.16,
+        "duration": 4.119
+    },
+    {
+        "text": "to houses and remember we looked at the",
+        "start": 786.6,
+        "duration": 4.88
+    },
+    {
+        "text": "all the unique values up here I should",
+        "start": 789.279,
+        "duration": 4.081
+    },
+    {
+        "text": "probably include that down again",
+        "start": 791.48,
+        "duration": 2.76
+    },
+    {
+        "text": "actually what I'm going to do is I'm",
+        "start": 793.36,
+        "duration": 4.12
+    },
+    {
+        "text": "just going to create a new uh a new cell",
+        "start": 794.24,
+        "duration": 6.52
+    },
+    {
+        "text": "here and we're going to do unique",
+        "start": 797.48,
+        "duration": 7.799
+    },
+    {
+        "text": "again and it was our",
+        "start": 800.76,
+        "duration": 7.24
+    },
+    {
+        "text": "subset and we wanted it on property",
+        "start": 805.279,
+        "duration": 5.721
+    },
+    {
+        "text": "value",
+        "start": 808.0,
+        "duration": 3.0
+    },
+    {
+        "text": "type property",
+        "start": 811.88,
+        "duration": 4.959
+    },
+    {
+        "text": "type close that off cool so now I can",
+        "start": 813.639,
+        "duration": 5.161
+    },
+    {
+        "text": "see these here we have some that are not",
+        "start": 816.839,
+        "duration": 5.521
+    },
+    {
+        "text": "specified that's fine so let's do um",
+        "start": 818.8,
+        "duration": 6.279
+    },
+    {
+        "text": "let's do bungalows in this case here so",
+        "start": 822.36,
+        "duration": 4.44
+    },
+    {
+        "text": "now we're basically saying give me all",
+        "start": 825.079,
+        "duration": 4.12
+    },
+    {
+        "text": "of the rows that match Bungalow so I can",
+        "start": 826.8,
+        "duration": 4.279
+    },
+    {
+        "text": "just close this off and run it and here",
+        "start": 829.199,
+        "duration": 3.721
+    },
+    {
+        "text": "we are here's all of our Bungalows chain",
+        "start": 831.079,
+        "duration": 3.801
+    },
+    {
+        "text": "this with do select and we're going to",
+        "start": 832.92,
+        "duration": 5.919
+    },
+    {
+        "text": "do pl. call on the price and I'm going",
+        "start": 834.88,
+        "duration": 5.44
+    },
+    {
+        "text": "to have have the mean which is going to",
+        "start": 838.839,
+        "duration": 4.56
+    },
+    {
+        "text": "be our average here so across this whole",
+        "start": 840.32,
+        "duration": 5.84
+    },
+    {
+        "text": "data set the average Bungalow price is",
+        "start": 843.399,
+        "duration": 5.601
+    },
+    {
+        "text": "just about 299 but you'll see now this",
+        "start": 846.16,
+        "duration": 5.679
+    },
+    {
+        "text": "has turned this into a float a 64b float",
+        "start": 849.0,
+        "duration": 4.88
+    },
+    {
+        "text": "we can actually do cast on the end of",
+        "start": 851.839,
+        "duration": 4.721
+    },
+    {
+        "text": "this I showed youcast at the start where",
+        "start": 853.88,
+        "duration": 4.36
+    },
+    {
+        "text": "we were doing it because this is the an",
+        "start": 856.56,
+        "duration": 4.0
+    },
+    {
+        "text": "output is the data frame so we'll do",
+        "start": 858.24,
+        "duration": 4.839
+    },
+    {
+        "text": "price and we do pl.",
+        "start": 860.56,
+        "duration": 5.36
+    },
+    {
+        "text": "int64 close our brackets and now we have",
+        "start": 863.079,
+        "duration": 5.401
+    },
+    {
+        "text": "it as an integer so you can use cast",
+        "start": 865.92,
+        "duration": 4.159
+    },
+    {
+        "text": "anytime you end with a data frame it's",
+        "start": 868.48,
+        "duration": 3.279
+    },
+    {
+        "text": "really handy to be able to chain these",
+        "start": 870.079,
+        "duration": 4.401
+    },
+    {
+        "text": "all together so let's have a look at",
+        "start": 871.759,
+        "duration": 4.32
+    },
+    {
+        "text": "something else let's put in another",
+        "start": 874.48,
+        "duration": 5.0
+    },
+    {
+        "text": "filter in the middle of this",
+        "start": 876.079,
+        "duration": 7.801
+    },
+    {
+        "text": "filter pl. call",
+        "start": 879.48,
+        "duration": 8.159
+    },
+    {
+        "text": "beds and we'll make this equal to",
+        "start": 883.88,
+        "duration": 7.24
+    },
+    {
+        "text": "one and we can see now the average price",
+        "start": 887.639,
+        "duration": 5.041
+    },
+    {
+        "text": "across the whole of the thing so this is",
+        "start": 891.12,
+        "duration": 5.48
+    },
+    {
+        "text": "a very general not that useful is uh for",
+        "start": 892.68,
+        "duration": 5.2
+    },
+    {
+        "text": "one is",
+        "start": 896.6,
+        "duration": 5.799
+    },
+    {
+        "text": "128,000 and and two is 246,000 is there",
+        "start": 897.88,
+        "duration": 6.68
+    },
+    {
+        "text": "three yeah three and on so on and so",
+        "start": 902.399,
+        "duration": 4.761
+    },
+    {
+        "text": "forth um so that's kind of like one way",
+        "start": 904.56,
+        "duration": 4.6
+    },
+    {
+        "text": "we can start to look at things here and",
+        "start": 907.16,
+        "duration": 4.799
+    },
+    {
+        "text": "we can of course put in houses here and",
+        "start": 909.16,
+        "duration": 5.599
+    },
+    {
+        "text": "we'll say two bed houses",
+        "start": 911.959,
+        "duration": 5.721
+    },
+    {
+        "text": "171,000 so versus",
+        "start": 914.759,
+        "duration": 6.401
+    },
+    {
+        "text": "Bungalows 246,000 so in the case of",
+        "start": 917.68,
+        "duration": 5.48
+    },
+    {
+        "text": "small houses they seem to be cheaper",
+        "start": 921.16,
+        "duration": 3.56
+    },
+    {
+        "text": "generally across the board or at least",
+        "start": 923.16,
+        "duration": 4.239
+    },
+    {
+        "text": "across my data set which is obviously",
+        "start": 924.72,
+        "duration": 5.2
+    },
+    {
+        "text": "you know just a small 6,000 or so",
+        "start": 927.399,
+        "duration": 5.721
+    },
+    {
+        "text": "listings of properties for sale so there",
+        "start": 929.92,
+        "duration": 5.08
+    },
+    {
+        "text": "we go so the next thing that you want to",
+        "start": 933.12,
+        "duration": 3.68
+    },
+    {
+        "text": "look at is I've done filter and I've",
+        "start": 935.0,
+        "duration": 4.399
+    },
+    {
+        "text": "done select and we looked at mean so now",
+        "start": 936.8,
+        "duration": 4.599
+    },
+    {
+        "text": "we want to do group by and so what I'm",
+        "start": 939.399,
+        "duration": 3.721
+    },
+    {
+        "text": "going to do is postcode which was this",
+        "start": 941.399,
+        "duration": 5.36
+    },
+    {
+        "text": "data frame that we created Group by and",
+        "start": 943.12,
+        "duration": 5.44
+    },
+    {
+        "text": "this is going to like as it says group",
+        "start": 946.759,
+        "duration": 3.361
+    },
+    {
+        "text": "all of our data together so we want to",
+        "start": 948.56,
+        "duration": 3.88
+    },
+    {
+        "text": "group it by post code this is the one",
+        "start": 950.12,
+        "duration": 3.56
+    },
+    {
+        "text": "that we want to do want to want to get",
+        "start": 952.44,
+        "duration": 3.399
+    },
+    {
+        "text": "everything together like this and then",
+        "start": 953.68,
+        "duration": 3.839
+    },
+    {
+        "text": "we want to do Aggregate and we want to",
+        "start": 955.839,
+        "duration": 6.56
+    },
+    {
+        "text": "do pl. we want to do of the uh price and",
+        "start": 957.519,
+        "duration": 9.161
+    },
+    {
+        "text": "I'm going to say uh mean again like so",
+        "start": 962.399,
+        "duration": 5.961
+    },
+    {
+        "text": "and let's see I've got the syntax in",
+        "start": 966.68,
+        "duration": 3.56
+    },
+    {
+        "text": "complete one more bracket there and now",
+        "start": 968.36,
+        "duration": 4.599
+    },
+    {
+        "text": "we have a list of all of the average",
+        "start": 970.24,
+        "duration": 5.64
+    },
+    {
+        "text": "prices for these this sort of area this",
+        "start": 972.959,
+        "duration": 5.24
+    },
+    {
+        "text": "general area uh again just come through",
+        "start": 975.88,
+        "duration": 4.84
+    },
+    {
+        "text": "as a float 64 so what do we do again we",
+        "start": 978.199,
+        "duration": 5.721
+    },
+    {
+        "text": "just go ahead and cast this over here as",
+        "start": 980.72,
+        "duration": 6.64
+    },
+    {
+        "text": "well and change this to an integer like",
+        "start": 983.92,
+        "duration": 6.68
+    },
+    {
+        "text": "so so what be we've got here is a long",
+        "start": 987.36,
+        "duration": 4.919
+    },
+    {
+        "text": "list of all these different postcodes so",
+        "start": 990.6,
+        "duration": 3.44
+    },
+    {
+        "text": "what we can do is we can do we need to",
+        "start": 992.279,
+        "duration": 4.161
+    },
+    {
+        "text": "move uh I think we can do do sort can we",
+        "start": 994.04,
+        "duration": 4.96
+    },
+    {
+        "text": "do do sort on WE off this yes we can so",
+        "start": 996.44,
+        "duration": 4.319
+    },
+    {
+        "text": "we'll do sort",
+        "start": 999.0,
+        "duration": 5.72
+    },
+    {
+        "text": "by and we want to sort on the sort on",
+        "start": 1000.759,
+        "duration": 5.0
+    },
+    {
+        "text": "the",
+        "start": 1004.72,
+        "duration": 4.599
+    },
+    {
+        "text": "price and we'll do",
+        "start": 1005.759,
+        "duration": 3.56
+    },
+    {
+        "text": "descending is equal to true so this will",
+        "start": 1010.24,
+        "duration": 4.44
+    },
+    {
+        "text": "give us the most expensive ones at the",
+        "start": 1012.88,
+        "duration": 5.319
+    },
+    {
+        "text": "top we can see out of my data set these",
+        "start": 1014.68,
+        "duration": 8.04
+    },
+    {
+        "text": "areas have the highest average uh",
+        "start": 1018.199,
+        "duration": 7.76
+    },
+    {
+        "text": "prices again this is just a my data set",
+        "start": 1022.72,
+        "duration": 4.88
+    },
+    {
+        "text": "we could end up saying that there's not",
+        "start": 1025.959,
+        "duration": 5.441
+    },
+    {
+        "text": "that many um properties in this to match",
+        "start": 1027.6,
+        "duration": 5.52
+    },
+    {
+        "text": "but you know that's why I've pulled so",
+        "start": 1031.4,
+        "duration": 3.6
+    },
+    {
+        "text": "this is what we're looking at right here",
+        "start": 1033.12,
+        "duration": 4.28
+    },
+    {
+        "text": "we can actually dive even deeper into",
+        "start": 1035.0,
+        "duration": 5.679
+    },
+    {
+        "text": "this as well so we could go ahead and",
+        "start": 1037.4,
+        "duration": 5.96
+    },
+    {
+        "text": "say our postcode we're going to be group",
+        "start": 1040.679,
+        "duration": 6.36
+    },
+    {
+        "text": "by um so I'm going to save this as",
+        "start": 1043.36,
+        "duration": 6.24
+    },
+    {
+        "text": "prices",
+        "start": 1047.039,
+        "duration": 6.64
+    },
+    {
+        "text": "by postcode while",
+        "start": 1049.6,
+        "duration": 4.079
+    },
+    {
+        "text": "typing like so great so we have this now",
+        "start": 1054.84,
+        "duration": 8.12
+    },
+    {
+        "text": "so let's try and narrow this uh broaden",
+        "start": 1060.08,
+        "duration": 6.0
+    },
+    {
+        "text": "it even more so for example this is the",
+        "start": 1062.96,
+        "duration": 5.12
+    },
+    {
+        "text": "area and this this is like the general",
+        "start": 1066.08,
+        "duration": 3.36
+    },
+    {
+        "text": "area and then this is kind of like a",
+        "start": 1068.08,
+        "duration": 3.76
+    },
+    {
+        "text": "subset of it so we want to go for just",
+        "start": 1069.44,
+        "duration": 5.04
+    },
+    {
+        "text": "these first two and we we'll bride we'll",
+        "start": 1071.84,
+        "duration": 4.64
+    },
+    {
+        "text": "broaden this out even more and then",
+        "start": 1074.48,
+        "duration": 3.88
+    },
+    {
+        "text": "we'll have a sort of a good overview of",
+        "start": 1076.48,
+        "duration": 3.0
+    },
+    {
+        "text": "the data",
+        "start": 1078.36,
+        "duration": 2.52
+    },
+    {
+        "text": "so what I'm going to do now is I'm going",
+        "start": 1079.48,
+        "duration": 3.8
+    },
+    {
+        "text": "to say this is with columns so we're",
+        "start": 1080.88,
+        "duration": 3.72
+    },
+    {
+        "text": "going to be working with these columns",
+        "start": 1083.28,
+        "duration": 3.8
+    },
+    {
+        "text": "again and we want to do",
+        "start": 1084.6,
+        "duration": 6.6
+    },
+    {
+        "text": "PL do call which is the post",
+        "start": 1087.08,
+        "duration": 7.719
+    },
+    {
+        "text": "code like this I'm going to do string",
+        "start": 1091.2,
+        "duration": 5.76
+    },
+    {
+        "text": "because this is a string as it says here",
+        "start": 1094.799,
+        "duration": 5.441
+    },
+    {
+        "text": "St Str and then we'll do do head and two",
+        "start": 1096.96,
+        "duration": 5.32
+    },
+    {
+        "text": "so we hit enter oh I missed a bracket I",
+        "start": 1100.24,
+        "duration": 3.88
+    },
+    {
+        "text": "always do that so now you can see that",
+        "start": 1102.28,
+        "duration": 4.6
+    },
+    {
+        "text": "we have our CBS and is all matching here",
+        "start": 1104.12,
+        "duration": 4.48
+    },
+    {
+        "text": "but now we need to do group by again so",
+        "start": 1106.88,
+        "duration": 4.24
+    },
+    {
+        "text": "we can sort of regroup all of this data",
+        "start": 1108.6,
+        "duration": 4.76
+    },
+    {
+        "text": "and this is essentially the same as this",
+        "start": 1111.12,
+        "duration": 4.799
+    },
+    {
+        "text": "so what I'm going to do is uh because",
+        "start": 1113.36,
+        "duration": 4.52
+    },
+    {
+        "text": "this basically gives us a data frame is",
+        "start": 1115.919,
+        "duration": 3.64
+    },
+    {
+        "text": "I'm going to just going to grab all of",
+        "start": 1117.88,
+        "duration": 4.279
+    },
+    {
+        "text": "this and we'll put it on here and we'll",
+        "start": 1119.559,
+        "duration": 4.401
+    },
+    {
+        "text": "run it again and now you'll see that",
+        "start": 1122.159,
+        "duration": 4.52
+    },
+    {
+        "text": "they have grouped all of these together",
+        "start": 1123.96,
+        "duration": 5.719
+    },
+    {
+        "text": "and if we were to let's go ahead and",
+        "start": 1126.679,
+        "duration": 4.961
+    },
+    {
+        "text": "just grab the top ones so I'm just going",
+        "start": 1129.679,
+        "duration": 4.48
+    },
+    {
+        "text": "to put head again and this is obviously",
+        "start": 1131.64,
+        "duration": 4.68
+    },
+    {
+        "text": "the head of the data frame rather than",
+        "start": 1134.159,
+        "duration": 4.241
+    },
+    {
+        "text": "the string which we did in the middle",
+        "start": 1136.32,
+        "duration": 4.8
+    },
+    {
+        "text": "and now we have the top five sort of",
+        "start": 1138.4,
+        "duration": 6.92
+    },
+    {
+        "text": "shorthand postcode areas with the most",
+        "start": 1141.12,
+        "duration": 8.919
+    },
+    {
+        "text": "expensive um houses or prices for uh any",
+        "start": 1145.32,
+        "duration": 7.96
+    },
+    {
+        "text": "property within now what we can do here",
+        "start": 1150.039,
+        "duration": 7.321
+    },
+    {
+        "text": "is we can actually save this to uh",
+        "start": 1153.28,
+        "duration": 7.56
+    },
+    {
+        "text": "price totals like so I'm going to come",
+        "start": 1157.36,
+        "duration": 5.0
+    },
+    {
+        "text": "back to the top here and I'm going to do",
+        "start": 1160.84,
+        "duration": 5.079
+    },
+    {
+        "text": "import cbor as",
+        "start": 1162.36,
+        "duration": 5.88
+    },
+    {
+        "text": "SNS I'm just going to run all the sales",
+        "start": 1165.919,
+        "duration": 3.681
+    },
+    {
+        "text": "just to make make sure nothing goes",
+        "start": 1168.24,
+        "duration": 4.96
+    },
+    {
+        "text": "wrong and now we can do SNS do set theme",
+        "start": 1169.6,
+        "duration": 5.68
+    },
+    {
+        "text": "this isn't necessary but I'm just going",
+        "start": 1173.2,
+        "duration": 4.4
+    },
+    {
+        "text": "to do it anyway and we can do SNS",
+        "start": 1175.28,
+        "duration": 6.519
+    },
+    {
+        "text": "barplot now we can do price",
+        "start": 1177.6,
+        "duration": 4.199
+    },
+    {
+        "text": "totals price",
+        "start": 1181.88,
+        "duration": 5.6
+    },
+    {
+        "text": "totals and we'll have the X column is",
+        "start": 1184.0,
+        "duration": 5.2
+    },
+    {
+        "text": "going to be equal",
+        "start": 1187.48,
+        "duration": 4.679
+    },
+    {
+        "text": "to our post",
+        "start": 1189.2,
+        "duration": 7.24
+    },
+    {
+        "text": "code and I think this should be price",
+        "start": 1192.159,
+        "duration": 8.481
+    },
+    {
+        "text": "we'll double check in just a second",
+        "start": 1196.44,
+        "duration": 4.2
+    },
+    {
+        "text": "why there we go now this is a very",
+        "start": 1201.88,
+        "duration": 4.039
+    },
+    {
+        "text": "uninspiring graph because we chopped",
+        "start": 1204.159,
+        "duration": 4.081
+    },
+    {
+        "text": "this right down uh where are we so we",
+        "start": 1205.919,
+        "duration": 4.041
+    },
+    {
+        "text": "come all the way to the end here and we",
+        "start": 1208.24,
+        "duration": 4.16
+    },
+    {
+        "text": "can just you know make this a bit bigger",
+        "start": 1209.96,
+        "duration": 5.44
+    },
+    {
+        "text": "like so same deal there we go so we can",
+        "start": 1212.4,
+        "duration": 4.56
+    },
+    {
+        "text": "start to look at this and we can start",
+        "start": 1215.4,
+        "duration": 3.399
+    },
+    {
+        "text": "to compare and you can of course put",
+        "start": 1216.96,
+        "duration": 3.4
+    },
+    {
+        "text": "these the other way around if you wanted",
+        "start": 1218.799,
+        "duration": 4.88
+    },
+    {
+        "text": "to grow out sideways like so okay so",
+        "start": 1220.36,
+        "duration": 6.08
+    },
+    {
+        "text": "let's construct ourselves another nice",
+        "start": 1223.679,
+        "duration": 6.48
+    },
+    {
+        "text": "uh long expression let's find um the",
+        "start": 1226.44,
+        "duration": 6.76
+    },
+    {
+        "text": "sort of average price for houses",
+        "start": 1230.159,
+        "duration": 6.0
+    },
+    {
+        "text": "depending on the number of beds so to",
+        "start": 1233.2,
+        "duration": 6.04
+    },
+    {
+        "text": "start with we want to do our again uh",
+        "start": 1236.159,
+        "duration": 5.0
+    },
+    {
+        "text": "filter we're going to go back to using",
+        "start": 1239.24,
+        "duration": 3.88
+    },
+    {
+        "text": "the postcode data frame it's just there",
+        "start": 1241.159,
+        "duration": 3.52
+    },
+    {
+        "text": "available for us so we're going to use",
+        "start": 1243.12,
+        "duration": 3.24
+    },
+    {
+        "text": "this one so we'll do",
+        "start": 1244.679,
+        "duration": 4.0
+    },
+    {
+        "text": "filter and we're going to filter on our",
+        "start": 1246.36,
+        "duration": 5.4
+    },
+    {
+        "text": "property type column so pl. call",
+        "start": 1248.679,
+        "duration": 5.281
+    },
+    {
+        "text": "property type and we're going to say",
+        "start": 1251.76,
+        "duration": 3.6
+    },
+    {
+        "text": "that that is going to be equal to going",
+        "start": 1253.96,
+        "duration": 4.8
+    },
+    {
+        "text": "to look at houses houses like this and",
+        "start": 1255.36,
+        "duration": 5.24
+    },
+    {
+        "text": "now we want to do a group buy because we",
+        "start": 1258.76,
+        "duration": 5.399
+    },
+    {
+        "text": "want to group Buy on the number of beds",
+        "start": 1260.6,
+        "duration": 6.0
+    },
+    {
+        "text": "so we'll do uh",
+        "start": 1264.159,
+        "duration": 5.681
+    },
+    {
+        "text": "beds and we'll do aggregate function or",
+        "start": 1266.6,
+        "duration": 7.84
+    },
+    {
+        "text": "a function pl. call on the price so we",
+        "start": 1269.84,
+        "duration": 6.319
+    },
+    {
+        "text": "just chaining all these Expressions",
+        "start": 1274.44,
+        "duration": 4.08
+    },
+    {
+        "text": "together now and we want to have the",
+        "start": 1276.159,
+        "duration": 5.481
+    },
+    {
+        "text": "mean of the price so there we go now",
+        "start": 1278.52,
+        "duration": 5.039
+    },
+    {
+        "text": "we've got this sort of data here but",
+        "start": 1281.64,
+        "duration": 4.96
+    },
+    {
+        "text": "again we have our it's converted our uh",
+        "start": 1283.559,
+        "duration": 5.281
+    },
+    {
+        "text": "price into a float 64 and you can see",
+        "start": 1286.6,
+        "duration": 4.12
+    },
+    {
+        "text": "that we've got some dodgy numbers going",
+        "start": 1288.84,
+        "duration": 5.319
+    },
+    {
+        "text": "on here um so let's go ahead and bring",
+        "start": 1290.72,
+        "duration": 6.319
+    },
+    {
+        "text": "this in here so we want to do we've got",
+        "start": 1294.159,
+        "duration": 6.241
+    },
+    {
+        "text": "this whole cast and sort and head so I'm",
+        "start": 1297.039,
+        "duration": 5.961
+    },
+    {
+        "text": "going to copy that we'll put you here as",
+        "start": 1300.4,
+        "duration": 7.759
+    },
+    {
+        "text": "well and now we have uh the top 10 of",
+        "start": 1303.0,
+        "duration": 7.24
+    },
+    {
+        "text": "price for the number of beds and you can",
+        "start": 1308.159,
+        "duration": 5.0
+    },
+    {
+        "text": "see here that generally speaking funnily",
+        "start": 1310.24,
+        "duration": 5.2
+    },
+    {
+        "text": "enough the more beds you have apart from",
+        "start": 1313.159,
+        "duration": 4.321
+    },
+    {
+        "text": "this bit of anonymous this bit of data",
+        "start": 1315.44,
+        "duration": 3.76
+    },
+    {
+        "text": "which is a bit strange I'd be interested",
+        "start": 1317.48,
+        "duration": 3.6
+    },
+    {
+        "text": "to see where that came from obviously",
+        "start": 1319.2,
+        "duration": 4.64
+    },
+    {
+        "text": "the more beds you have the higher the",
+        "start": 1321.08,
+        "duration": 4.88
+    },
+    {
+        "text": "price we can do Tail as well which I",
+        "start": 1323.84,
+        "duration": 3.48
+    },
+    {
+        "text": "think is probably just going to give us",
+        "start": 1325.96,
+        "duration": 2.959
+    },
+    {
+        "text": "this as well yes so there we go",
+        "start": 1327.32,
+        "duration": 4.28
+    },
+    {
+        "text": "obviously that's not overly surprising",
+        "start": 1328.919,
+        "duration": 4.76
+    },
+    {
+        "text": "um one one thing I want to show you is",
+        "start": 1331.6,
+        "duration": 4.0
+    },
+    {
+        "text": "that when you create when you construct",
+        "start": 1333.679,
+        "duration": 4.321
+    },
+    {
+        "text": "these sort of long uh Expressions it's",
+        "start": 1335.6,
+        "duration": 4.559
+    },
+    {
+        "text": "very easy just to drop in and drop out",
+        "start": 1338.0,
+        "duration": 4.279
+    },
+    {
+        "text": "the different bits of information so we",
+        "start": 1340.159,
+        "duration": 4.76
+    },
+    {
+        "text": "take uh land for example here we can now",
+        "start": 1342.279,
+        "duration": 4.88
+    },
+    {
+        "text": "just change this and we've got the same",
+        "start": 1344.919,
+        "duration": 5.161
+    },
+    {
+        "text": "amount the same information but for the",
+        "start": 1347.159,
+        "duration": 5.841
+    },
+    {
+        "text": "type of land so it's very easy and I'm",
+        "start": 1350.08,
+        "duration": 4.12
+    },
+    {
+        "text": "going to change this back two heads so",
+        "start": 1353.0,
+        "duration": 3.24
+    },
+    {
+        "text": "we get the top ones it's very easy just",
+        "start": 1354.2,
+        "duration": 4.16
+    },
+    {
+        "text": "to drop this in and I think this one",
+        "start": 1356.24,
+        "duration": 6.64
+    },
+    {
+        "text": "here um is character properties so let's",
+        "start": 1358.36,
+        "duration": 6.28
+    },
+    {
+        "text": "go ahead and put that in cool so we can",
+        "start": 1362.88,
+        "duration": 3.679
+    },
+    {
+        "text": "see right away that the character",
+        "start": 1364.64,
+        "duration": 5.12
+    },
+    {
+        "text": "properties are much more expensive and",
+        "start": 1366.559,
+        "duration": 6.48
+    },
+    {
+        "text": "uh maybe generally have uh the this",
+        "start": 1369.76,
+        "duration": 4.76
+    },
+    {
+        "text": "different number of beds but you get the",
+        "start": 1373.039,
+        "duration": 4.24
+    },
+    {
+        "text": "idea of what you can start to build and",
+        "start": 1374.52,
+        "duration": 6.36
+    },
+    {
+        "text": "construct with these long um expressions",
+        "start": 1377.279,
+        "duration": 4.64
+    },
+    {
+        "text": "and obviously you don't have to do this",
+        "start": 1380.88,
+        "duration": 2.76
+    },
+    {
+        "text": "you can split these up but for example I",
+        "start": 1381.919,
+        "duration": 3.88
+    },
+    {
+        "text": "know that when I run this is my data",
+        "start": 1383.64,
+        "duration": 4.84
+    },
+    {
+        "text": "frame when I run this this is going to",
+        "start": 1385.799,
+        "duration": 4.441
+    },
+    {
+        "text": "end up with a data frame as well so then",
+        "start": 1388.48,
+        "duration": 4.28
+    },
+    {
+        "text": "I can do group by and when I end up here",
+        "start": 1390.24,
+        "duration": 4.0
+    },
+    {
+        "text": "I know that I'm going to have data left",
+        "start": 1392.76,
+        "duration": 4.64
+    },
+    {
+        "text": "and I can do cast to change the data",
+        "start": 1394.24,
+        "duration": 5.559
+    },
+    {
+        "text": "type then I can sort it because I have",
+        "start": 1397.4,
+        "duration": 4.6
+    },
+    {
+        "text": "that data frame left and of course if",
+        "start": 1399.799,
+        "duration": 3.841
+    },
+    {
+        "text": "you wanted to you can then throw in",
+        "start": 1402.0,
+        "duration": 5.679
+    },
+    {
+        "text": "caborn to do some kind of um graphing if",
+        "start": 1403.64,
+        "duration": 5.56
+    },
+    {
+        "text": "you want um",
+        "start": 1407.679,
+        "duration": 2.681
+    },
+    {
+        "text": "it's up to you this it's fairly",
+        "start": 1409.2,
+        "duration": 2.76
+    },
+    {
+        "text": "straightforward I tend to only use S",
+        "start": 1410.36,
+        "duration": 6.0
+    },
+    {
+        "text": "graph plot or ra plot I",
+        "start": 1411.96,
+        "duration": 6.64
+    },
+    {
+        "text": "think kind of get the idea not that",
+        "start": 1416.36,
+        "duration": 3.799
+    },
+    {
+        "text": "particularly useful in this but it is",
+        "start": 1418.6,
+        "duration": 3.679
+    },
+    {
+        "text": "when you have more different more and",
+        "start": 1420.159,
+        "duration": 4.601
+    },
+    {
+        "text": "different data points so from here if I",
+        "start": 1422.279,
+        "duration": 4.201
+    },
+    {
+        "text": "was going to continue to analyze this",
+        "start": 1424.76,
+        "duration": 3.76
+    },
+    {
+        "text": "data let's go back up so I can see the",
+        "start": 1426.48,
+        "duration": 4.679
+    },
+    {
+        "text": "schema I would be changing added which",
+        "start": 1428.52,
+        "duration": 5.519
+    },
+    {
+        "text": "to a date and I'd be looking at seeing",
+        "start": 1431.159,
+        "duration": 3.88
+    },
+    {
+        "text": "how",
+        "start": 1434.039,
+        "duration": 3.961
+    },
+    {
+        "text": "long um things have been on sale because",
+        "start": 1435.039,
+        "duration": 4.24
+    },
+    {
+        "text": "we have",
+        "start": 1438.0,
+        "duration": 5.32
+    },
+    {
+        "text": "somewhere down here um sold STC so we",
+        "start": 1439.279,
+        "duration": 5.76
+    },
+    {
+        "text": "can filter those out and we can have a",
+        "start": 1443.32,
+        "duration": 3.76
+    },
+    {
+        "text": "look how long things have been on sale",
+        "start": 1445.039,
+        "duration": 4.801
+    },
+    {
+        "text": "and what sort of property stale stay on",
+        "start": 1447.08,
+        "duration": 5.12
+    },
+    {
+        "text": "sale for the longest that would be an",
+        "start": 1449.84,
+        "duration": 4.68
+    },
+    {
+        "text": "interesting piece of data to look at we",
+        "start": 1452.2,
+        "duration": 4.719
+    },
+    {
+        "text": "focused in much more on the price and",
+        "start": 1454.52,
+        "duration": 5.08
+    },
+    {
+        "text": "the type and the number of beds and the",
+        "start": 1456.919,
+        "duration": 5.0
+    },
+    {
+        "text": "averages in this instance so hopefully",
+        "start": 1459.6,
+        "duration": 4.079
+    },
+    {
+        "text": "you enjoyed this video if you want to",
+        "start": 1461.919,
+        "duration": 4.081
+    },
+    {
+        "text": "know how I got all of this data make",
+        "start": 1463.679,
+        "duration": 4.12
+    },
+    {
+        "text": "sure you subscribe because that video is",
+        "start": 1466.0,
+        "duration": 5.48
+    },
+    {
+        "text": "coming up next",
+        "start": 1467.799,
+        "duration": 3.681
+    }
+]
