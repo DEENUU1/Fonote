@@ -29,3 +29,7 @@ class InputPkAPIView(APIView):
     def get(self, request, pk):
         input_data = self._service.get_input_details_by_uuid(pk, request.user)
         return Response(InputDataOutputSerializer(input_data).data, status=status.HTTP_200_OK)
+
+    def delete(self, request, pk):
+        self._service.delete(pk, request.user)
+        return Response(status=status.HTTP_204_NO_CONTENT)
