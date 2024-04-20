@@ -10,8 +10,25 @@ class InputDataRepository:
     def __init__(self):
         self.model = InputData
 
-    def create(self, data: Dict, user: UserModel) -> InputData:
-        return self.model.objects.create(**data, user=user)
+    def create(
+            self,
+            data: Dict,
+            user: UserModel,
+            source: str,
+            audio_length: int,
+            source_title: str,
+            transcription_type: str,
+            status: str
+    ) -> InputData:
+        return self.model.objects.create(
+            **data,
+            user=user,
+            source=source,
+            audio_length=audio_length,
+            source_title=source_title,
+            transcription_type=transcription_type,
+            status=status
+        )
 
     def get_input_list_by_user(self, user: UserModel) -> List[InputData]:
         return self.model.objects.filter(user=user)

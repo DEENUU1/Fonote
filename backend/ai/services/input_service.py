@@ -6,8 +6,9 @@ from ..models import InputData
 from subscription.repositories.user_subscription_repository import UserSubscriptionRepository
 from subscription.repositories.plan_repository import PlanRepository
 from rest_framework.exceptions import PermissionDenied, ValidationError, NotFound
-
+from ..sources.youtube_transcription import YoutubeTranscription
 from uuid import UUID
+from ..sources.youtube_data import get_youtube_video_data
 
 
 class InputDataService:
@@ -21,7 +22,7 @@ class InputDataService:
         if "spotify" in url:
             return "SPOTIFY"
 
-        elif "youtube" in url:
+        if "youtube" in url:
             return "YOUTUBE"
 
         return None
@@ -39,11 +40,8 @@ class InputDataService:
 
         source = self.get_source_from_url(data.get("source_url"))
 
-        if source is None:
-            raise ValidationError("Source not found")
-
-        if source != data.get("source"):
-            raise ValidationError("Source not match")
+        if source not in ["SPOTIFY", "YOUTUBE"]:
+            raise ValidationError("Invalid url")
 
         if source == "SPOTIFY" and not plan.spotify:
             raise ValidationError("Your subscription doesn't allow you to process data from Spotify")
@@ -51,29 +49,67 @@ class InputDataService:
         if source == "YOUTUBE" and not plan.youtube:
             raise ValidationError("Your subscription doesn't allow you to process data from Youtube")
 
-        # TODO check if video from youtube has generated or manually added transcription
+        if source == "YOUTUBE":
+            video_data = get_youtube_video_data(data.get("source_url"))
+            if video_data.get("length") > plan.max_length:
+                raise ValidationError("Youtube video is too long")
 
-        if source == "SPOTIFY" and not plan.ai_transcription:
-            raise ValidationError("Your subscription doesn't allow you to process data from Spotify")
+            youtube_transcript = YoutubeTranscription(data.get("source_url"))
+            video_id = youtube_transcript.get_youtube_video_id(data.get("source_url"))
 
-        # TODO check length of a file
+            transcription, transcription_type = youtube_transcript.get_youtube_transcription(
+                video_id,
+                data.get("language")
+            )
 
-        # TODO get length and title
+            if transcription is None:
 
-        return self.input_repository.create(data, user)
+                if not plan.ai_transcription:
+                    raise ValidationError("You can't use LLM transcription generator")
 
-    def create_input_unsubscription(self, data: Dict, user: UserModel) -> InputData:
-        source = self.get_source_from_url(data.get("source_url"))
+                # TODO when InputData object is created with `transcription_type=LLM` then run task to process it
+                return self.input_repository.create(
+                    data=data,
+                    user=user,
+                    source=source,
+                    audio_length=video_data.get("length"),
+                    source_title=video_data.get("title"),
+                    transcription_type="LLM",
+                    status="NEW"
+                )
 
-        if source is None or source != data.get("source") or source != "YOUTUBE":
-            raise ValidationError("Source not found")
+            formatted = youtube_transcript.format_text(transcription)
+            print(formatted)
+            # TODO save formatted text to database
+            self.input_repository.create(
+                data=data,
+                user=user,
+                source=source,
+                audio_length=video_data.get("length"),
+                source_title=video_data.get("title"),
+                transcription_type=transcription_type,
+                status="DONE"
+            )
+            # TODO run task to generate LLM response and save to Result object
 
-        # TODO check video from youtube has generated or manually added transcription
-        # TODO check video length
+        if source == "SPOTIFY":
+            if not plan.ai_transcription:
+                raise ValidationError("You can't use LLM transcription generator")
 
-        # TODO get length and title
+            raise ValidationError("Spotify is not supported yet")
 
-        return self.input_repository.create(data, user)
+    # def create_input_unsubscription(self, data: Dict, user: UserModel) -> InputData:
+    #     source = self.get_source_from_url(data.get("source_url"))
+    #
+    #     if source is None or source != data.get("source") or source != "YOUTUBE":
+    #         raise ValidationError("Source not found")
+    #
+    #     # TODO check video from youtube has generated or manually added transcription
+    #     # TODO check video length
+    #
+    #     # TODO get length and title
+    #
+    #     return self.input_repository.create(data, user)
 
     def get_input_list_by_user(self, user: UserModel) -> List[InputData]:
         return self.input_repository.get_input_list_by_user(user)

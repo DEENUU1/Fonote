@@ -6,8 +6,8 @@ class InputDataInputSerializer(ModelSerializer):
     class Meta:
         model = InputData
         fields = (
-            "source",
             "source_url",
+            "language"
         )
 
 
@@ -25,6 +25,7 @@ class InputDataOutputSerializer(ModelSerializer):
             "source_title",
             "source_url",
             "status",
+            "language",
             "user",
             "created_at",
             "updated_at"
