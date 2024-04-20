@@ -19,3 +19,9 @@ class ResultRepository:
 
     def count_results_by_input_data_id(self, input_data_id: UUID) -> int:
         return self.model.objects.filter(input_id=input_data_id).count()
+
+    def result_exists_by_uuid(self, uuid: UUID) -> bool:
+        return self.model.objects.filter(id=uuid).exists()
+
+    def get_result_by_uuid(self, uuid: UUID) -> Result:
+        return self.model.objects.get(id=uuid)
