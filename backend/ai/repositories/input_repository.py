@@ -34,7 +34,7 @@ class InputDataRepository:
         return self.model.objects.filter(user=user)
 
     def get_input_details_by_uuid(self, uuid: UUID) -> InputData:
-        return self.model.objects.get(id=uuid)
+        return self.model.objects.prefetch_related('fragments').get(id=uuid)
 
     def input_exists_by_uuid(self, uuid: UUID) -> bool:
         return self.model.objects.filter(id=uuid).exists()
