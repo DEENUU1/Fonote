@@ -84,7 +84,7 @@ class YoutubeTranscription:
                 type_ = "GENERATED"
 
         except TranscriptsDisabled:
-            return
+            return text, type_
 
         return text, type_
 

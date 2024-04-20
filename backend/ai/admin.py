@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models.input_data import InputData
 from .models.result import Result
+from .models.fragment import Fragment
 
 
 class InputDataAdmin(admin.ModelAdmin):
@@ -15,3 +16,4 @@ class ResultAdmin(admin.ModelAdmin):
 
 admin.site.register(InputData, InputDataAdmin)
 admin.site.register(Result, ResultAdmin)
+admin.site.register(Fragment)

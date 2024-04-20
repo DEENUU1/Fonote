@@ -1,14 +1,17 @@
-from django.contrib.auth.backends import UserModel
-
-from ..repositories.input_repository import InputDataRepository
 from typing import Dict, Any, Optional, List
-from ..models import InputData
-from subscription.repositories.user_subscription_repository import UserSubscriptionRepository
-from subscription.repositories.plan_repository import PlanRepository
-from rest_framework.exceptions import PermissionDenied, ValidationError, NotFound
-from ..sources.youtube_transcription import YoutubeTranscription
 from uuid import UUID
+
+from django.contrib.auth.backends import UserModel
+from rest_framework.exceptions import PermissionDenied, ValidationError, NotFound
+
+from subscription.repositories.plan_repository import PlanRepository
+from subscription.repositories.user_subscription_repository import UserSubscriptionRepository
+from ..models import InputData
+from ..repositories.fragment_repository import FragmentRepository
+from ..repositories.input_repository import InputDataRepository
+from ..serializers import FragmentInputSerializer
 from ..sources.youtube_data import get_youtube_video_data
+from ..sources.youtube_transcription import YoutubeTranscription
 
 
 class InputDataService:
@@ -16,6 +19,7 @@ class InputDataService:
         self.input_repository = InputDataRepository()
         self.user_subscription_repository = UserSubscriptionRepository()
         self.plan_repository = PlanRepository()
+        self.fragment_repository = FragmentRepository()
 
     @staticmethod
     def get_source_from_url(url: str) -> Optional[str]:
@@ -27,7 +31,7 @@ class InputDataService:
 
         return None
 
-    def create_input_subscription(self, data: Dict[str, Any], user: UserModel) -> InputData:
+    def create_input_subscription(self, data: Dict[str, Any], user: UserModel):
         user_subscription = self.user_subscription_repository.get_current_subscription_by_user(user)
 
         if user_subscription is None:
@@ -68,20 +72,9 @@ class InputDataService:
                     raise ValidationError("You can't use LLM transcription generator")
 
                 # TODO when InputData object is created with `transcription_type=LLM` then run task to process it
-                return self.input_repository.create(
-                    data=data,
-                    user=user,
-                    source=source,
-                    audio_length=video_data.get("length"),
-                    source_title=video_data.get("title"),
-                    transcription_type="LLM",
-                    status="NEW"
-                )
+                raise ValidationError("LLM transcription is not available yet")
 
-            formatted = youtube_transcript.format_text(transcription)
-            print(formatted)
-            # TODO save formatted text to database
-            self.input_repository.create(
+            input_db = self.input_repository.create(
                 data=data,
                 user=user,
                 source=source,
@@ -90,6 +83,21 @@ class InputDataService:
                 transcription_type=transcription_type,
                 status="DONE"
             )
+
+            formatted = youtube_transcript.format_text(transcription)
+
+            for idx, txt in enumerate(formatted):
+                data = {
+                    "start_time": txt.start_time,
+                    "end_time": txt.end_time,
+                    "order": idx,
+                    "text": txt.transcriptions,
+                    "input_data": input_db.id
+                }
+                fragment_serializer = FragmentInputSerializer(data=data)
+                fragment_serializer.is_valid(raise_exception=True)
+                self.fragment_repository.create(fragment_serializer.validated_data)
+
             # TODO run task to generate LLM response and save to Result object
 
         if source == "SPOTIFY":
@@ -97,19 +105,6 @@ class InputDataService:
                 raise ValidationError("You can't use LLM transcription generator")
 
             raise ValidationError("Spotify is not supported yet")
-
-    # def create_input_unsubscription(self, data: Dict, user: UserModel) -> InputData:
-    #     source = self.get_source_from_url(data.get("source_url"))
-    #
-    #     if source is None or source != data.get("source") or source != "YOUTUBE":
-    #         raise ValidationError("Source not found")
-    #
-    #     # TODO check video from youtube has generated or manually added transcription
-    #     # TODO check video length
-    #
-    #     # TODO get length and title
-    #
-    #     return self.input_repository.create(data, user)
 
     def get_input_list_by_user(self, user: UserModel) -> List[InputData]:
         return self.input_repository.get_input_list_by_user(user)

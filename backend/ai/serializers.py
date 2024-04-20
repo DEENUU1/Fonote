@@ -1,5 +1,18 @@
 from .models.input_data import InputData
 from rest_framework.serializers import ModelSerializer, DateTimeField
+from .models.fragment import Fragment
+
+
+class FragmentInputSerializer(ModelSerializer):
+    class Meta:
+        model = Fragment
+        fields = (
+            "start_time",
+            "end_time",
+            "order",
+            "text",
+            "input_data"
+        )
 
 
 class InputDataInputSerializer(ModelSerializer):
