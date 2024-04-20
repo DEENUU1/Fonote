@@ -217,3 +217,5 @@ STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")
 FRONTEND_SUBSCRIPTION_SUCCESS_URL = "http://localhost:3000/subscription/success/"
 FRONTEND_SUBSCRIPTION_CANCEL_URL = "http://localhost:3000/subscription/failed/"
 
+# LLM / AI
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
