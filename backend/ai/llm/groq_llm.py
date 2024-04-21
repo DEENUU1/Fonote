@@ -42,7 +42,7 @@ class GroqLLM(LLM):
         result = ""
 
         for chunk in chunks:
-            response = self.get_response(result_type, chunk)
+            response = self.get_response(result_type, chunk.page_content)
             if response:
                 result += response + "\n\n"
 
