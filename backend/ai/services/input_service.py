@@ -57,6 +57,8 @@ class InputDataService:
             self.input_repository.update_status(input_data_db, "PROCESSING")
             run_youtube_processor(input_data_db)
 
+            return input_data_db
+
         if source == "SPOTIFY":
             raise ValidationError("Spotify is not supported yet")
 

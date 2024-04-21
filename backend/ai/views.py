@@ -16,8 +16,8 @@ class InputAPIView(APIView):
     def post(self, request):
         serializer = InputDataInputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        self._service.create_input_subscription(serializer.validated_data, request.user)
-        return Response(status=status.HTTP_201_CREATED)
+        input_db = self._service.create_input_subscription(serializer.validated_data, request.user)
+        return Response(InputDataOutputSerializer(input_db).data, status=status.HTTP_201_CREATED)
 
     def get(self, request):
         input_data = self._service.get_input_list_by_user(request.user.id)
