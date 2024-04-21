@@ -2,6 +2,7 @@ import {useState} from "react";
 import {signOut, useSession} from "next-auth/react";
 import {Box, Button, Code, HStack, Spinner, Text, VStack} from "@chakra-ui/react";
 import axios from "axios";
+import Layout from "@/components/Layout";
 
 export default function Home() {
 
@@ -27,6 +28,8 @@ export default function Home() {
 
   if (session) {
     return (
+    <Layout>
+      <main>{
       <Box m={8}>
         <VStack>
           <Text>PK: {session.user.pk}</Text>
@@ -48,6 +51,8 @@ export default function Home() {
           </Button>
         </HStack>
       </Box>
+      }</main>
+    </Layout>
     );
   }
 
