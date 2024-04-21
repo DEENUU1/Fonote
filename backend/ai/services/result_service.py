@@ -1,18 +1,35 @@
 from typing import Dict, Any
 from uuid import UUID
-from rest_framework.exceptions import NotFound
+
+from django.contrib.auth.backends import UserModel
+from rest_framework.exceptions import NotFound, PermissionDenied, APIException
 
 from ..repositories.result_repository import ResultRepository
 from ..repositories.input_repository import InputDataRepository
+from ..llm.groq_llm import GroqLLM
+from ..repositories.fragment_repository import FragmentRepository
+import uuid
 
 
 class ResultService:
     def __init__(self):
         self.result_repository = ResultRepository()
         self.input_repository = InputDataRepository()
+        self.fragment_repository = FragmentRepository()
 
     def create(self, data: Dict[str, Any]):
-        return self.result_repository.create(data)
+        if not self.input_repository.input_exists_by_uuid(data.get("input_id")):
+            raise NotFound("Input data not found")
+
+        input_text = self.fragment_repository.get_text_by_input_data_id(data.get("input_id"))
+
+        groq = GroqLLM()
+        llm_response = groq.get_response(data.get("result_type"), input_text)
+
+        if not llm_response:
+            raise APIException("Failed to generate response")
+
+        return self.result_repository.create(data, llm_response)
 
     def update_status(self, result_id: UUID, status: str):
         if not self.result_repository.result_exists_by_uuid(result_id):
@@ -21,8 +38,12 @@ class ResultService:
         result = self.result_repository.get_result_by_uuid(result_id)
         return self.result_repository.update_status(result, status)
 
-    def count_results_by_input_data_id(self, input_data_id: UUID) -> int:
+    def get_result_list_by_input_data_id(self, input_data_id: UUID, user: UserModel):
         if not self.input_repository.input_exists_by_uuid(input_data_id):
             raise NotFound("Input data not found")
 
-        return self.result_repository.count_results_by_input_data_id(input_data_id)
+        input_data = self.input_repository.get_input_details_by_uuid(input_data_id)
+        if not self.input_repository.input_belongs_to_user(input_data, user):
+            raise PermissionDenied("Input data does not belong to user")
+
+        return self.result_repository.get_result_list_by_input_data(input_data)

@@ -11,15 +11,14 @@ class YoutubeProcessor:
         self.input_repository = InputDataRepository()
         self.fragment_repository = FragmentRepository()
         self.input_data = input_data
-        self.status = "PROCESSING"
 
-    def process(self) -> str:
+    def process(self) -> None:
         youtube_transcription = YoutubeTranscription(self.input_data.source_url)
 
         transcription = youtube_transcription.get_transcription(self.input_data.language)
 
         if not transcription:
-            self.status = "ERROR"
+            self.input_repository.update_status(self.input_data, "DONE")
             raise Exception("Transcription not found, WHISPER AI is not yet supported")
 
         video_data = get_youtube_video_data(self.input_data.source_url)
@@ -45,5 +44,4 @@ class YoutubeProcessor:
             fragment_serializer.is_valid(raise_exception=True)
             self.fragment_repository.create(fragment_serializer.validated_data)
 
-        self.status = "DONE"
-        return self.status
+        self.input_repository.update_status(self.input_data, "DONE")

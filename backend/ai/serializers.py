@@ -2,6 +2,7 @@ from .models.input_data import InputData
 from rest_framework.serializers import ModelSerializer, DateTimeField
 from .models.fragment import Fragment
 from .models.result import Result
+from rest_framework import serializers
 
 
 class FragmentInputSerializer(ModelSerializer):
@@ -93,12 +94,13 @@ class InputDataOutputSerializer(ModelSerializer):
 
 
 class ResultInputSerializer(ModelSerializer):
+    input_id = serializers.UUIDField()
+
     class Meta:
         model = Result
         fields = (
-            "content",
             "result_type",
-            "input"
+            "input_id"
         )
 
 
@@ -112,7 +114,6 @@ class ResultOutputSerializer(ModelSerializer):
             "id",
             "content",
             "result_type",
-            "status",
             "input",
             "created_at",
             "updated_at"

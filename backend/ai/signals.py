@@ -10,9 +10,7 @@ def run_youtube_processor(sender, instance, created, **kwargs):
     # run the Celery task to process
     if created and instance.source == "YOUTUBE" and instance.status == "NEW":
         youtube_processor = YoutubeProcessor(instance)
-        status = youtube_processor.process()
-        instance.status = status
-        instance.save()
+        youtube_processor.process()
 
 
 post_save.connect(run_youtube_processor, sender=InputData)

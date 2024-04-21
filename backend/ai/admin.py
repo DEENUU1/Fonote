@@ -10,8 +10,8 @@ class InputDataAdmin(admin.ModelAdmin):
 
 
 class ResultAdmin(admin.ModelAdmin):
-    list_display = ('id', 'result_type', 'status', 'input')
-    list_filter = ('status', 'result_type')
+    list_display = ('id', 'result_type', 'input')
+    list_filter = ('result_type',)
 
 
 admin.site.register(InputData, InputDataAdmin)
