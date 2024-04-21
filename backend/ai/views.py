@@ -54,4 +54,4 @@ class ResultListAPIView(APIView):
 
     def get(self, request, pk):
         result = self._service.get_result_list_by_input_data_id(pk, request.user)
-        return Response(ResultOutputSerializer(result).data, status=status.HTTP_200_OK)
+        return Response(ResultOutputSerializer(result, many=True).data, status=status.HTTP_200_OK)

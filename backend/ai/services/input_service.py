@@ -10,6 +10,7 @@ from ..models import InputData
 from ..repositories.fragment_repository import FragmentRepository
 from ..repositories.input_repository import InputDataRepository
 from ..repositories.result_repository import ResultRepository
+from ..tasks import run_youtube_processor
 
 
 class InputDataService:
@@ -52,7 +53,9 @@ class InputDataService:
             raise ValidationError("Your subscription doesn't allow you to process data from Youtube")
 
         if source == "YOUTUBE":
-            self.input_repository.create(data=data, user=user, source=source)
+            input_data_db = self.input_repository.create(data=data, user=user, source=source)
+            self.input_repository.update_status(input_data_db, "PROCESSING")
+            run_youtube_processor(input_data_db)
 
         if source == "SPOTIFY":
             raise ValidationError("Spotify is not supported yet")

@@ -31,13 +31,6 @@ class ResultService:
 
         return self.result_repository.create(data, llm_response)
 
-    def update_status(self, result_id: UUID, status: str):
-        if not self.result_repository.result_exists_by_uuid(result_id):
-            raise NotFound("Result not found")
-
-        result = self.result_repository.get_result_by_uuid(result_id)
-        return self.result_repository.update_status(result, status)
-
     def get_result_list_by_input_data_id(self, input_data_id: UUID, user: UserModel):
         if not self.input_repository.input_exists_by_uuid(input_data_id):
             raise NotFound("Input data not found")
