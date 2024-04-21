@@ -51,6 +51,3 @@ class StripeService:
             # TODO add logger
             print(e)
             return
-
-
-

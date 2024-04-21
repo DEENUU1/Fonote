@@ -1,5 +1,5 @@
 from typing import Dict, Any, List
-from rest_framework.exceptions import PermissionDenied, NotFound, APIException, ValidationError
+from rest_framework.exceptions import PermissionDenied, NotFound, APIException
 from django.contrib.auth.backends import UserModel
 
 from uuid import UUID
