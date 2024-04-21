@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict, List, Any
 from uuid import UUID
 
 from django.contrib.auth.backends import UserModel
@@ -10,25 +10,8 @@ class InputDataRepository:
     def __init__(self):
         self.model = InputData
 
-    def create(
-            self,
-            data: Dict,
-            user: UserModel,
-            source: str,
-            audio_length: int,
-            source_title: str,
-            transcription_type: str,
-            status: str
-    ) -> InputData:
-        return self.model.objects.create(
-            **data,
-            user=user,
-            source=source,
-            audio_length=audio_length,
-            source_title=source_title,
-            transcription_type=transcription_type,
-            status=status
-        )
+    def create(self, data: Dict[str, Any], user: UserModel, source: str) -> InputData:
+        return self.model.objects.create(**data, user=user, source=source)
 
     def get_input_list_by_user(self, user: UserModel) -> List[InputData]:
         return self.model.objects.filter(user=user)
@@ -47,3 +30,15 @@ class InputDataRepository:
     def delete(input_data: InputData) -> bool:
         return input_data.delete()
 
+    @staticmethod
+    def partial_update(data: Dict[str, Any], input_data: InputData):
+        for key, value in data.items():
+            setattr(input_data, key, value)
+        input_data.save()
+        return input_data
+
+    @staticmethod
+    def update_status(input_data: InputData, status: str):
+        input_data.status = status
+        input_data.save()
+        return input_data

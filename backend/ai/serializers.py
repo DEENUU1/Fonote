@@ -38,6 +38,16 @@ class InputDataInputSerializer(ModelSerializer):
         )
 
 
+class InputDataUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = InputData
+        fields = (
+            "transcription_type",
+            "audio_length",
+            "source_title",
+        )
+
+
 class InputDataListOutputSerializer(ModelSerializer):
     created_at = DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)
     updated_at = DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)

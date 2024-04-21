@@ -1,9 +1,9 @@
-from typing import Optional, List, Dict, Any
+from dataclasses import dataclass
+from typing import Optional, List, Dict, Any, Tuple
 from urllib.parse import urlparse, parse_qs
 
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
-from dataclasses import dataclass
 
 
 @dataclass
@@ -13,9 +13,15 @@ class Fragment:
     transcriptions: str
 
 
+@dataclass
+class FragmentList:
+    type_: str
+    fragments: List[Fragment]
+
+
 class YoutubeTranscription:
     def __init__(self, url: str):
-        self.url = url
+        self.video_id = self.get_youtube_video_id(url)
 
     @staticmethod
     def get_youtube_video_id(url: str) -> Optional[str]:
@@ -50,12 +56,12 @@ class YoutubeTranscription:
         }
         return mapper[language]
 
-    def get_youtube_transcription(self, video_id: str, language: str):
+    def fetch_transcription(self, language: str):
         text = None
         type_ = None
 
         try:
-            transcription_list = YouTubeTranscriptApi.list_transcripts(video_id)
+            transcription_list = YouTubeTranscriptApi.list_transcripts(self.video_id)
             generated, manually = None, None
             for transcript in transcription_list:
                 if language in transcript.language:
@@ -88,14 +94,18 @@ class YoutubeTranscription:
 
         return text, type_
 
-    def format_text(self, full_text: List[Dict[str, Any]]):
+    @staticmethod
+    def format_text(full_text: List[Dict[str, Any]]):
         fragments = []
         current_fragment = None
 
         for text in full_text:
             if current_fragment is None:
-                current_fragment = Fragment(start_time=text["start"], end_time=text["start"] + text["duration"],
-                                            transcriptions=text["text"])
+                current_fragment = Fragment(
+                    start_time=text["start"],
+                    end_time=text["start"] + text["duration"],
+                    transcriptions=text["text"]
+                )
             else:
                 if text["text"].endswith("."):
                     current_fragment.transcriptions += " " + text["text"]
@@ -110,22 +120,12 @@ class YoutubeTranscription:
 
         return fragments
 
+    def get_transcription(self, language: str) -> Optional[FragmentList]:
+        fetched_transcript, type_ = self.fetch_transcription(language)
 
+        if fetched_transcript is None:
+            return None
 
+        formatted_text = self.format_text(fetched_transcript)
 
-
-
-if __name__ == "__main__":
-    import json
-
-    url = "https://www.youtube.com/watch?v=39jB8nJBrCI"
-
-    youtube_transcript = YoutubeTranscription(url)
-    # video_id = youtube_transcript.get_youtube_video_id(url)
-    # transcription = youtube_transcript.get_youtube_transcription(video_id, "English")
-
-    with open("transcription.json", "r") as f:
-        transcription = json.load(f)
-
-    formatted_text = youtube_transcript.format_text(transcription)
-    print(formatted_text[0])
+        return FragmentList(type_, formatted_text)

@@ -9,9 +9,11 @@ from subscription.repositories.user_subscription_repository import UserSubscript
 from ..models import InputData
 from ..repositories.fragment_repository import FragmentRepository
 from ..repositories.input_repository import InputDataRepository
-from ..serializers import FragmentInputSerializer
+from ..serializers import FragmentInputSerializer, ResultInputSerializer
 from ..sources.youtube_data import get_youtube_video_data
 from ..sources.youtube_transcription import YoutubeTranscription
+from ..llm.groq_llm import GroqLLM
+from ..repositories.result_repository import ResultRepository
 
 
 class InputDataService:
@@ -20,6 +22,7 @@ class InputDataService:
         self.user_subscription_repository = UserSubscriptionRepository()
         self.plan_repository = PlanRepository()
         self.fragment_repository = FragmentRepository()
+        self.result_repository = ResultRepository()
 
     @staticmethod
     def get_source_from_url(url: str) -> Optional[str]:
@@ -41,7 +44,6 @@ class InputDataService:
             raise ValidationError("Plan not found")
 
         plan = self.plan_repository.get_plan_by_uuid(user_subscription.plan.id)
-
         source = self.get_source_from_url(data.get("source_url"))
 
         if source not in ["SPOTIFY", "YOUTUBE"]:
@@ -54,56 +56,9 @@ class InputDataService:
             raise ValidationError("Your subscription doesn't allow you to process data from Youtube")
 
         if source == "YOUTUBE":
-            video_data = get_youtube_video_data(data.get("source_url"))
-            if video_data.get("length") > plan.max_length:
-                raise ValidationError("Youtube video is too long")
-
-            youtube_transcript = YoutubeTranscription(data.get("source_url"))
-            video_id = youtube_transcript.get_youtube_video_id(data.get("source_url"))
-
-            transcription, transcription_type = youtube_transcript.get_youtube_transcription(
-                video_id,
-                data.get("language")
-            )
-
-            if transcription is None:
-
-                if not plan.ai_transcription:
-                    raise ValidationError("You can't use LLM transcription generator")
-
-                # TODO when InputData object is created with `transcription_type=LLM` then run task to process it
-                raise ValidationError("LLM transcription is not available yet")
-
-            input_db = self.input_repository.create(
-                data=data,
-                user=user,
-                source=source,
-                audio_length=video_data.get("length"),
-                source_title=video_data.get("title"),
-                transcription_type=transcription_type,
-                status="DONE"
-            )
-
-            formatted = youtube_transcript.format_text(transcription)
-
-            for idx, txt in enumerate(formatted):
-                data = {
-                    "start_time": txt.start_time,
-                    "end_time": txt.end_time,
-                    "order": idx,
-                    "text": txt.transcriptions,
-                    "input_data": input_db.id
-                }
-                fragment_serializer = FragmentInputSerializer(data=data)
-                fragment_serializer.is_valid(raise_exception=True)
-                self.fragment_repository.create(fragment_serializer.validated_data)
-
-            # TODO run task to generate LLM response and save to Result object
+            self.input_repository.create(data=data, user=user, source=source)
 
         if source == "SPOTIFY":
-            if not plan.ai_transcription:
-                raise ValidationError("You can't use LLM transcription generator")
-
             raise ValidationError("Spotify is not supported yet")
 
     def get_input_list_by_user(self, user: UserModel) -> List[InputData]:
