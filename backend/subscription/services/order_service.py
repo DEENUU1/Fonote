@@ -1,16 +1,18 @@
 from typing import Dict, Any, List
-from rest_framework.exceptions import PermissionDenied, NotFound
+from rest_framework.exceptions import PermissionDenied, NotFound, APIException, ValidationError
 from django.contrib.auth.backends import UserModel
 
 from uuid import UUID
 
 from ..models.order import Order
 from ..repositories.order_repository import OrderRepository
+from .stripe_service import StripeService
 
 
 class OrderService:
     def __init__(self):
         self.order_repository = OrderRepository()
+        self.stripe_service = StripeService()
 
     def create(self, data: Dict[str, Any], user: UserModel) -> Order:
         return self.order_repository.create(data, user)
@@ -28,3 +30,12 @@ class OrderService:
             raise PermissionDenied(detail="You are not allowed to access this order")
 
         return order
+
+    def get_invoice(self, order_id: UUID, user_id: int) -> str:
+        order = self.get_order_details(order_id, user_id)
+        invoice_url = self.stripe_service.get_invoice(order.invoice_id)
+        if not invoice_url:
+            raise APIException("Invoice not found")
+
+        return invoice_url
+

@@ -9,6 +9,7 @@ from datetime import date
 from .stripe_service import StripeService
 from ..services.plan_service import PlanService
 
+
 class UserSubscriptionService:
     def __init__(self):
         self.user_subscription_repository = UserSubscriptionRepository()
@@ -55,7 +56,6 @@ class UserSubscriptionService:
         plan = self.plan_service.get_plan_by_price_id(price_id)
         self.user_subscription_repository.create({"session_id": checkout_session.id, "plan": plan.pk}, user)
         return checkout_session.url
-
 
     def cancel_subscription(self, user: UserModel) -> None:
         user_current_plan = self.user_subscription_repository.get_current_subscription_by_user(user)
