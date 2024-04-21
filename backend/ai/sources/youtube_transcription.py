@@ -4,6 +4,9 @@ from urllib.parse import urlparse, parse_qs
 
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -90,6 +93,11 @@ class YoutubeTranscription:
                 type_ = "GENERATED"
 
         except TranscriptsDisabled:
+            logger.error(f"Transcripts disabled for video {self.video_id}")
+            return text, type_
+
+        except Exception as e:
+            logger.error(e)
             return text, type_
 
         return text, type_

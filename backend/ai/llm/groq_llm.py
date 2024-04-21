@@ -3,6 +3,9 @@ from typing import Optional
 from groq import Groq
 from django.conf import settings
 from .llm import LLM
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class GroqLLM(LLM):
@@ -30,8 +33,7 @@ class GroqLLM(LLM):
             return llm_response.choices[0].message.content
 
         except Exception as e:
-            print(e)
-            # TODO add logger
+            logger.error(f"Error generating response: {e}")
             return None
 
     def generate(self, result_type: str, input_data: str) -> Optional[str]:

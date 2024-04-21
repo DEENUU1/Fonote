@@ -8,6 +8,10 @@ from rest_framework.exceptions import NotFound, ValidationError, APIException
 from datetime import date
 from .stripe_service import StripeService
 from ..services.plan_service import PlanService
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 class UserSubscriptionService:
@@ -51,6 +55,7 @@ class UserSubscriptionService:
 
         checkout_session = self.stripe_service.create_checkout_session(price_id, user.id)
         if not checkout_session:
+            logger.error("Error creating checkout session")
             raise APIException(detail="Error creating checkout session")
 
         plan = self.plan_service.get_plan_by_price_id(price_id)
@@ -71,7 +76,11 @@ class UserSubscriptionService:
 
         cancelled_subscription = self.stripe_service.cancel_subscription(user_current_plan.subscription_id)
         if not cancelled_subscription:
+            logger.error("Error canceling subscription")
             raise APIException(detail="Error canceling subscription")
 
         self.user_subscription_repository.partial_update(user_current_plan, {"status": "CANCELED"})
+        logger.info(
+            f"Subscription canceled successfully user: {user} subscription: {user_current_plan.subscription_id}"
+        )
         return

@@ -1,6 +1,9 @@
 from pytube import YouTube
 from typing import Optional
 from dataclasses import dataclass
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -17,7 +20,6 @@ def get_youtube_video_data(url: str) -> Optional[YoutubeVideoData]:
 
         return YoutubeVideoData(title, length)
     except Exception as e:
-        # TODO add logger
-        print(e)
+        logger.error(f"Error getting youtube video data: {e}")
         return None
 

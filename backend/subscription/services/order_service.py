@@ -7,6 +7,9 @@ from uuid import UUID
 from ..models.order import Order
 from ..repositories.order_repository import OrderRepository
 from .stripe_service import StripeService
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class OrderService:
@@ -35,6 +38,7 @@ class OrderService:
         order = self.get_order_details(order_id, user_id)
         invoice_url = self.stripe_service.get_invoice(order.invoice_id)
         if not invoice_url:
+            logger.error(f"Invoice not found for order {order_id}")
             raise APIException("Invoice not found")
 
         return invoice_url

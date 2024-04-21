@@ -4,6 +4,9 @@ from ..models import InputData
 from ..repositories.input_repository import InputDataRepository
 from ..serializers import InputDataUpdateSerializer, FragmentInputSerializer
 from ..repositories.fragment_repository import FragmentRepository
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class YoutubeProcessor:
@@ -13,12 +16,15 @@ class YoutubeProcessor:
         self.input_data = input_data
 
     def process(self) -> None:
+        logger.info(f"Processing input data {self.input_data.id}")
+
         youtube_transcription = YoutubeTranscription(self.input_data.source_url)
 
         transcription = youtube_transcription.get_transcription(self.input_data.language)
 
         if not transcription:
-            self.input_repository.update_status(self.input_data, "DONE")
+            logger.error(f"Transcription not found for input data {self.input_data.id}")
+            self.input_repository.update_status(self.input_data, "ERROR")
             raise Exception("Transcription not found, WHISPER AI is not yet supported")
 
         video_data = get_youtube_video_data(self.input_data.source_url)
@@ -44,4 +50,5 @@ class YoutubeProcessor:
             fragment_serializer.is_valid(raise_exception=True)
             self.fragment_repository.create(fragment_serializer.validated_data)
 
+        logger.info(f"Input data {self.input_data.id} processed")
         self.input_repository.update_status(self.input_data, "DONE")

@@ -10,7 +10,10 @@ from ..serializers.order_serializer import OrderInputSerializer
 from ..serializers.user_subscription_serializer import UserSubscriptionUpdateSerializer
 from ..services.order_service import OrderService
 from ..services.user_subscription_service import UserSubscriptionService
+import logging
 
+
+logger = logging.getLogger(__name__)
 stripe.api_key = settings.STRIPE_SECRET_KEY
 webhook_secret = settings.STRIPE_WEBHOOK_SECRET
 
@@ -26,6 +29,8 @@ class Webhook(APIView):
 
             :return: returns event details as json response .
         """
+        logger.info("Webhook received")
+
         request_data = json.loads(request.body)
         event = None
 
@@ -37,9 +42,12 @@ class Webhook(APIView):
                     sig_header=signature,
                     secret=webhook_secret
                 )
+                logger.info("Webhook verified")
             except ValueError as err:
+                logger.error(f"Error while verifying webhook: {err}")
                 raise err
             except stripe.error.SignatureVerificationError as err:
+                logger.error(f"Error while verifying webhook: {err}")
                 raise err
 
             event_type = event['type']
@@ -47,6 +55,7 @@ class Webhook(APIView):
             event_type = request_data['type']
 
         if event_type == 'checkout.session.completed':
+            logger.info("Checkout session completed")
             if event:
                 user_id = event.get("data").get("object").get("metadata").get("user_id")
                 user_subscription = self._user_subscription_service.get_current_subscription_by_user(int(user_id))
@@ -89,6 +98,7 @@ class Webhook(APIView):
                 )
 
         elif event_type == 'invoice.payment_failed':
+            logger.info("Invoice payment failed")
             if event:
                 # Update UserSubscription object
                 user_id = event.get("data").get("object").get("metadata").get("user_id")
@@ -107,4 +117,5 @@ class Webhook(APIView):
         else:
             pass
 
+        logger.info("Webhook processed")
         return JsonResponse(data={"status": "success"})
