@@ -7,12 +7,13 @@ from uuid import UUID
 from rest_framework.exceptions import NotFound, ValidationError, APIException
 from datetime import date
 from .stripe_service import StripeService
-
+from ..services.plan_service import PlanService
 
 class UserSubscriptionService:
     def __init__(self):
         self.user_subscription_repository = UserSubscriptionRepository()
         self.stripe_service = StripeService()
+        self.plan_service = PlanService()
 
     def create(self, data: Dict[str, Any], user: UserModel) -> UserSubscription:
         return self.user_subscription_repository.create(data, user)
@@ -39,6 +40,22 @@ class UserSubscriptionService:
             return False
 
         return True
+
+    def create_checkout_session(self, user: UserModel, price_id) -> str:
+        user_current_plan = self.user_subscription_repository.get_current_subscription_by_user(user)
+
+        if user_current_plan:
+            if user_current_plan.status == "ACTIVE" or self.subscription_is_valid(user_current_plan):
+                raise ValidationError(detail="You already have an active subscription")
+
+        checkout_session = self.stripe_service.create_checkout_session(price_id, user.id)
+        if not checkout_session:
+            raise APIException(detail="Error creating checkout session")
+
+        plan = self.plan_service.get_plan_by_price_id(price_id)
+        self.user_subscription_repository.create({"session_id": checkout_session.id, "plan": plan.pk}, user)
+        return checkout_session.url
+
 
     def cancel_subscription(self, user: UserModel) -> None:
         user_current_plan = self.user_subscription_repository.get_current_subscription_by_user(user)
