@@ -24,7 +24,7 @@ class ResultService:
         input_text = self.fragment_repository.get_text_by_input_data_id(data.get("input_id"))
 
         groq = GroqLLM()
-        llm_response = groq.get_response(data.get("result_type"), input_text)
+        llm_response = groq.generate(data.get("result_type"), input_text)
 
         if not llm_response:
             raise APIException("Failed to generate response")

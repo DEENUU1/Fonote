@@ -2,10 +2,12 @@ from typing import Optional
 
 from groq import Groq
 from django.conf import settings
+from .llm import LLM
 
 
-class GroqLLM:
+class GroqLLM(LLM):
     def __init__(self):
+        super().__init__(chunk_size=8000, chunk_overlap=100)
         self.client = Groq(api_key=settings.GROQ_API_KEY)
         self.model: str = "llama3-8b-8192"
 
@@ -15,8 +17,8 @@ class GroqLLM:
                 messages=[
                     {
                         "role": "system",
-                        "content": f"You are an assistant responsible for processing transcriptions of videos and podcasts."
-                                   f" Do {result_type} based on the given text",
+                        "content": f"You are an assistant responsible for processing transcriptions of videos and "
+                                   f"podcasts. Do {result_type} based on the given text",
                     },
                     {
                         "role": "user",
@@ -31,6 +33,18 @@ class GroqLLM:
             print(e)
             # TODO add logger
             return None
+
+    def generate(self, result_type: str, input_data: str) -> Optional[str]:
+        chunks = self.split_text_to_chunks(input_data)
+
+        result = ""
+
+        for chunk in chunks:
+            response = self.get_response(result_type, chunk)
+            if response:
+                result += response + "\n\n"
+
+        return result
 
 
 
