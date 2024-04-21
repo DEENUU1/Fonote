@@ -46,20 +46,20 @@ class UserSubscriptionService:
 
         return True
 
-    def create_checkout_session(self, user: UserModel, price_id) -> str:
+    def create_checkout_session(self, user: UserModel, plan_id) -> str:
         user_current_plan = self.user_subscription_repository.get_current_subscription_by_user(user)
 
         if user_current_plan:
             if user_current_plan.status == "ACTIVE" or self.subscription_is_valid(user_current_plan):
                 raise ValidationError(detail="You already have an active subscription")
 
-        checkout_session = self.stripe_service.create_checkout_session(price_id, user.id)
+        plan = self.plan_service.get_plan_by_id(plan_id)
+        checkout_session = self.stripe_service.create_checkout_session(plan.price.stripe_id, user.id)
         if not checkout_session:
             logger.error("Error creating checkout session")
             raise APIException(detail="Error creating checkout session")
 
-        plan = self.plan_service.get_plan_by_price_id(price_id)
-        self.user_subscription_repository.create({"session_id": checkout_session.id, "plan": plan.pk}, user)
+        self.user_subscription_repository.create({"session_id": checkout_session.id, "plan": plan}, user)
         return checkout_session.url
 
     def cancel_subscription(self, user: UserModel) -> None:

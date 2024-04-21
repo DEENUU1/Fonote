@@ -1,16 +1,16 @@
+import Layout from "@/components/Layout";
 
 export default function Success() {
 
 	return (
 			<>
-				<section>
-					<div>
-
-						<div>
+			<Layout>
+				<main>
+					{
 							<h3>Your plan Subscribed successful!</h3>
-						</div>
-					</div>
-				</section>
+					}
+				</main>
+			</Layout>
 			</>
 		)
 }

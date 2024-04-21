@@ -11,5 +11,5 @@ class CreateSubscription(APIView):
     _service = UserSubscriptionService()
 
     def post(self, request):
-        checkout_session_url = self._service.create_checkout_session(request.user, request.data.get("price_id"))
+        checkout_session_url = self._service.create_checkout_session(request.user, request.data.get("plan_id"))
         return Response(data=checkout_session_url, status=status.HTTP_200_OK)

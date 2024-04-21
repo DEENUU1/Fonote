@@ -1,17 +1,16 @@
-import Subscription from "@/components/Subscription";
+import Layout from "@/components/Layout";
 
-export default function Home() {
+export default function Failed() {
 
 	return (
 			<>
-				<section>
-					<div>
-
-						<div>
-							<h3>Subscription Failed . back to pay!</h3>
-						</div>
-					</div>
-				</section>
+			<Layout>
+				<main>
+					{
+							<h3>Failed!</h3>
+					}
+				</main>
+			</Layout>
 			</>
 		)
 }

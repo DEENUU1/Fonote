@@ -10,6 +10,7 @@ class PlanOutputSerializer(ModelSerializer):
     class Meta:
         model = Plan
         fields = (
+            "id",
             "name",
             "youtube",
             "spotify",
