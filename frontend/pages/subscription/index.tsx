@@ -1,7 +1,7 @@
 import {useSession} from "next-auth/react";
 import Layout from "@/components/Layout";
 import {useEffect, useState} from "react";
-
+import {toast} from "react-toastify";
 
 async function getPlans(){
 	const res = await fetch(process.env.API_URL + "subscription/plan/", {
@@ -12,7 +12,7 @@ async function getPlans(){
 
 
 export default function Home() {
-	const {data: session, status} = useSession({required: true});
+	const {data: session, status} = useSession({required: false});
 	const [plans, setPlans] = useState([]);
 
 	useEffect(() => {
@@ -26,7 +26,11 @@ export default function Home() {
 
 
 	const handleSubscription = async (planId: string) => {
-		console.log(planId)
+		if (!session){
+			toast.error("Please login to continue")
+			return;
+		}
+
 		try {
 			const response = await fetch('http://localhost:8000/api/subscription/checkout/', {
 				method: 'POST',
@@ -44,10 +48,10 @@ export default function Home() {
 
 				window.location.href = data;
 			} else {
-				console.error(response.statusText);
+				toast.error(response.text)
 			}
 		} catch (error) {
-			console.error(error);
+			toast.error("Error")
 		}
 	};
 
@@ -65,11 +69,11 @@ export default function Home() {
 											<h2 className="text-xl leading-6 font-bold text-slate-900">{plan?.name}</h2>
 											<p className="mt-2 text-base text-slate-700 leading-tight">{plan?.description}</p>
 											<p className="mt-8">
-												<span className="text-4xl font-bold text-slate-900 tracking-tighter">{plan?.price.price}</span>
+												<span className="text-4xl font-bold text-slate-900 tracking-tighter">$ {plan?.price.price}</span>
 												<span className="text-base font-medium text-slate-500">/mo</span>
 											</p>
 											<button onClick={() => handleSubscription(plan.id)}
-															className="mt-8 block w-full bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
+															className="text-white mt-5 bg-blue-500 hover:bg-blue-600 font-semibold rounded-md text-sm px-4 py-3 w-full">
 												Subscribe
 											</button>
 										</div>
