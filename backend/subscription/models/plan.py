@@ -4,6 +4,7 @@ from .price import Price
 
 class Plan(models.Model):
     name = models.CharField(max_length=20, null=False)
+    description = models.TextField(null=True)
     youtube = models.BooleanField(default=True)
     spotify = models.BooleanField(default=False)
     max_length = models.IntegerField(null=False, default=15)

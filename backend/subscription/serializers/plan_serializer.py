@@ -12,6 +12,7 @@ class PlanOutputSerializer(ModelSerializer):
         fields = (
             "id",
             "name",
+            "description",
             "youtube",
             "spotify",
             "max_length",
