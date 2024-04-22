@@ -63,7 +63,7 @@ export default function Home() {
 									<div key={plan.id} className="border border-slate-200 rounded-lg shadow-sm divide-y divide-slate-200">
 										<div className="p-6">
 											<h2 className="text-xl leading-6 font-bold text-slate-900">{plan?.name}</h2>
-											<p className="mt-2 text-base text-slate-700 leading-tight">description here...</p>
+											<p className="mt-2 text-base text-slate-700 leading-tight">{plan?.description}</p>
 											<p className="mt-8">
 												<span className="text-4xl font-bold text-slate-900 tracking-tighter">{plan?.price.price}</span>
 												<span className="text-base font-medium text-slate-500">/mo</span>
