@@ -8,8 +8,9 @@ import Footer from "@/components/Footer";
 export default function Layout({ children }) {
   return (
     <>
+      <section className="text-gray-700 body-font overflow-hidden border-t">
       <Navbar/>
-      <section className="text-gray-700 h-screen body-font overflow-hidden border-t">
+
           <ToastContainer/>
           <main>{children}</main>
       </section>

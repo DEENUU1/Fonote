@@ -1,30 +1,27 @@
-import {signIn, useSession} from "next-auth/react";
-import {Box, Button, Spinner, Text, VStack} from "@chakra-ui/react";
 import Layout from "@/components/Layout";
+import { HeroSection } from "@/components/home/HeroSection";
+import { ClientsSection } from "@/components/home/Clients";
+import { ContactUs } from "@/components/home/ContactUs";
+import { Features } from "@/components/home/Features";
+import { HowItWork } from "@/components/home/HowItWork";
+import { Pricing } from "@/components/home/Pricing";
+import { Testimonials } from "@/components/home/Testimonials";
 
 export default function Home() {
 
-  const {data: session, status} = useSession();
-
-  if (status == "loading") {
-    return <Spinner size="lg"/>;
-  }
 
   return (
     <Layout>
       <main>{
-        <Box m={8}>
-          <VStack>
-            <Text>
-              {session ? `Hello, ${session.user.username}` : "You are not logged in"}
-            </Text>
-
-            <Button colorScheme="blue" onClick={() => signIn(undefined, {callbackUrl: "/profile"})}>
-              Login
-            </Button>
-
-          </VStack>
-        </Box>
+        <>
+          <HeroSection />
+          {/*<ClientsSection />*/}
+          <Features />
+          <HowItWork />
+          <Pricing />
+          {/*<Testimonials />*/}
+          <ContactUs />
+        </>
       }
       </main>
     </Layout>

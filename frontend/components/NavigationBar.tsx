@@ -25,7 +25,7 @@ function Navbar() {
                 <Link href={"/"} className="px-3 py-2 cursor-pointer font-bold rounded hover:bg-blue-400">
                     Home
                 </Link>
-                <Link href={"/pricing"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
+                <Link href={"/subscription"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
                     Pricing
                 </Link>
                 <Link href={"/contact"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
