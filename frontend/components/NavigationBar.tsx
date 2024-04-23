@@ -25,10 +25,10 @@ function Navbar() {
                 <Link href={"/"} className="px-3 py-2 cursor-pointer font-bold rounded hover:bg-blue-400">
                     Home
                 </Link>
-                <Link href={"/Pricing"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
+                <Link href={"/pricing"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
                     Pricing
                 </Link>
-                <Link href={"/Contact"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
+                <Link href={"/contact"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
                     Contact
                 </Link>
                 <Button className="px-3 py-2 cursor-pointer rounded font-extrabold hover:bg-blue-400" onClick={() => signIn(undefined, {callbackUrl: "/profile"})}>
@@ -42,16 +42,16 @@ function Navbar() {
                 <Link href={"/"} className="px-3 py-2 cursor-pointer font-bold rounded hover:bg-blue-400">
                     Home
                 </Link>
-                <Link href={"/Pricing"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
+                <Link href={"/subscription"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
                     Pricing
                 </Link>
-                <Link href={"/Contact"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
+                <Link href={"/contact"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
                     Contact
                 </Link>
                 <Link href={"/profile"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
                     Profile
                 </Link>
-                <Link href={"/Dashboard"} className="px-3 py-2 cursor-pointer rounded font-extrabold hover:bg-blue-400">
+                <Link href={"/dashboard"} className="px-3 py-2 cursor-pointer rounded font-extrabold hover:bg-blue-400">
                     Dashboard
                 </Link>
             </>
