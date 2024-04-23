@@ -51,7 +51,6 @@ class FragmentOutputSerializer(ModelSerializer):
         )
 
 
-
 class InputDataInputSerializer(ModelSerializer):
     class Meta:
         model = InputData

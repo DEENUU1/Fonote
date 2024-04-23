@@ -3,8 +3,10 @@ import {useSession} from "next-auth/react";
 import {useEffect, useState} from "react";
 import Link from "next/link";
 import ChipStatus from "@/components/dashboard/StatusChip";
-import {Button} from "@nextui-org/react";
 import {Chip} from "@nextui-org/react";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
+import {Input, Select, SelectItem} from "@nextui-org/react";
+import {toast} from "react-toastify";
 
 async function getListInputData(access_token: string) {
 	const res = await fetch(process.env.API_URL + "ai/input/", {
@@ -56,17 +58,62 @@ async function postResponse(access_token: string, inputDataId: string, result_ty
 
 
 const resultType: String[] = ["NOTE", "SUMMARY", "BULLETS", "LONG SUMMARY", "LONG NOTE"];
+const languages = [
+	{label: "English", value: "English", description: "English"},
+	{label: "French", value: "French", description: "French"},
+	{label: "German", value: "German", description: "German"},
+	{label: "Italian", value: "Italian", description: "Italian"},
+	{label: "Spanish", value: "Spanish", description: "Spanish"},
+	{label: "Japanese", value: "Japanese", description: "Japanese"},
+	{label: "Korean", value: "Korean", description: "Korean"},
+	{label: "Danish", value: "Danish", description: "Danish"},
+	{label: "Czech", value: "Czech", description: "Czech"},
+	{label: "Dutch", value: "Dutch", description: "Dutch"},
+	{label: "Polish", value: "Polish", description: "Polish"},
+]
 
 
 export default function Dashboard() {
 	const {data: session, status} = useSession({required: true});
 
+	const {isOpen, onOpen, onOpenChange} = useDisclosure();
 	const [listInputData, setListInputData] = useState([]);
 	const [detailInputData, setDetailInputData] = useState(null);
 	const [listResult, setListResult] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	console.log(detailInputData);
+	const [url, setUrl] = useState("");
+	const [language, setLanguage] = useState("");
 
+	const handleSubmitCreateInputData = async (e: any) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    const formData = new FormData();
+    formData.append("source_url", url);
+    formData.append("language", language);
+
+    try {
+      const response = await fetch(process.env.API_URL + "ai/input/", {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+					Authorization: `Bearer ${session?.access_token}`
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        toast.success("Input data created successfully");
+      } else {
+        toast.error("Error while creating Input data object")
+      }
+    } catch (error) {
+      toast.error("Error while creating Input data object");
+    } finally {
+      setIsLoading(false)
+    }
+  };
 
 	useEffect(() => {
 		async function fetchData() {
@@ -117,6 +164,43 @@ export default function Dashboard() {
 										 aria-label="Sidebar">
 								<div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
 									<ul className="space-y-2 font-medium">
+
+										<Button onPress={onOpen}>Add data to process</Button>
+										<Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false} isKeyboardDismissDisabled={true}>
+											<ModalContent>
+												{(onClose) => (
+													<>
+														<ModalHeader className="flex flex-col gap-1">Process data</ModalHeader>
+														<form onSubmit={handleSubmitCreateInputData}>
+														<ModalBody>
+															<div className={"flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-2"}>
+																<Input isRequired={true} type="url" label="Url" placeholder="Youtube/Spotify url" onChange={(e) => setUrl(e.target.value)} />
+																<Select
+																	isRequired={true}
+																	items={languages}
+																	label="Langugae"
+																	placeholder="Select a language"
+																	onChange={(e) => setLanguage(e.target.value)}
+																	className="max-w-xs"
+																>
+																	{(language) => <SelectItem key={language.value}>{language.label}</SelectItem>}
+																</Select>
+															</div>
+
+														</ModalBody>
+														<ModalFooter>
+															<Button color="danger" variant="light" onPress={onClose}>
+																Close
+															</Button>
+															<Button type={"submit"} color="primary" onPress={onClose}>
+																Submit
+															</Button>
+														</ModalFooter>
+														</form>
+													</>
+												)}
+											</ModalContent>
+										</Modal>
 
 										{Array.isArray(listInputData) && (
 											listInputData.map((inputData) => (
