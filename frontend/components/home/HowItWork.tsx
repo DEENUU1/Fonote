@@ -8,14 +8,11 @@ export const HowItWork = () => {
           <h2 className="font-poppins text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
             How does it work?
           </h2>
-          <p className="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">
-            Effortlessly Navigate the Hiring Process with Our Intuitive
-            Platform.
-          </p>
         </div>
 
         <div className="relative mt-12 lg:mt-20">
           <div className="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="w-full"
               src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg"
@@ -29,11 +26,10 @@ export const HowItWork = () => {
                 <span className="text-xl font-semibold text-white"> 1 </span>
               </div>
               <h3 className="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
-                Candidate Sourcing
+                Provide a link to the source you want to process
               </h3>
               <p className="mt-4 text-base text-gray-600">
-                Tap into our AI-powered algorithms to effortlessly discover and
-                attract top talent from diverse channels.
+                Fonote supports both YouTube and Spotify
               </p>
             </div>
 
@@ -45,12 +41,10 @@ export const HowItWork = () => {
                 </span>
               </div>
               <h3 className="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
-                Application Management
+                Generate transcript
               </h3>
               <p className="mt-4 text-base text-gray-600">
-                Streamline your workflow with our applicant tracking system,
-                allowing you to easily manage and track candidates&apos;
-                progress.
+                Fonote allows you to download a generated, manually added transcript and generate it using the Whisper model
               </p>
             </div>
 
@@ -62,11 +56,10 @@ export const HowItWork = () => {
                 </span>
               </div>
               <h3 className="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
-                Collaborative Decision-Making
+                Talk with source data
               </h3>
               <p className="mt-4 text-base text-gray-600">
-                Foster seamless communication and collaboration among your
-                hiring team with centralized feedback and evaluation tools.
+                Just one button allows you to generate a summary, note or other type of summary using AI
               </p>
             </div>
           </div>

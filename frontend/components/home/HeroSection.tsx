@@ -1,5 +1,6 @@
+import Link from "next/link";
 
-export const HeroSection = () => {
+export const  HeroSection = () => {
   return (
     <>
       <section className="pt-12 pb-24 bg-gray-50 sm:pt-16">
@@ -9,22 +10,19 @@ export const HeroSection = () => {
               Created for those who like to see words.{" "}
             </h1>
             <h2 className="mt-5 text-6xl leading-2 text-gray-900 sm:leading-tight md:text-6xl lg:text-6xl  font-poppins font-bold">
-              Unlock the Power of Words: Transform{" "}
+               Transform{" "}
               <span className="bg-gradient-to-r from-warning via-red-500 to-red-600 inline-block text-transparent bg-clip-text">
                 YouTube
               </span>{" and "}
               <span className="bg-gradient-to-r from-success via-green-500 to-green-600 inline-block text-transparent bg-clip-text">
                   Spotify
               </span>{" "}
-              audio into Insightful Transcripts with{" "}
-              <span className="bg-gradient-to-r from-primary via-blue-500 to-blue-600 inline-block text-transparent bg-clip-text">
-                Fonote
-              </span>{" "}
+              audio into Insightful Transcripts
             </h2>
 
             <div className="px-8 sm:items-center sm:justify-center sm:px-0 sm:space-x-5 sm:flex mt-9">
-              <a
-                href="#"
+              <Link
+                href="/subscription"
                 title=""
                 className="mt-0 max-sm:mt-5 md:mt-0 lg:mt-0 inline-flex items-center justify-center px-6 py-2 fpx-5 text-white bg-black rounded-md"
                 role="button"
@@ -45,7 +43,7 @@ export const HeroSection = () => {
                   />
                 </svg>
                 Start for free
-              </a>
+              </Link>
             </div>
 
 

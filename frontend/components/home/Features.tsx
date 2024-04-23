@@ -4,13 +4,8 @@ export const Features = () => {
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className=" font-poppins text-3xl font-bold leading-tight text-gray-900 sm:text-4xl xl:text-5xl font-pj">
-            Revolutionize Your Hiring Process with Our Advanced Recruitment
-            Software
+            Improve your learning system
           </h2>
-          <p className="mt-4 text-base leading-7 text-gray-600 sm:mt-8 font-pj">
-            Streamline Talent Acquisition, Simplify Workflow, and Find the
-            Perfect Fit Faster Than Ever Before
-          </p>
         </div>
 
         <div className="grid grid-cols-1 mt-10 text-center sm:mt-16 sm:grid-cols-2 sm:gap-x-12 gap-y-12 md:grid-cols-3 md:gap-0 xl:mt-24">
@@ -20,15 +15,15 @@ export const Features = () => {
               className="mx-auto"
               viewBox="0 0 64 64"
               xmlns="http://www.w3.org/2000/svg"
-              stroke-width="3"
+              strokeWidth="3"
               stroke="#000000"
               fill="none"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 <circle cx="34.52" cy="11.43" r="5.82"></circle>
@@ -50,12 +45,10 @@ export const Features = () => {
             </svg>
 
             <h3 className="mt-12 text-xl font-bold text-gray-900 font-pj">
-              AI-Powered Candidate Sourcing
+              AI-Powered tools
             </h3>
             <p className="mt-5 text-base text-gray-600 font-pj">
-              Utilize advanced AI algorithms to identify and attract top talent
-              from various sources, including job boards, social media
-              platforms, and professional networks.
+              Integration with language models allows you to create notes, summaries and even transcriptions with just a few clicks.
             </p>
           </div>
 
