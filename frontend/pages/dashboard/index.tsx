@@ -55,7 +55,7 @@ async function postResponse(access_token: string, inputDataId: string, result_ty
 }
 
 
-const resultType: String[] = ["NOTE", "SUMMARY"];
+const resultType: String[] = ["NOTE", "SUMMARY", "BULLETS", "LONG SUMMARY", "LONG NOTE"];
 
 
 export default function Dashboard() {
@@ -185,8 +185,8 @@ export default function Dashboard() {
 								</div>
 
 								{resultType.map((resultType, index) => (
-									<div key={index}>
-										<Button isLoading={isLoading} type={"button"}
+									<div key={index} className={"mt-5 gap-2"}>
+										<Button variant={"ghost"} size={"sm"} isLoading={isLoading} type={"button"}
 														onClick={() => handleResponseCreate(detailInputData?.id, resultType)}>
 											{resultType}
 										</Button>

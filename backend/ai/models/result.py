@@ -8,6 +8,9 @@ class Result(BaseModel):
     RESULT = (
         ("SUMMARY", "SUMMARY"),
         ("NOTE", "NOTE"),
+        ("BULLETS", "BULLETS"),
+        ("LONG SUMMARY", "LONG SUMMARY"),
+        ("LONG NOTE", "LONG NOTE"),
     )
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
