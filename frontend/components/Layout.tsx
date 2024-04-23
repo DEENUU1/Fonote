@@ -1,6 +1,7 @@
-import Navbar from "@/components/Navbar";
+// import Navbar from "@/components/Navbar";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Navbar from "@/components/NavigationBar";
 
 
 // @ts-ignore
