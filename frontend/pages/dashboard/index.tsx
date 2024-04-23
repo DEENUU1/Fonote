@@ -135,9 +135,9 @@ export default function Dashboard() {
 								</div>
 							</aside>
 
-							<div className="p-4 sm:ml-64 flex flex-wrap">
+							<div className="p-4 sm:ml-64 flex flex-wrap h-[850px]">
 								<div
-									className="p-4 w-1/2 border-2 border-gray-200 border-solid rounded-lg dark:border-gray-700 overflow-y-auto"
+									className="p-4 w-1/2 border-2 flex-grow border-gray-200 border-solid rounded-lg dark:border-gray-700 overflow-y-auto"
 									style={{maxHeight: "850px"}}>
 									{detailInputData?.fragments.length > 0 && (
 										detailInputData?.fragments.map((detail) => (
@@ -157,7 +157,7 @@ export default function Dashboard() {
 									)}
 								</div>
 								<div
-									className="p-4 w-1/2 border-2 border-gray-200 border-solid rounded-lg dark:border-gray-700 overflow-y-auto"
+									className="p-4 w-1/2 border-2 flex-grow border-gray-200 border-solid rounded-lg dark:border-gray-700 overflow-y-auto"
 									style={{maxHeight: "850px"}}>
 									{Array.isArray(listResult) && (listResult.length> 0 && (
 										listResult?.map((result) => (
@@ -179,9 +179,6 @@ export default function Dashboard() {
 								</div>
             	))}
 							</div>
-
-
-
 						</>
 					}
 				</main>
