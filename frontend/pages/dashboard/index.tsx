@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import Link from "next/link";
 import ChipStatus from "@/components/dashboard/StatusChip";
 import {Button} from "@nextui-org/react";
-
+import {Chip} from "@nextui-org/react";
 
 async function getListInputData(access_token: string) {
 	const res = await fetch(process.env.API_URL + "ai/input/", {
@@ -65,6 +65,7 @@ export default function Dashboard() {
 	const [detailInputData, setDetailInputData] = useState(null);
 	const [listResult, setListResult] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	console.log(detailInputData);
 
 
 	useEffect(() => {
@@ -136,15 +137,27 @@ export default function Dashboard() {
 							</aside>
 
 							<div className="p-4 sm:ml-64 flex flex-wrap h-[850px]">
+								<>
+									{detailInputData?.fragments.length > 0 && (
+											<div className="w-full flex mb-4 gap-2">
+												<Chip color={"default"} variant={"bordered"}>{detailInputData?.audio_length_minutes} minutes</Chip>
+												<Chip color={"default"} variant={"bordered"}>{detailInputData?.language}</Chip>
+												<Chip color={"default"} variant={"bordered"}>{detailInputData?.source}</Chip>
+												<Chip color={"default"} variant={"bordered"}>{detailInputData?.transcription_type}</Chip>
+											</div>
+										)
+									}
+								</>
+
 								<div
 									className="p-4 w-1/2 border-2 flex-grow border-gray-200 border-solid rounded-lg dark:border-gray-700 overflow-y-auto"
 									style={{maxHeight: "850px"}}>
-									{detailInputData?.fragments.length > 0 && (
-										detailInputData?.fragments.map((detail) => (
-											<li key={detail?.id} className={"mb-5"}>
-												<div>
-													<strong>
-														{detail.start_time.hours}:{detail.start_time.minutes}:{detail.start_time.seconds}
+								{detailInputData?.fragments.length > 0 && (
+									detailInputData?.fragments.map((detail) => (
+									<li key={detail?.id} className={"mb-5"}>
+								<div>
+									<strong>
+										{detail.start_time.hours}:{detail.start_time.minutes}:{detail.start_time.seconds}
 													</strong>
 													-
 													<strong>
@@ -159,7 +172,7 @@ export default function Dashboard() {
 								<div
 									className="p-4 w-1/2 border-2 flex-grow border-gray-200 border-solid rounded-lg dark:border-gray-700 overflow-y-auto"
 									style={{maxHeight: "850px"}}>
-									{Array.isArray(listResult) && (listResult.length> 0 && (
+									{Array.isArray(listResult) && (listResult.length > 0 && (
 										listResult?.map((result) => (
 											<li key={result?.id} className={"mb-5"}>
 												<div>
@@ -171,13 +184,14 @@ export default function Dashboard() {
 									))}
 								</div>
 
-							{resultType.map((resultType, index) => (
-								<div key={index}>
-									<Button isLoading={isLoading} type={"button"} onClick={() => handleResponseCreate(detailInputData?.id, resultType)}>
+								{resultType.map((resultType, index) => (
+									<div key={index}>
+										<Button isLoading={isLoading} type={"button"}
+														onClick={() => handleResponseCreate(detailInputData?.id, resultType)}>
 											{resultType}
-									</Button>
-								</div>
-            	))}
+										</Button>
+									</div>
+								))}
 							</div>
 						</>
 					}
