@@ -40,7 +40,7 @@ class UserSubscriptionOutputSerializer(ModelSerializer):
         )
 
 
-class UserSubscriptionDetailOutputSerializer():
+class UserSubscriptionDetailOutputSerializer(ModelSerializer):
     plan = PlanOutputSerializer()
 
     class Meta:

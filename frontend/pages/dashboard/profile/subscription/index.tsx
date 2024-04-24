@@ -5,6 +5,7 @@ import Layout from "@/components/Layout";
 import Link from "next/link";
 import {toast} from "react-toastify";
 import {Button} from "@nextui-org/react";
+import {subscribe} from "node:diagnostics_channel";
 
 
 async function getUserSubscription(access_token: string) {
@@ -141,7 +142,7 @@ export default function UserSubscription() {
 										Cancel Order
 									</Button>
 									<Link
-										href={"/"}
+										href={`/dashboard/profile/order/${userSubscription?.order}`}
 										className="flex outline-0 py-6 sm:pr-6  sm:border-r border-gray-200 whitespace-nowrap gap-2 items-center justify-center font-semibold group text-lg text-black bg-white transition-all duration-500 hover:text-indigo-600">
 										<svg
 											width="22"
@@ -173,7 +174,6 @@ export default function UserSubscription() {
 									</Link>
 								</div>
 							</div>
-
 						</div>
 
 					</>

@@ -4,6 +4,7 @@ import {Spinner} from "@chakra-ui/react";
 import Layout from "@/components/Layout";
 import {toast} from "react-toastify";
 import {Button} from "@nextui-org/react";
+import Link from "next/link";
 
 async function getOrderList(access_token: string) {
 	const res = await fetch(process.env.API_URL + "subscription/order", {
@@ -20,7 +21,6 @@ export default function Order() {
 
 	const {data: session, status} = useSession({required: true});
 	const [orderList, setOrderList] = useState<any>([]);
-	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -31,34 +31,6 @@ export default function Order() {
 
 		fetchData();
 	}, [session?.access_token]);
-
-	const handleGetInvoice = async (orderId: str) => {
-		setIsLoading(true);
-
-		try {
-			const response = await fetch(process.env.API_URL + "subscription/invoice/" + orderId + "/", {
-				method: "GET",
-				headers: {
-					accept: "application/json",
-					Authorization: `Bearer ${session?.access_token}`
-				}
-			})
-
-			const responseData = await response.json();
-
-			if (responseData && responseData?.message) {
-				window.location.href = responseData?.message;
-			} else {
-				toast.error("Something went wrong");
-			}
-
-		} catch (error) {
-			toast.error("Something went wrong");
-		} finally {
-			setIsLoading(false);
-		}
-
-	}
 
 
 	if (status == "loading") {
@@ -80,6 +52,7 @@ export default function Order() {
 
 									{Array.isArray(orderList) && (
 										orderList.map((order) => (
+											<Link key={order?.id} href={`/dashboard/profile/order/${order.id}`}>
 											<div
 												key={order?.id}
 												className="flex flex-col lg:flex-row items-center py-6 border-b border-gray-200 gap-6 w-full">
@@ -109,23 +82,12 @@ export default function Order() {
 																		{order?.created_at}</p>
 																</div>
 															</div>
-															<div className="col-span-5 lg:col-span-2 flex items-center max-lg:mt-3 ">
-																<div className="flex gap-3 lg:block">
-																	<p className="font-medium text-sm leading-7 text-black">Invoice
-																	</p>
-																	<Button
-																		onClick={(e) => handleGetInvoice(order?.id)}
-																		className="font-medium text-sm leading-6 whitespace-nowrap py-0.5 px-3 rounded-full lg:mt-3 bg-emerald-50 text-emerald-600">
-																		Get invoice
-																	</Button>
-																</div>
-															</div>
-
 														</div>
 													</div>
 
 												</div>
 											</div>
+											</Link>
 										))
 									)}
 								</div>

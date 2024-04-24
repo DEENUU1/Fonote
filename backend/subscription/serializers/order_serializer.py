@@ -2,6 +2,7 @@ from rest_framework.serializers import ModelSerializer, DateTimeField
 
 from .plan_serializer import PlanOrderDetailsSerializer
 from ..models.order import Order
+from .user_subscription_serializer import UserSubscriptionDetailOutputSerializer
 
 
 class OrderInputSerializer(ModelSerializer):
@@ -46,5 +47,6 @@ class OrderOutputSerializer(ModelSerializer):
             "total_amount",
             "created_at",
             "updated_at",
-            "plan"
+            "plan",
+            "user_subscription"
         )
