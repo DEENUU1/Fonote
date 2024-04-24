@@ -29,7 +29,7 @@ export default function Home() {
   if (session) {
     return (
     <Layout>
-      <main>{
+      <main className={"h-screen"}>{
       <Box m={8}>
         <VStack>
           <Text>PK: {session.user.pk}</Text>

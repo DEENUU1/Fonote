@@ -7,7 +7,7 @@ export default function Contact() {
 	return (
 		<>
 			<Layout>
-				<main>
+				<main className={"h-screen"}>
 					{
 						<ContactForm/>
 					}
