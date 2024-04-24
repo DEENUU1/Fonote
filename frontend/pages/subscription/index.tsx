@@ -1,7 +1,8 @@
 import {useSession} from "next-auth/react";
 import Layout from "@/components/Layout";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {toast} from "react-toastify";
+import {Spinner} from "@chakra-ui/react";
 
 async function getPlans(){
 	const res = await fetch(process.env.API_URL + "subscription/plan/", {
@@ -55,13 +56,20 @@ export default function Home() {
 		}
 	};
 
+
 	return (
 		<>
 			<Layout>
-				<main>
+				<main className={"h-screen"}>
 					{
+						<>
+							<div className="my-6 mx-auto max-w-xl">
+								<h1 className="text-3xl font-extrabold text-center">Subscription</h1>
+							</div>
+
+
 						<div
-							className="mt-12 space-y-3 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
+						className="mt-12 space-y-3 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
 							{Array.isArray(plans) && (
 								plans.map((plan) => (
 									<div key={plan.id} className="border border-slate-200 rounded-lg shadow-sm divide-y divide-slate-200">
@@ -141,6 +149,7 @@ export default function Home() {
 								))
 							)}
 						</div>
+						</>
 
 					}
 				</main>
