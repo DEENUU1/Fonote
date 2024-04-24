@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 import {Spinner} from "@chakra-ui/react";
 import Layout from "@/components/Layout";
+import {toast} from "react-toastify";
+import {Button} from "@nextui-org/react";
 
 async function getOrderList(access_token: string) {
 	const res = await fetch(process.env.API_URL + "subscription/order", {
@@ -18,7 +20,7 @@ export default function Order() {
 
 	const {data: session, status} = useSession({required: true});
 	const [orderList, setOrderList] = useState<any>([]);
-
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -29,6 +31,34 @@ export default function Order() {
 
 		fetchData();
 	}, [session?.access_token]);
+
+	const handleGetInvoice = async (orderId: str) => {
+		setIsLoading(true);
+
+		try {
+			const response = await fetch(process.env.API_URL + "subscription/invoice/" + orderId + "/", {
+				method: "GET",
+				headers: {
+					accept: "application/json",
+					Authorization: `Bearer ${session?.access_token}`
+				}
+			})
+
+			const responseData = await response.json();
+
+			if (responseData && responseData?.message) {
+				window.location.href = responseData?.message;
+			} else {
+				toast.error("Something went wrong");
+			}
+
+		} catch (error) {
+			toast.error("Something went wrong");
+		} finally {
+			setIsLoading(false);
+		}
+
+	}
 
 
 	if (status == "loading") {
@@ -58,16 +88,7 @@ export default function Order() {
 														<div className="flex items-center">
 															<div className="">
 																<h2 className="font-semibold text-xl leading-8 text-black mb-3">
-																	Premium Quality Dust Watch</h2>
-																<p className="font-normal text-lg leading-8 text-gray-500 mb-3 ">
-																	By: Dust Studios</p>
-																<div className="flex items-center ">
-																	<p
-																		className="font-medium text-base leading-7 text-black pr-4 mr-4 border-r border-gray-200">
-																		Size: <span className="text-gray-500">100 ml</span></p>
-																	<p className="font-medium text-base leading-7 text-black ">Qty: <span
-																		className="text-gray-500">2</span></p>
-																</div>
+																	{order?.plan?.name}</h2>
 															</div>
 
 														</div>
@@ -76,7 +97,7 @@ export default function Order() {
 																<div className="flex gap-3 lg:block">
 																	<p className="font-medium text-sm leading-7 text-black">Price</p>
 																	<p
-																		className="lg:mt-4 font-medium text-sm leading-7 text-indigo-600">${order?.total_amount}</p>
+																		className="lg:mt-4 font-medium text-sm leading-7 text-indigo-600">{order?.total_amount} {order?.currency}</p>
 																</div>
 															</div>
 															<div className="col-span-5 lg:col-span-2 flex items-center max-lg:mt-3">
@@ -92,9 +113,11 @@ export default function Order() {
 																<div className="flex gap-3 lg:block">
 																	<p className="font-medium text-sm leading-7 text-black">Invoice
 																	</p>
-																	<p
+																	<Button
+																		onClick={(e) => handleGetInvoice(order?.id)}
 																		className="font-medium text-sm leading-6 whitespace-nowrap py-0.5 px-3 rounded-full lg:mt-3 bg-emerald-50 text-emerald-600">
-																		Get invoice</p>
+																		Get invoice
+																	</Button>
 																</div>
 															</div>
 
@@ -105,10 +128,7 @@ export default function Order() {
 											</div>
 										))
 									)}
-
-
 								</div>
-
 							</div>
 						</div>
 

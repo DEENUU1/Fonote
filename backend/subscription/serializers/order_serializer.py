@@ -1,4 +1,6 @@
 from rest_framework.serializers import ModelSerializer, DateTimeField
+
+from .plan_serializer import PlanOrderDetailsSerializer
 from ..models.order import Order
 
 
@@ -25,6 +27,7 @@ class OrderInputSerializer(ModelSerializer):
 class OrderOutputSerializer(ModelSerializer):
     created_at = DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)
     updated_at = DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)
+    plan = PlanOrderDetailsSerializer(read_only=True)
 
     class Meta:
         model = Order
@@ -42,5 +45,6 @@ class OrderOutputSerializer(ModelSerializer):
             "phone",
             "total_amount",
             "created_at",
-            "updated_at"
+            "updated_at",
+            "plan"
         )

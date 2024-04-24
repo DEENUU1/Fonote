@@ -54,7 +54,7 @@ class UserSubscriptionService:
                 raise ValidationError(detail="You already have an active subscription")
 
         plan = self.plan_service.get_plan_by_id(plan_id)
-        checkout_session = self.stripe_service.create_checkout_session(plan.price.stripe_id, user.id)
+        checkout_session = self.stripe_service.create_checkout_session(plan.price.stripe_id, user.id, plan.pk)
         if not checkout_session:
             logger.error("Error creating checkout session")
             raise APIException(detail="Error creating checkout session")

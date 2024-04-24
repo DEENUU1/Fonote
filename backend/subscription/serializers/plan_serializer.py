@@ -20,3 +20,13 @@ class PlanOutputSerializer(ModelSerializer):
             "duration",
             "price",
         )
+
+
+class PlanOrderDetailsSerializer(ModelSerializer):
+
+    class Meta:
+        model = Plan
+        fields = (
+            "id",
+            "name",
+        )

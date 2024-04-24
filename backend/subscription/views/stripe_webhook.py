@@ -9,6 +9,7 @@ from authentication.services.user_service import UserService
 from ..serializers.order_serializer import OrderInputSerializer
 from ..serializers.user_subscription_serializer import UserSubscriptionUpdateSerializer
 from ..services.order_service import OrderService
+from ..services.plan_service import PlanService
 from ..services.user_subscription_service import UserSubscriptionService
 import logging
 
@@ -22,6 +23,7 @@ class Webhook(APIView):
     _user_subscription_service = UserSubscriptionService()
     _order_service = OrderService()
     _user_service = UserService()
+    _plan_service = PlanService()
 
     def post(self, request):
         """
@@ -58,6 +60,7 @@ class Webhook(APIView):
             logger.info("Checkout session completed")
             if event:
                 user_id = event.get("data").get("object").get("metadata").get("user_id")
+                plan_id = event.get("data").get("object").get("metadata").get("plan_id")
                 user_subscription = self._user_subscription_service.get_current_subscription_by_user(int(user_id))
 
                 # Create Order object
@@ -78,9 +81,12 @@ class Webhook(APIView):
                     "total_amount": object_data.get("amount_total"),
                     "invoice_id": object_data.get("invoice"),
                 }
+
+                plan = self._plan_service.get_plan_by_id(plan_id)
+
                 order_serializer = OrderInputSerializer(data=data)
                 order_serializer.is_valid(raise_exception=True)
-                order = self._order_service.create(order_serializer.validated_data, user_subscription.user)
+                order = self._order_service.create(order_serializer.validated_data, user_subscription.user, plan=plan)
 
                 # Update UserSubscription object
                 user_subscription_update_data = {

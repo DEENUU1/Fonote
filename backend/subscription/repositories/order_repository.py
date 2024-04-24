@@ -2,6 +2,7 @@ from typing import Dict, Any, List
 
 from django.contrib.auth.backends import UserModel
 
+from ..models import Plan
 from ..models.order import Order
 from uuid import UUID
 
@@ -16,8 +17,8 @@ class OrderRepository:
     def order_object_exists_by_uuid(self, uuid: UUID) -> bool:
         return self.model.objects.filter(id=uuid).exists()
 
-    def create(self, data: Dict[str, Any], user: UserModel) -> Order:
-        return self.model.objects.create(**data, user=user)
+    def create(self, data: Dict[str, Any], user: UserModel, plan: Plan) -> Order:
+        return self.model.objects.create(**data, user=user, plan=plan)
 
     def get_order_list_by_user(self, user_id: int) -> List[Order]:
         return self.model.objects.filter(user_id=user_id)

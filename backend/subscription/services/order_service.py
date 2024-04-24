@@ -4,6 +4,7 @@ from django.contrib.auth.backends import UserModel
 
 from uuid import UUID
 
+from ..models import Plan
 from ..models.order import Order
 from ..repositories.order_repository import OrderRepository
 from .stripe_service import StripeService
@@ -17,8 +18,8 @@ class OrderService:
         self.order_repository = OrderRepository()
         self.stripe_service = StripeService()
 
-    def create(self, data: Dict[str, Any], user: UserModel) -> Order:
-        return self.order_repository.create(data, user)
+    def create(self, data: Dict[str, Any], user: UserModel, plan: Plan) -> Order:
+        return self.order_repository.create(data, user, plan)
 
     def get_order_list_by_user(self, user_id: int) -> List[Order]:
         return self.order_repository.get_order_list_by_user(user_id)
