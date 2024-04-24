@@ -97,7 +97,7 @@ export default function Order() {
 																<div className="flex gap-3 lg:block">
 																	<p className="font-medium text-sm leading-7 text-black">Price</p>
 																	<p
-																		className="lg:mt-4 font-medium text-sm leading-7 text-indigo-600">{order?.total_amount} {order?.currency}</p>
+																		className="lg:mt-4 font-medium text-sm leading-7 text-indigo-600">${order?.total_amount}</p>
 																</div>
 															</div>
 															<div className="col-span-5 lg:col-span-2 flex items-center max-lg:mt-3">

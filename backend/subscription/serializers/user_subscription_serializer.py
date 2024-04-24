@@ -38,3 +38,20 @@ class UserSubscriptionOutputSerializer(ModelSerializer):
             "status",
             "order"
         )
+
+
+class UserSubscriptionDetailOutputSerializer():
+    plan = PlanOutputSerializer()
+
+    class Meta:
+        model = UserSubscription
+        fields = (
+            "id",
+            "user",
+            "subscription_id",
+            "plan",
+            "start_date",
+            "end_date",
+            "status",
+            "order"
+        )

@@ -6,7 +6,8 @@ from .views import (
     order_details,
     order_list,
     plan_list,
-    stripe_webhook
+    stripe_webhook,
+    user_subscription
 )
 
 
@@ -18,4 +19,5 @@ urlpatterns = [
     path('checkout/', create_checkout.CreateSubscription.as_view(), name='create_subscription'),
     path('cancel/', cancel_subscription.CancelSubscription.as_view(), name='cancel_subscription'),
     path('webhook/', stripe_webhook.Webhook.as_view()),
+    path('subscription/', user_subscription.UserSubscriptionAPIView.as_view(), name="user_current_subscription")
 ]
