@@ -43,6 +43,9 @@ class InputDataService:
         plan = self.plan_repository.get_plan_by_uuid(user_subscription.plan.id)
         source = self.get_source_from_url(data.get("source_url"))
 
+        if not plan.change_lang and data.get("langugae") != "English":
+            raise ValidationError("Your subscription doesn't allow you to change language")
+
         if source not in ["SPOTIFY", "YOUTUBE"]:
             raise ValidationError("Invalid url")
 
