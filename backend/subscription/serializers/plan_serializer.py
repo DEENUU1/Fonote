@@ -19,6 +19,7 @@ class PlanOutputSerializer(ModelSerializer):
             "max_result",
             "duration",
             "price",
+            "change_lang",
         )
 
 

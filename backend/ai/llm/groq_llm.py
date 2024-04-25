@@ -14,10 +14,14 @@ class GroqLLM(LLM):
         self.client = Groq(api_key=settings.GROQ_API_KEY)
         self.model: str = "llama3-8b-8192"
 
-    def get_response(self, result_type: str, input_data: str) -> Optional[str]:
+    def get_response(self, result_type: str, input_data: str, language: str) -> Optional[str]:
         try:
             llm_response = self.client.chat.completions.create(
                 messages=[
+                    {
+                      "role": "system",
+                      "content": f"Response must be in {language} language."
+                    },
                     {
                         "role": "system",
                         "content": f"You are an assistant responsible for processing transcriptions of videos and "
@@ -36,13 +40,13 @@ class GroqLLM(LLM):
             logger.error(f"Error generating response: {e}")
             return None
 
-    def generate(self, result_type: str, input_data: str) -> Optional[str]:
+    def generate(self, result_type: str, input_data: str, language: str) -> Optional[str]:
         chunks = self.split_text_to_chunks(input_data)
 
         result = ""
 
         for chunk in chunks:
-            response = self.get_response(result_type, chunk.page_content)
+            response = self.get_response(result_type, chunk.page_content, language)
             if response:
                 result += response + "\n\n"
 

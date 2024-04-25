@@ -17,5 +17,5 @@ class LLM(ABC):
         return split_text
 
     @abstractmethod
-    def generate(self, result_type: str, input_data: str) -> Optional[str]:
+    def generate(self, result_type: str, input_data: str, language: str) -> Optional[str]:
         raise NotImplementedError
