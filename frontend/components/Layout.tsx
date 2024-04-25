@@ -10,7 +10,6 @@ export default function Layout({ children }) {
     <>
       <section className="text-gray-700 body-font overflow-hidden border-t">
       <Navbar/>
-
           <ToastContainer/>
           <main>{children}</main>
       </section>

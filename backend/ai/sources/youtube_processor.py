@@ -2,7 +2,8 @@ from .youtube_data import get_youtube_video_data
 from .youtube_transcription import YoutubeTranscription
 from ..models import InputData
 from ..repositories.input_repository import InputDataRepository
-from ..serializers import InputDataUpdateSerializer, FragmentInputSerializer
+from ..serializers.input_data_serializers import InputDataUpdateSerializer
+from ..serializers.fragment_serializers import FragmentInputSerializer
 from ..repositories.fragment_repository import FragmentRepository
 import logging
 

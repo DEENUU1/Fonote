@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional, List, Dict, Any, Tuple
+from typing import Optional, List, Dict, Any
 from urllib.parse import urlparse, parse_qs
 
 from youtube_transcript_api import YouTubeTranscriptApi
