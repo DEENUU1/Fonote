@@ -48,5 +48,4 @@ class OrderOutputSerializer(ModelSerializer):
             "created_at",
             "updated_at",
             "plan",
-            "user_subscription"
         )

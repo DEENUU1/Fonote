@@ -21,7 +21,7 @@ export default function Order() {
 
 	const {data: session, status} = useSession({required: true});
 	const [orderList, setOrderList] = useState<any>([]);
-
+	console.log(session);
 	useEffect(() => {
 		async function fetchData() {
 			const res = await getOrderList(session?.access_token);
