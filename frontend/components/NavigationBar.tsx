@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import Link from "next/link";
 import {Button} from "@chakra-ui/react";
-import {signIn, useSession} from "next-auth/react";
+import {signIn, useSession, signOut} from "next-auth/react";
 
 
 
@@ -31,7 +31,7 @@ function Navbar() {
                 <Link href={"/contact"} className="px-3 py-2 cursor-pointer rounded hover:bg-blue-400">
                     Contact
                 </Link>
-                <Button className="px-3 py-2 cursor-pointer rounded font-extrabold hover:bg-blue-400" onClick={() => signIn(undefined, {callbackUrl: "/profile"})}>
+                <Button className="px-3 py-2 cursor-pointer rounded font-extrabold hover:bg-blue-400" onClick={() => signIn(undefined, {callbackUrl: "/dashboard/profile"})}>
                     Login
                 </Button>
             </>
@@ -54,6 +54,7 @@ function Navbar() {
                 <Link href={"/dashboard"} className="px-3 py-2 cursor-pointer rounded font-extrabold hover:bg-blue-400">
                     Dashboard
                 </Link>
+							<Button className="px-3 py-2 cursor-pointer rounded font-extrabold hover:bg-blue-400" onClick={() => signOut({callbackUrl: "/"})}>Logout</Button>
             </>
         );
     }
