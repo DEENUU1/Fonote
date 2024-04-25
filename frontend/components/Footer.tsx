@@ -52,7 +52,7 @@ export default function Footer() {
 					<div className="lg:mx-auto text-left ">
 						<h4 className="text-lg text-gray-900 font-medium mb-7">Subscribe</h4>
 						<p className="text-sm text-gray-500 leading-6 mb-7">Subscribe to get the latest news from us</p>
-						<Link href="/contact"
+						<Link href="/subscription"
 							 className="flex items-center justify-center gap-2 border border-blue-600 rounded-full py-3 px-6 w-fit lg:mx-0  text-sm text-blue-600 font-semibold transition-all duration-500 hover:bg-indigo-50">Subscribe
 						</Link>
 					</div>
