@@ -73,6 +73,13 @@ const languages = [
 	{label: "Polish", value: "Polish", description: "Polish"},
 ]
 
+const aiTranscriptions = [
+	{"label": "Generated", value: "GENERATED", description: "Generated"},
+	{"label": "Manual", value: "MANUAL", description: "Manual"},
+	{"label": "AI", value: "LLM", description: "AI"},
+
+]
+
 
 export default function Dashboard() {
 	const {data: session, status} = useSession({required: true});
@@ -84,6 +91,7 @@ export default function Dashboard() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [url, setUrl] = useState("");
 	const [language, setLanguage] = useState("");
+	const [transcription, setTranscription] = useState("");
 
 	const handleSubmitCreateInputData = async (e: any) => {
     e.preventDefault();
@@ -93,6 +101,7 @@ export default function Dashboard() {
     const formData = new FormData();
     formData.append("source_url", url);
     formData.append("language", language);
+		formData.append("transcription_type", transcription);
 
     try {
       const response = await fetch(process.env.API_URL + "ai/input/", {
@@ -104,15 +113,17 @@ export default function Dashboard() {
         body: formData,
       });
 
+			const res = await response.json();
+
       if (response.ok) {
         toast.success("Input data created successfully");
       } else {
-        toast.error("Error while creating Input data object")
+        toast.error(res.detail);
       }
     } catch (error) {
       toast.error("Error while creating Input data object");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
@@ -183,43 +194,61 @@ export default function Dashboard() {
 													<path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
 												</svg>
 											</Button>
-											<Modal backdrop={"blur"} isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false}
-														 isKeyboardDismissDisabled={true}>
-												<ModalContent>
-													{(onClose) => (
-														<>
-															<ModalHeader className="flex flex-col gap-1">Process data</ModalHeader>
-															<form onSubmit={handleSubmitCreateInputData}>
-																<ModalBody>
-																	<div className={"flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-2"}>
-																		<Input isRequired={true} type="url" label="Url" placeholder="Youtube/Spotify url"
-																					 onChange={(e) => setUrl(e.target.value)}/>
-																		<Select
-																			isRequired={true}
-																			items={languages}
-																			label="Langugae"
-																			placeholder="Select a language"
-																			onChange={(e) => setLanguage(e.target.value)}
-																			className="max-w-xs"
-																		>
-																			{(language) => <SelectItem key={language.value}>{language.label}</SelectItem>}
-																		</Select>
-																	</div>
-
-																</ModalBody>
-																<ModalFooter>
-																	<Button color="danger" variant="light" onPress={onClose}>
-																		Close
-																	</Button>
-																	<Button type={"submit"} color="primary" onPress={onClose}>
-																		Submit
-																	</Button>
-																</ModalFooter>
-															</form>
-														</>
-													)}
-												</ModalContent>
+											<Modal backdrop={"blur"} isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false} isKeyboardDismissDisabled={true}>
+													<ModalContent>
+															{(onClose) => (
+																	<>
+																			<ModalHeader className="flex flex-col gap-1">Process data</ModalHeader>
+																			<form onSubmit={handleSubmitCreateInputData}>
+																					<ModalBody>
+																							<div className={"flex flex-col gap-2"}>
+																									<div className="flex gap-2">
+																											<div className="w-full">
+																													<Input isRequired={true} type="url" label="Url" placeholder="Youtube/Spotify url" onChange={(e) => setUrl(e.target.value)}/>
+																											</div>
+																									</div>
+																									<div className="flex gap-2">
+																											<div className="w-full">
+																													<Select
+																															isRequired={true}
+																															items={languages}
+																															label="Language"
+																															placeholder="Select a language"
+																															onChange={(e) => setLanguage(e.target.value)}
+																													>
+																															{(language) => <SelectItem key={language.value}>{language.label}</SelectItem>}
+																													</Select>
+																											</div>
+																											<div className="w-full">
+																													<Select
+																															isRequired={true}
+																															items={aiTranscriptions}
+																															label="Transcription type"
+																															placeholder="Select a transcription type"
+																															onChange={(e) => setTranscription(e.target.value)}
+																													>
+																															{(transcript) => <SelectItem key={transcript.value}>{transcript.label}</SelectItem>}
+																													</Select>
+																											</div>
+																									</div>
+																							</div>
+																					</ModalBody>
+																					<ModalFooter>
+																							<Button color="danger" variant="light" onPress={onClose}>
+																									Close
+																							</Button>
+																							<Button type={"submit"} color="primary" onPress={onClose}>
+																									Submit
+																							</Button>
+																					</ModalFooter>
+																			</form>
+																	</>
+															)}
+													</ModalContent>
 											</Modal>
+
+
+
 
 											{Array.isArray(listInputData) && (
 												listInputData.map((inputData) => (
