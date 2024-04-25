@@ -2,7 +2,7 @@ from typing import Dict, Any, Optional, List
 from uuid import UUID
 
 from django.contrib.auth.backends import UserModel
-from rest_framework.exceptions import PermissionDenied, ValidationError, NotFound
+from rest_framework.exceptions import PermissionDenied, ValidationError, NotFound, APIException
 
 from subscription.repositories.plan_repository import PlanRepository
 from subscription.repositories.user_subscription_repository import UserSubscriptionRepository
@@ -38,22 +38,23 @@ class InputDataService:
             raise PermissionDenied("You don't have access to use this")
 
         if not self.plan_repository.plan_exists_by_uuid(user_subscription.plan.id):
-            raise ValidationError("Plan not found")
+            raise NotFound("Plan not found")
 
         plan = self.plan_repository.get_plan_by_uuid(user_subscription.plan.id)
         source = self.get_source_from_url(data.get("source_url"))
 
         if not plan.change_lang and data.get("langugae") != "English":
-            raise ValidationError("Your subscription doesn't allow you to change language")
+            raise PermissionDenied("Your subscription doesn't allow you to change language")
 
+        # TODO move this to serializer
         if source not in ["SPOTIFY", "YOUTUBE"]:
             raise ValidationError("Invalid url")
 
         if source == "SPOTIFY" and not plan.spotify:
-            raise ValidationError("Your subscription doesn't allow you to process data from Spotify")
+            raise PermissionDenied("Your subscription doesn't allow you to process data from Spotify")
 
         if source == "YOUTUBE" and not plan.youtube:
-            raise ValidationError("Your subscription doesn't allow you to process data from Youtube")
+            raise PermissionDenied("Your subscription doesn't allow you to process data from Youtube")
 
         if source == "YOUTUBE":
             input_data_db = self.input_repository.create(data=data, user=user, source=source)
@@ -63,7 +64,7 @@ class InputDataService:
             return input_data_db
 
         if source == "SPOTIFY":
-            raise ValidationError("Spotify is not supported yet")
+            raise APIException("Spotify is not supported yet")
 
     def get_input_list_by_user(self, user: UserModel) -> List[InputData]:
         return self.input_repository.get_input_list_by_user(user)

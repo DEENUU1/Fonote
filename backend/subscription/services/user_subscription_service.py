@@ -4,7 +4,7 @@ from ..models import UserSubscription
 from ..repositories.user_subscription_repository import UserSubscriptionRepository
 from typing import Dict, Any
 from uuid import UUID
-from rest_framework.exceptions import NotFound, ValidationError, APIException
+from rest_framework.exceptions import NotFound, ValidationError, APIException, PermissionDenied
 from datetime import date
 from .stripe_service import StripeService
 from ..services.plan_service import PlanService
@@ -51,7 +51,7 @@ class UserSubscriptionService:
 
         if user_current_plan:
             if user_current_plan.status == "ACTIVE" or self.subscription_is_valid(user_current_plan):
-                raise ValidationError(detail="You already have an active subscription")
+                raise PermissionDenied(detail="You already have an active subscription")
 
         plan = self.plan_service.get_plan_by_id(plan_id)
         checkout_session = self.stripe_service.create_checkout_session(plan.price.stripe_id, user.id, plan.pk)
@@ -66,13 +66,13 @@ class UserSubscriptionService:
         user_current_plan = self.user_subscription_repository.get_current_subscription_by_user(user)
 
         if not user_current_plan:
-            raise ValidationError(detail="You don't have an active subscription")
+            raise NotFound(detail="You don't have an active subscription")
 
         if user_current_plan and user_current_plan.status == "CANCELED":
-            raise ValidationError(detail="You already canceled your subscription")
+            raise APIException(detail="You already canceled your subscription")
 
         if user_current_plan and user_current_plan.status != "ACTIVE":
-            raise ValidationError(detail="You don't have an active subscription")
+            raise APIException(detail="You don't have an active subscription")
 
         cancelled_subscription = self.stripe_service.cancel_subscription(user_current_plan.subscription_id)
         if not cancelled_subscription:

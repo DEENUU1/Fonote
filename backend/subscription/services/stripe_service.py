@@ -1,12 +1,11 @@
+import logging
 from typing import Optional
 from uuid import UUID
 
 import stripe
 from django.conf import settings
+from rest_framework.exceptions import APIException, NotFound
 from stripe.checkout import Session
-import logging
-
-from subscription.models import Plan
 
 logger = logging.getLogger(__name__)
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -45,7 +44,7 @@ class StripeService:
 
         except Exception as e:
             logger.error(f"Error while creating checkout session: {e}")
-            return
+            raise APIException(detail="Error creating checkout session")
 
     def get_invoice(self, invoice_id: str) -> Optional[str]:
         try:
@@ -55,4 +54,4 @@ class StripeService:
 
         except Exception as e:
             logger.error(f"Error while retrieving invoice: {e}")
-            return
+            raise NotFound(detail="Invoice not found")

@@ -43,16 +43,15 @@ export default function Home() {
 					plan_id: planId
 				})
 			});
-			if (response.ok) {
-				const data = await response.json();
-				console.log(data)
+			const res = await response.json();
 
-				window.location.href = data;
+			if (response.ok) {
+				window.location.href = res;
 			} else {
-				toast.error(response.text)
+				toast.warning(res.detail)
 			}
 		} catch (error) {
-			toast.error("Error")
+			toast.error("Error");
 		}
 	};
 
