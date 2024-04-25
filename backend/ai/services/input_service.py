@@ -43,6 +43,9 @@ class InputDataService:
         plan = self.plan_repository.get_plan_by_uuid(user_subscription.plan.id)
         source = self.get_source_from_url(data.get("source_url"))
 
+        if data.get("transcription_type") not in ["GENERATED", "MANUAL"] and not plan.ai_transcription:
+            raise PermissionDenied("Your subscription doesn't allow you to process data from AI")
+
         if not plan.change_lang and data.get("langugae") != "English":
             raise PermissionDenied("Your subscription doesn't allow you to change language")
 

@@ -12,6 +12,7 @@ class Plan(models.Model):
     duration = models.IntegerField(null=False)
     price = models.ForeignKey(Price, on_delete=models.CASCADE)
     change_lang = models.BooleanField(default=False)
+    ai_transcription = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
 
     def __str__(self):

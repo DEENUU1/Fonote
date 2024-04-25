@@ -56,7 +56,8 @@ class InputDataInputSerializer(ModelSerializer):
         model = InputData
         fields = (
             "source_url",
-            "language"
+            "language",
+            "transcription_type"
         )
 
 

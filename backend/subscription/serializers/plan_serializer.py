@@ -20,6 +20,7 @@ class PlanOutputSerializer(ModelSerializer):
             "duration",
             "price",
             "change_lang",
+            "ai_transcription",
         )
 
 
