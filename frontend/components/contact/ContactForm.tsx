@@ -43,8 +43,7 @@ export function ContactForm() {
 
 	return (
 		<>
-			<div className="my-6 mx-auto max-w-xl">
-				<h1 className="text-3xl font-extrabold text-center">Contact</h1>
+			<div className=" my-6 mx-auto max-w-xl">
 				<form className="mt-8 space-y-4" onSubmit={handleSubmit}>
 					<Input disabled={isLoading} isRequired={true} variant={"faded"} type='text' label={"Name"}
 								 placeholder='John Doe' onChange={(e) => setName(e.target.value)}/>

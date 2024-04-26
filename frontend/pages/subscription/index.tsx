@@ -59,7 +59,7 @@ export default function Home() {
 	return (
 		<>
 			<Layout>
-				<main className={"h-screen"}>
+				<main>
 					{
 						<>
 							<div className="my-6 mx-auto max-w-xl">
@@ -68,7 +68,8 @@ export default function Home() {
 
 
 						<div
-						className="mt-12 space-y-3 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
+						className="mt-12 space-y-3 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3"
+						>
 							{Array.isArray(plans) && (
 								plans.map((plan) => (
 									<div key={plan.id} className="border border-slate-200 rounded-lg shadow-sm divide-y divide-slate-200">
