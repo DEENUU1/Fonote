@@ -1,25 +1,14 @@
-from dataclasses import dataclass
+import logging
 from typing import Optional, List, Dict, Any
 from urllib.parse import urlparse, parse_qs
 
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
-import logging
+
+from .fragment import Fragment
+from .fragment_list import FragmentList
 
 logger = logging.getLogger(__name__)
-
-
-@dataclass
-class Fragment:
-    start_time: float
-    end_time: float
-    transcriptions: str
-
-
-@dataclass
-class FragmentList:
-    type_: str
-    fragments: List[Fragment]
 
 
 class YoutubeTranscription:

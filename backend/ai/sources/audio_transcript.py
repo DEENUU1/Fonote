@@ -1,12 +1,12 @@
+import logging
 import os
 from typing import Optional
 
-from pydub import AudioSegment
-from openai import OpenAI
-import logging
-from utils.get_date_hash import get_date_hash
 from django.conf import settings
+from openai import OpenAI
+from pydub import AudioSegment
 
+from utils.get_date_hash import get_date_hash
 
 logger = logging.getLogger(__name__)
 
