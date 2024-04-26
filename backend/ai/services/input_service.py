@@ -62,12 +62,14 @@ class InputDataService:
         if source == "YOUTUBE":
             input_data_db = self.input_repository.create(data=data, user=user, source=source)
             self.input_repository.update_status(input_data_db, "PROCESSING")
+            # TODO add celery task
             run_youtube_processor(input_data_db)
 
             return input_data_db
 
         if source == "SPOTIFY":
-            raise APIException("Spotify is not supported yet")
+            raise APIException("Not implemented")
+
 
     def get_input_list_by_user(self, user: UserModel) -> List[InputData]:
         return self.input_repository.get_input_list_by_user(user)
