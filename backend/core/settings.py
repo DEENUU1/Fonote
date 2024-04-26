@@ -291,3 +291,11 @@ CELERY_RESULT_SERIALIZER = "json"
 # DOWNLOADED MEDIA
 
 DOWNLOADED_MEDIA = "downloaded/media"
+
+# AUDIO CHUNKS
+
+AUDIO_CHUNK_FILE_PATH = "downloaded/chunks"
+
+# OPENAI
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
