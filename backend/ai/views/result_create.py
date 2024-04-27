@@ -8,6 +8,7 @@ from ..serializers.result_serializers import (
     ResultOutputSerializer,
 )
 from ..services.result_service import ResultService
+from ..throttle.result_create_throttle import ResultCreateThrottle
 
 
 class ResultCreateAPIView(APIView):
@@ -23,8 +24,7 @@ class ResultCreateAPIView(APIView):
     """
     permission_classes = (IsAuthenticated,)
     _service = ResultService()
-
-    # TODO add rate limit
+    throttle_classes = (ResultCreateThrottle, )
 
     def post(self, request):
         """

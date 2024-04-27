@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 
 from ..serializers.contact_serializer import ContactInputSerializer, ContactOutputSerializer
 from ..services.contact_service import ContactService
+from ..throttle.contact_create_throttle import ContactCreateThrottle, AnonContactCreateThrottle
 
 
 class ContactCreateAPIView(APIView):
@@ -21,8 +22,7 @@ class ContactCreateAPIView(APIView):
     """
     permission_classes = (AllowAny,)
     _contact_service = ContactService()
-
-    # TODO add rate limit
+    throttle_classes = (ContactCreateThrottle, AnonContactCreateThrottle)
 
     def post(self, request):
         """
