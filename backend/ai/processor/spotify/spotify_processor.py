@@ -8,6 +8,8 @@ from ai.serializers.fragment_serializers import FragmentInputSerializer
 from ai.serializers.input_data_serializers import InputDataUpdateSerializer
 from .auto_transcription import SpotifyAutoTranscription
 from ..audio.fragment_list import FragmentList
+from ai.processor.llm.deepl import Translator
+
 
 logger = logging.getLogger(__name__)
 
@@ -29,13 +31,40 @@ class SpotifyProcessor:
 
         return transcription
 
+    @staticmethod
+    def map_languages_to_code(language: str) -> str:
+        """
+        Maps human-readable language names to their corresponding language codes.
+
+        Args:
+            language (str): The human-readable language name.
+
+        Returns:
+            str: The corresponding language code.
+        """
+        mapper = {
+            "Danish": "da",
+            "Czech": "cs",
+            "Dutch": "nl",
+            "English": "en",
+            "German": "de",
+            "French": "fr",
+            "Italian": "it",
+            "Japanese": "ja",
+            "Korean": "ko",
+            "Polish": "pl",
+            "Spanish": "es",
+        }
+        return mapper[language]
+
     def process(self) -> None:
         logger.info(f"Processing input data {self.input_data.id}")
 
         spotify_data = ...  # TODO add this later
         transcription = self.get_transcription(self.input_data.source_url)
 
-        translate = ...  # TODO add this later
+        lang_code = self.map_languages_to_code(self.input_data.language)
+        translator = Translator(lang_code)
 
         data = {
             "transcription_type": transcription.type_,
@@ -48,11 +77,13 @@ class SpotifyProcessor:
         self.input_repository.partial_update(input_data_update_serializer.validated_data, self.input_data)
 
         for idx, fragment in enumerate(transcription.fragments):
+            translated_text = translator.translate(fragment.transcriptions)
+
             data = {
                 "start_time": fragment.start_time,
                 "end_time": fragment.end_time,
                 "order": idx,
-                "text": fragment.transcriptions,
+                "text": translated_text,
                 "input_data": self.input_data.id
             }
             fragment_serializer = FragmentInputSerializer(data=data)
