@@ -5,8 +5,8 @@ from urllib.parse import urlparse, parse_qs
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled
 
-from ai.processor.transcription.fragment import Fragment
-from ai.processor.transcription.fragment_list import FragmentList
+from ai.processor.audio.fragment import Fragment
+from ai.processor.audio.fragment_list import FragmentList
 
 logger = logging.getLogger(__name__)
 
@@ -24,11 +24,11 @@ class YoutubeTranscription:
         map_languages_to_code(language: str) -> str:
             Maps human-readable language names to their corresponding language codes.
         fetch_transcription(language: str) -> Tuple[Optional[List[Dict[str, Any]]], Optional[str]]:
-            Fetches the transcription of the YouTube video in the specified language.
+            Fetches the audio of the YouTube video in the specified language.
         format_text(full_text: List[Dict[str, Any]]) -> List[Fragment]:
-            Formats the transcription text into fragments with start and end times.
+            Formats the audio text into fragments with start and end times.
         get_transcription(language: str) -> Optional[FragmentList]:
-            Gets the transcription of the YouTube video in the specified language as a FragmentList object.
+            Gets the audio of the YouTube video in the specified language as a FragmentList object.
     """
 
     def __init__(self, url: str):
@@ -93,14 +93,14 @@ class YoutubeTranscription:
 
     def fetch_transcription(self, language: str) -> Tuple[Optional[List[Dict[str, Any]]], Optional[str]]:
         """
-        Fetches the transcription of the YouTube video in the specified language.
+        Fetches the audio of the YouTube video in the specified language.
 
         Args:
-            language (str): The language for transcription.
+            language (str): The language for audio.
 
         Returns:
-            Tuple[Optional[List[Dict[str, Any]]], Optional[str]]: A tuple containing the fetched transcription text
-                as a list of dictionaries and the type of transcription fetched (either "MANUAL" or "GENERATED").
+            Tuple[Optional[List[Dict[str, Any]]], Optional[str]]: A tuple containing the fetched audio text
+                as a list of dictionaries and the type of audio fetched (either "MANUAL" or "GENERATED").
         """
         text, type_ = None, None
         generated, manually = None, None
@@ -109,7 +109,7 @@ class YoutubeTranscription:
             transcription_list = YouTubeTranscriptApi.list_transcripts(self.video_id)
 
             if not transcription_list:
-                logger.info(f"No transcription found for video {self.video_id}")
+                logger.info(f"No audio found for video {self.video_id}")
                 return text, type_
 
             for transcript in transcription_list:
@@ -150,10 +150,10 @@ class YoutubeTranscription:
     @staticmethod
     def format_text(full_text: List[Dict[str, Any]]) -> List[Fragment]:
         """
-        Formats the transcription text into fragments with start and end times.
+        Formats the audio text into fragments with start and end times.
 
         Args:
-            full_text (List[Dict[str, Any]]): The full transcription text as a list of dictionaries.
+            full_text (List[Dict[str, Any]]): The full audio text as a list of dictionaries.
 
         Returns:
             List[Fragment]: A list of Fragment objects representing the formatted text.
@@ -184,21 +184,21 @@ class YoutubeTranscription:
 
     def get_transcription(self, language: str) -> Optional[FragmentList]:
         """
-        Gets the transcription of the YouTube video in the specified language as a FragmentList object.
+        Gets the audio of the YouTube video in the specified language as a FragmentList object.
 
         Args:
-            language (str): The language for transcription.
+            language (str): The language for audio.
 
         Returns:
             Optional[FragmentList]: A FragmentList object containing the formatted text fragments,
-                or None if no transcription is found.
+                or None if no audio is found.
         """
         fetched_transcript, type_ = self.fetch_transcription(language)
 
         logger.info(f"Transcription type: {type_}")
 
         if fetched_transcript is None:
-            logger.error(f"No transcription found for video {self.video_id}")
+            logger.error(f"No audio found for video {self.video_id}")
             return None
 
         logger.info(f"Transcription fetched for video {self.video_id}")

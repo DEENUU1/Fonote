@@ -13,11 +13,11 @@ logger = logging.getLogger(__name__)
 
 class AudioTranscription:
     """
-    A class to handle audio transcription using OpenAI models.
+    A class to handle audio audio using OpenAI models.
 
     Attributes:
-        audio_file_path (str): The path to the audio file for transcription.
-        whisper_model (str): The model to use for transcription, defaults to "whisper-1".
+        audio_file_path (str): The path to the audio file for audio.
+        whisper_model (str): The model to use for audio, defaults to "whisper-1".
         chunk_size (int): The size of audio chunks for processing, defaults to 150.
 
     Methods:
@@ -26,9 +26,9 @@ class AudioTranscription:
         get_audio_file(path: str) -> Optional[BinaryIO]:
             Static method to open an audio file in binary mode.
         transcribe_audio(audio_file: BinaryIO, language: str) -> Optional[Transcription]:
-            Transcribes the audio file using the specified language and returns the transcription.
-        format_text(transcription: Transcription) -> List[Fragment]:
-            Formats the transcription text into fragments with start and end times.
+            Transcribes the audio file using the specified language and returns the audio.
+        format_text(audio: Transcription) -> List[Fragment]:
+            Formats the audio text into fragments with start and end times.
         transcribe(language: str) -> Optional[FragmentList]:
             Transcribes the audio file, formats the text, and returns a list of fragments.
     """
@@ -89,14 +89,14 @@ class AudioTranscription:
 
     def transcribe_audio(self, audio_file: BinaryIO, language: str) -> Optional[Transcription]:
         """
-        Transcribes the audio file using the specified language and returns the transcription.
+        Transcribes the audio file using the specified language and returns the audio.
 
         Args:
             audio_file (BinaryIO): The audio file object in binary mode.
-            language (str): The language code for transcription.
+            language (str): The language code for audio.
 
         Returns:
-            Optional[Transcription]: The transcription object or None if an error occurs.
+            Optional[Transcription]: The audio object or None if an error occurs.
         """
         try:
             transcription = self.client.audio.transcriptions.create(
@@ -114,10 +114,10 @@ class AudioTranscription:
     @staticmethod
     def format_text(transcription: Transcription) -> List[Fragment]:
         """
-        Formats the transcription text into fragments with start and end times.
+        Formats the audio text into fragments with start and end times.
 
         Args:
-            transcription (Transcription): The transcription object.
+            transcription (Transcription): The audio object.
 
         Returns:
             List[Fragment]: A list of Fragment objects representing the formatted text.
@@ -151,7 +151,7 @@ class AudioTranscription:
         Transcribes the audio file, formats the text, and returns a list of fragments.
 
         Args:
-            language (str): The language code for transcription.
+            language (str): The language code for audio.
 
         Returns:
             Optional[FragmentList]: A FragmentList object containing the list of formatted text fragments.

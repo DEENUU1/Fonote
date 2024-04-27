@@ -42,9 +42,3 @@ class SpotifyAccess:
 
         except Exception as err:
             logger.error(f"Exception {err}")
-
-
-if __name__ == '__main__':
-    access = SpotifyAccess()
-    token = access.get_token()
-    print(token)

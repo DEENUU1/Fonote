@@ -20,20 +20,20 @@ class InputDataInputSerializer(ModelSerializer):
 
     def validate_transcription_type(self, value: str) -> str:
         """
-        Validates the transcription type.
+        Validates the audio type.
 
         Parameters:
-        value (str): The transcription type to be validated.
+        value (str): The audio type to be validated.
 
         Returns:
-        str: The validated transcription type.
+        str: The validated audio type.
 
         Raises:
         ValidationError: If the provided value is not one of ["GENERATED", "MANUAL", "LLM"].
         """
 
         if value not in ["GENERATED", "MANUAL", "LLM"]:
-            raise ValidationError("Invalid transcription type")
+            raise ValidationError("Invalid audio type")
         return value
 
     def validate_source_url(self, value: str) -> str:

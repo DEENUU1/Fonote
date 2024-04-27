@@ -2,7 +2,7 @@ import logging
 from typing import Optional
 
 from ai.models import InputData
-from ai.processor.transcription.audio_transcript import AudioTranscription
+from ai.processor.audio.audio_transcript import AudioTranscription
 from ai.repositories.fragment_repository import FragmentRepository
 from ai.repositories.input_repository import InputDataRepository
 from ai.serializers.fragment_serializers import FragmentInputSerializer
@@ -10,7 +10,7 @@ from ai.serializers.input_data_serializers import InputDataUpdateSerializer
 from .youtube_data import get_youtube_video_data
 from .youtube_downloader import YoutubeDownloader
 from .youtube_transcription import YoutubeTranscription
-from ..transcription.fragment_list import FragmentList
+from ..audio.fragment_list import FragmentList
 
 logger = logging.getLogger(__name__)
 
@@ -21,15 +21,15 @@ class YoutubeProcessor:
 
     Attributes:
         input_data (InputData): The input data object to be processed.
-        transcription_type (Optional[str]): The type of transcription to perform, defaults to None.
+        transcription_type (Optional[str]): The type of audio to perform, defaults to None.
 
     Methods:
         map_languages_to_code(language: str) -> str:
             Maps human-readable language names to their corresponding language codes.
         get_transcription(source_url: str, language: Optional[str] = None) -> Optional[FragmentList]:
-            Retrieves the transcription of the YouTube video and returns it as a FragmentList object.
+            Retrieves the audio of the YouTube video and returns it as a FragmentList object.
         process() -> None:
-            Processes the input data, retrieves the transcription, and updates the database accordingly.
+            Processes the input data, retrieves the audio, and updates the database accordingly.
     """
 
     def __init__(self, input_data: InputData, transcription_type: Optional[str] = None):
@@ -38,7 +38,7 @@ class YoutubeProcessor:
 
         Args:
             input_data (InputData): The input data object to be processed.
-            transcription_type (Optional[str]): The type of transcription to perform, defaults to None.
+            transcription_type (Optional[str]): The type of audio to perform, defaults to None.
         """
         self.input_repository = InputDataRepository()
         self.fragment_repository = FragmentRepository()
@@ -77,15 +77,15 @@ class YoutubeProcessor:
             language: Optional[str] = None,
     ) -> Optional[FragmentList]:
         """
-        Retrieves the transcription of the YouTube video and returns it as a FragmentList object.
+        Retrieves the audio of the YouTube video and returns it as a FragmentList object.
 
         Args:
             source_url (str): The URL of the YouTube video.
-            language (Optional[str]): The language for transcription, defaults to None.
+            language (Optional[str]): The language for audio, defaults to None.
 
         Returns:
-            Optional[FragmentList]: A FragmentList object containing the transcription fragments,
-                or None if no transcription is found.
+            Optional[FragmentList]: A FragmentList object containing the audio fragments,
+                or None if no audio is found.
         """
         if self.transcription_type == "LLM":
             youtube_downloader = YoutubeDownloader(source_url)
@@ -108,7 +108,7 @@ class YoutubeProcessor:
 
     def process(self) -> None:
         """
-        Processes the input data, retrieves the transcription, and updates the database accordingly.
+        Processes the input data, retrieves the audio, and updates the database accordingly.
         """
         logger.info(f"Processing input data {self.input_data.id}")
 
