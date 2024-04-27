@@ -5,6 +5,8 @@ from typing import Optional
 from django.conf import settings
 from pytube import YouTube
 
+from utils.get_date_hash import get_date_hash
+
 logger = logging.getLogger(__name__)
 
 
@@ -44,10 +46,10 @@ class YoutubeDownloader:
             audio_download = youtube.streams.filter(only_audio=True).first()
             out_file = audio_download.download(output_path=settings.DOWNLOADED_MEDIA)
 
-            base, ext = os.path.splitext(out_file)
-            new_file = base + self.format_file
-            os.rename(out_file, new_file)
-            return new_file
+            new_file_name = get_date_hash() + self.format_file
+            new_file_path = os.path.join(settings.DOWNLOADED_MEDIA, new_file_name)
+            os.rename(out_file, new_file_path)
+            return new_file_path
         except Exception as e:
             logger.error(e)
             return None
