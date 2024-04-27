@@ -2,7 +2,7 @@ from typing import Dict, Any, Optional, List
 from uuid import UUID
 
 from django.contrib.auth.backends import UserModel
-from rest_framework.exceptions import PermissionDenied, ValidationError, NotFound, APIException
+from rest_framework.exceptions import PermissionDenied, NotFound, APIException
 
 from subscription.repositories.plan_repository import PlanRepository
 from subscription.repositories.user_subscription_repository import UserSubscriptionRepository
@@ -10,7 +10,7 @@ from ..models import InputData
 from ..repositories.fragment_repository import FragmentRepository
 from ..repositories.input_repository import InputDataRepository
 from ..repositories.result_repository import ResultRepository
-from ..tasks import run_youtube_processor, run_spotify_processor
+from ..tasks import run_processor
 
 
 class InputDataService:
@@ -61,21 +61,11 @@ class InputDataService:
         if source == "YOUTUBE" and not plan.youtube:
             raise PermissionDenied("Your subscription doesn't allow you to process data from Youtube")
 
-        if source == "YOUTUBE":
-            input_data_db = self.input_repository.create(data=data, user=user, source=source)
-            self.input_repository.update_status(input_data_db, "PROCESSING")
-            # TODO add celery task
-            run_youtube_processor(input_data_db, transcription_type)
+        input_data_db = self.input_repository.create(data=data, user=user, source=source)
+        self.input_repository.update_status(input_data_db, "PROCESSING")
+        run_processor(input_data_db, source, transcription_type)
 
-            return input_data_db
-
-        if source == "SPOTIFY":
-            input_data_db = self.input_repository.create(data=data, user=user, source=source)
-            self.input_repository.update_status(input_data_db, "PROCESSING")
-            # TODO add celery task
-            run_spotify_processor(input_data_db, transcription_type)
-
-            return input_data_db
+        return input_data_db
 
     def get_input_list_by_user(self, user: UserModel) -> List[InputData]:
         return self.input_repository.get_input_list_by_user(user)
