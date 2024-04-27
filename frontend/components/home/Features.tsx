@@ -45,11 +45,10 @@ export const Features = () => {
             </svg>
 
             <h3 className="mt-12 text-xl font-bold text-gray-900 font-pj">
-              AI-Powered tools
+              Lorem Ipsum
             </h3>
             <p className="mt-5 text-base text-gray-600 font-pj">
-              Integration with language models allows you to create notes, summaries and even transcriptions with just a few clicks.
-            </p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.             </p>
           </div>
 
           <div className="md:p-8 lg:p-14 md:border-l md:border-gray-200">
@@ -78,12 +77,10 @@ export const Features = () => {
               </g>
             </svg>
             <h3 className="mt-12 text-xl font-bold text-gray-900 font-pj">
-              Efficient Applicant Tracking System (ATS)
+              Lorem Ipsum
             </h3>
             <p className="mt-5 text-base text-gray-600 font-pj">
-              Streamline the recruitment process with a comprehensive ATS that
-              allows you to manage applicants, track their progress, and
-              collaborate with your hiring team seamlessly.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
           </div>
 
@@ -113,12 +110,10 @@ export const Features = () => {
               </g>
             </svg>
             <h3 className="mt-12 text-xl font-bold text-gray-900 font-pj">
-              Customizable Assessment Tools
+              Lorem Ipsum
             </h3>
             <p className="mt-5 text-base text-gray-600 font-pj">
-              Create and administer customized assessments to evaluate
-              candidates skills, competencies, and fit for the role, ensuring
-              you make informed hiring decisions.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
           </div>
 
@@ -144,12 +139,10 @@ export const Features = () => {
               </g>
             </svg>
             <h3 className="mt-12 text-xl font-bold text-gray-900 font-pj">
-              Automated Interview Scheduling
+              Lorem Ipsum
             </h3>
             <p className="mt-5 text-base text-gray-600 font-pj">
-              Simplify the scheduling process and eliminate back-and-forth
-              emails with automated interview scheduling tools that sync with
-              your calendar and the candidate&apos;s availability.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
           </div>
 
@@ -214,13 +207,10 @@ export const Features = () => {
               </g>
             </svg>
             <h3 className="mt-12 text-xl font-bold text-gray-900 font-pj">
-              Centralized Communication Hub
+              Lorem Ipsum
             </h3>
             <p className="mt-5 text-base text-gray-600 font-pj">
-              Facilitate efficient communication between recruiters, hiring
-              managers, and candidates with a centralized communication hub,
-              ensuring everyone stays informed and engaged throughout the
-              recruitment process.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
           </div>
 
@@ -262,13 +252,10 @@ export const Features = () => {
               </g>
             </svg>
             <h3 className="mt-12 text-xl font-bold text-gray-900 font-pj">
-              Comprehensive Analytics and Reporting
+              Lorem Ipsum
             </h3>
             <p className="mt-5 text-base text-gray-600 font-pj">
-              Gain valuable insights into your recruitment efforts with
-              comprehensive analytics and reporting tools, allowing you to track
-              key metrics, identify trends, and optimize your hiring strategy
-              for better results.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
           </div>
         </div>
