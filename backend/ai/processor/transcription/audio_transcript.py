@@ -50,7 +50,7 @@ class AudioTranscription:
         self.chunk_size = chunk_size
 
         if not settings.OPENAI_API_KEY:
-            raise ValueError("OPENAI_API_KEY is not set")
+            logger.error("OPENAI_API_KEY is not set in Django settings.")
 
         self.client = OpenAI(
             api_key=settings.OPENAI_API_KEY

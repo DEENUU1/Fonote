@@ -33,7 +33,7 @@ class StripeService:
         Initializes the StripeService with the Stripe secret key from Django settings.
         """
         if not settings.STRIPE_SECRET_KEY:
-            raise ValueError("STRIPE_SECRET_KEY is not set")
+            logger.error("Stripe secret key not found in settings")
 
         stripe.api_key = settings.STRIPE_SECRET_KEY
 

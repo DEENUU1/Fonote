@@ -21,8 +21,12 @@ class GroqLLM(LLM):
     def __init__(self):
         """Initialize the GroqLLM object."""
         super().__init__(chunk_size=8000, chunk_overlap=100)
-        self.client = Groq(api_key=settings.GROQ_API_KEY)
         self.model: str = "llama3-8b-8192"
+
+        if not settings.GROQ_API_KEY:
+            logger.error("GROQ_API_KEY is not set")
+
+        self.client = Groq(api_key=settings.GROQ_API_KEY)
 
     def get_response(self, result_type: str, input_data: str, language: str) -> Optional[str]:
         """Generate a response based on the given input data.
