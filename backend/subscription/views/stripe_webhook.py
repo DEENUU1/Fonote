@@ -27,9 +27,9 @@ class Webhook(APIView):
 
     def post(self, request):
         """
-            This API handling the webhook .
+        This API handles the webhook.
 
-            :return: returns event details as json response .
+        :return: returns event details as a JSON response.
         """
         logger.info("Webhook received")
 

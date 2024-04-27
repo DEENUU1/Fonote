@@ -6,9 +6,8 @@ from rest_framework.exceptions import NotFound, PermissionDenied, APIException
 
 from ..repositories.result_repository import ResultRepository
 from ..repositories.input_repository import InputDataRepository
-from ..llm.groq_llm import GroqLLM
+from ai.processor.llm.groq_llm import GroqLLM
 from ..repositories.fragment_repository import FragmentRepository
-import uuid
 
 
 class ResultService:
@@ -19,7 +18,7 @@ class ResultService:
 
     def create(self, data: Dict[str, Any]):
         if not self.input_repository.input_exists_by_uuid(data.get("input_id")):
-            raise NotFound("Input data not found")
+            raise NotFound("Input data not found!")
 
         input_text = self.fragment_repository.get_text_by_input_data_id(data.get("input_id"))
         input_obj = self.input_repository.get_input_details_by_uuid(data.get("input_id"))
@@ -28,7 +27,7 @@ class ResultService:
         llm_response = groq.generate(data.get("result_type"), input_text, input_obj.language)
 
         if not llm_response:
-            raise APIException("Failed to generate response")
+            raise APIException("Failed to generate response :(")
 
         return self.result_repository.create(data, llm_response)
 
@@ -38,6 +37,6 @@ class ResultService:
 
         input_data = self.input_repository.get_input_details_by_uuid(input_data_id)
         if not self.input_repository.input_belongs_to_user(input_data, user):
-            raise PermissionDenied("Input data does not belong to user")
+            raise PermissionDenied("You don't have access to this object!")
 
         return self.result_repository.get_result_list_by_input_data(input_data)

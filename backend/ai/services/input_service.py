@@ -23,35 +23,34 @@ class InputDataService:
 
     @staticmethod
     def get_source_from_url(url: str) -> Optional[str]:
-        if "spotify" in url:
+        if "spotify.com/" in url:
             return "SPOTIFY"
 
-        if "youtube" in url:
+        if "youtube.com/" in url:
             return "YOUTUBE"
 
         return None
 
-    def create_input_subscription(self, data: Dict[str, Any], user: UserModel):
+    def create_input_subscription(self, data: Dict[str, Any], user: UserModel) -> InputData:
         user_subscription = self.user_subscription_repository.get_current_subscription_by_user(user)
 
         if user_subscription is None:
-            raise PermissionDenied("You don't have access to use this")
+            raise PermissionDenied("You don't have access!")
 
         if not self.plan_repository.plan_exists_by_uuid(user_subscription.plan.id):
-            raise NotFound("Plan not found")
+            raise NotFound("Plan not found, please contact with support.")
 
         plan = self.plan_repository.get_plan_by_uuid(user_subscription.plan.id)
         source = self.get_source_from_url(data.get("source_url"))
 
-        if data.get("transcription_type") not in ["GENERATED", "MANUAL"] and not plan.ai_transcription:
+        transcription_type = data.get("transcription_type")
+        language = data.get("language")
+
+        if transcription_type not in ["GENERATED", "MANUAL"] and not plan.ai_transcription:
             raise PermissionDenied("Your subscription doesn't allow you to process data from AI")
 
-        if not plan.change_lang and data.get("language") != "English":
+        if not plan.change_lang and language != "English":
             raise PermissionDenied("Your subscription doesn't allow you to change language")
-
-        # TODO move this to serializer
-        if source not in ["SPOTIFY", "YOUTUBE"]:
-            raise ValidationError("Invalid url")
 
         if source == "SPOTIFY" and not plan.spotify:
             raise PermissionDenied("Your subscription doesn't allow you to process data from Spotify")
@@ -63,13 +62,12 @@ class InputDataService:
             input_data_db = self.input_repository.create(data=data, user=user, source=source)
             self.input_repository.update_status(input_data_db, "PROCESSING")
             # TODO add celery task
-            run_youtube_processor(input_data_db, data.get("transcription_type"))
+            run_youtube_processor(input_data_db, transcription_type)
 
             return input_data_db
 
         if source == "SPOTIFY":
-            raise APIException("Not implemented")
-
+            raise APIException("Not implemented!")
 
     def get_input_list_by_user(self, user: UserModel) -> List[InputData]:
         return self.input_repository.get_input_list_by_user(user)
@@ -81,7 +79,7 @@ class InputDataService:
         input_data = self.input_repository.get_input_details_by_uuid(_id)
 
         if not self.input_repository.input_belongs_to_user(input_data, user):
-            raise PermissionDenied("You don't have access to use this")
+            raise PermissionDenied("You don't have access to this object!")
 
         return input_data
 
@@ -92,6 +90,6 @@ class InputDataService:
         input_data = self.input_repository.get_input_details_by_uuid(_id)
 
         if not self.input_repository.input_belongs_to_user(input_data, user):
-            raise PermissionDenied("You don't have access to use this")
+            raise PermissionDenied("You don't have access to this object!")
 
         return self.input_repository.delete(input_data)
