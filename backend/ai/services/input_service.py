@@ -46,7 +46,7 @@ class InputDataService:
         if data.get("transcription_type") not in ["GENERATED", "MANUAL"] and not plan.ai_transcription:
             raise PermissionDenied("Your subscription doesn't allow you to process data from AI")
 
-        if not plan.change_lang and data.get("langugae") != "English":
+        if not plan.change_lang and data.get("language") != "English":
             raise PermissionDenied("Your subscription doesn't allow you to change language")
 
         # TODO move this to serializer
@@ -63,7 +63,7 @@ class InputDataService:
             input_data_db = self.input_repository.create(data=data, user=user, source=source)
             self.input_repository.update_status(input_data_db, "PROCESSING")
             # TODO add celery task
-            run_youtube_processor(input_data_db)
+            run_youtube_processor(input_data_db, data.get("transcription_type"))
 
             return input_data_db
 

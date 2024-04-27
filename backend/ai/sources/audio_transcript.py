@@ -1,11 +1,13 @@
 import logging
 import os
-from typing import Optional
+from typing import Optional, List
 
 from django.conf import settings
 from openai import OpenAI
+from openai.types.audio import Transcription
 from pydub import AudioSegment
-
+from .fragment import Fragment
+from .fragment_list import FragmentList
 from utils.get_date_hash import get_date_hash
 
 logger = logging.getLogger(__name__)
@@ -31,59 +33,57 @@ class AudioTranscription:
         except Exception as e:
             logger.error(f"Error while opening file: {e}")
 
-    def split_audio_to_chunks(self) -> Optional[str]:
-        try:
-            audio = AudioSegment.from_file(self.audio_file_path)
-
-            chunk_length = self.chunk_size * 1000
-            chunks = [audio[i:i + chunk_length] for i in range(0, len(audio), chunk_length)]
-
-            logging.info(f"Split file into {len(chunks)} chunks")
-
-            date_hash = get_date_hash()
-            output_directory = f"{settings.AUDIO_CHUNK_FILE_PATH}{date_hash}"
-            os.makedirs(output_directory, exist_ok=True)
-
-            for i, chunk in enumerate(chunks):
-                chunk.export(os.path.join(output_directory, f"chunk_{i}.mp3"), format="mp3")
-                logger.info(f"Chunk {i} exported")
-
-            return output_directory
-
-        except Exception as e:
-            logger.error(f"Error while splitting audio file: {e}")
-            return
-
-    def transcribe_audio(self, audio_file) -> Optional[str]:
+    def transcribe_audio(self, audio_file, language: str) -> Optional[Transcription]:
         try:
             transcription = self.client.audio.transcriptions.create(
                 model=self.whisper_model,
                 file=audio_file,
+                language=language,
+                response_format="verbose_json",
+                timestamp_granularities=["word"]
             )
-            return transcription.text
+            return transcription
         except Exception as e:
             logger.error(f"Error while transcribing audio: {e}")
             return
 
-    def run(self) -> Optional[str]:
-        result = ""
+    def format_text(self, full_text) -> List[Fragment]:
+        fragments = []
+        current_fragment = None
 
-        audio_path = self.split_audio_to_chunks()
-        if not audio_path:
+        for text in full_text.words:
+            if current_fragment is None:
+                current_fragment = Fragment(
+                    start_time=text["start"],
+                    end_time=text["start"] + text["end"] - text["start"],
+                    transcriptions=text["word"]
+                )
+            else:
+                if text["word"].endswith("."):
+                    current_fragment.transcriptions += " " + text["word"]
+                    fragments.append(current_fragment)
+                    current_fragment = None
+                else:
+                    current_fragment.transcriptions += " " + text["word"]
+                    current_fragment.end_time = text["start"] + text["end"] - text["start"]
+
+        if current_fragment is not None:
+            fragments.append(current_fragment)
+
+        return fragments
+
+    def run(self, language: str) -> Optional[FragmentList]:
+        audio_file = self.get_audio_file(self.audio_file_path)
+        transcription = self.transcribe_audio(audio_file, language)
+        if not transcription:
+            logger.info("Couldn't transcribe audio file")
             return None
 
-        sorted_chunks = sorted(os.listdir(audio_path), key=self.numerical_sort)
-        for chunk in sorted_chunks:
-            chunk_path = f"{audio_path}/{chunk}"
-            transcription = self.transcribe_audio(chunk_path)
-            if not transcription:
-                continue
-            result += transcription
+        logger.info("Transcribe audio file")
 
-            logger.info(f"Transcribed chunk {chunk}")
+        formatted_text = self.format_text(transcription)
 
-            os.remove(chunk_path)
+        logger.info(f"Format transcription")
 
-            logger.info(f"Removed chunk {chunk}")
+        return FragmentList(type_="LLM", fragments=formatted_text)
 
-        return result

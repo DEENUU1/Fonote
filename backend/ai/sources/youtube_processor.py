@@ -1,3 +1,5 @@
+from typing import Optional
+
 from .audio_transcript import AudioTranscription
 from .youtube_data import get_youtube_video_data
 from .youtube_downloader import YoutubeDownloader
@@ -13,10 +15,28 @@ logger = logging.getLogger(__name__)
 
 
 class YoutubeProcessor:
-    def __init__(self, input_data: InputData):
+    def __init__(self, input_data: InputData, transcription_type: Optional[str] = None):
         self.input_repository = InputDataRepository()
         self.fragment_repository = FragmentRepository()
         self.input_data = input_data
+        self.transcription_type = transcription_type
+
+    @staticmethod
+    def map_languages_to_code(language: str) -> str:
+        mapper = {
+            "Danish": "da",
+            "Czech": "cs",
+            "Dutch": "nl",
+            "English": "en",
+            "German": "de",
+            "French": "fr",
+            "Italian": "it",
+            "Japanese": "ja",
+            "Korean": "ko",
+            "Polish": "pl",
+            "Spanish": "es",
+        }
+        return mapper[language]
 
     def process(self) -> None:
         logger.info(f"Processing input data {self.input_data.id}")
@@ -27,23 +47,26 @@ class YoutubeProcessor:
 
         video_data = get_youtube_video_data(self.input_data.source_url)
 
-        if not transcription:
+        if not transcription or self.transcription_type is not None:
             youtube_downloader = YoutubeDownloader(self.input_data.source_url)
             downloaded_video = youtube_downloader.download()
 
             if not downloaded_video:
                 logger.error("Couldn't download youtube video")
                 self.input_repository.update_status(self.input_data, "ERROR")
+                return
 
             audio_transcription = AudioTranscription(audio_file_path=downloaded_video)
-            transcription = audio_transcription.run()
+            lang_code = self.map_languages_to_code(self.input_data.language)
+            transcription = audio_transcription.run(lang_code)
 
             if not transcription:
                 logger.error("Couldn't transcribe audio")
                 self.input_repository.update_status(self.input_data, "ERROR")
+                return
 
             data = {
-                "transcription_type": "LLM",
+                "transcription_type": transcription.type_,
                 "audio_length": video_data.length if video_data else None,
                 "source_title": video_data.title if video_data else None,
             }
@@ -51,16 +74,21 @@ class YoutubeProcessor:
             input_data_update_serializer.is_valid(raise_exception=True)
             self.input_repository.partial_update(input_data_update_serializer.validated_data, self.input_data)
 
-            data = {
-                "text": transcription,
-                "input_data": self.input_data.id
-            }
-            fragment_serializer = FragmentInputSerializer(data=data)
-            fragment_serializer.is_valid(raise_exception=True)
-            self.fragment_repository.create(fragment_serializer.validated_data)
+            for idx, fragment in enumerate(transcription.fragments):
+                data = {
+                    "start_time": fragment.start_time,
+                    "end_time": fragment.end_time,
+                    "order": idx,
+                    "text": fragment.transcriptions,
+                    "input_data": self.input_data.id
+                }
+                fragment_serializer = FragmentInputSerializer(data=data)
+                fragment_serializer.is_valid(raise_exception=True)
+                self.fragment_repository.create(fragment_serializer.validated_data)
 
             logger.info(f"Input data {self.input_data.id} processed")
             self.input_repository.update_status(self.input_data, "DONE")
+            return
 
         data = {
             "transcription_type": transcription.type_,
@@ -85,3 +113,4 @@ class YoutubeProcessor:
 
         logger.info(f"Input data {self.input_data.id} processed")
         self.input_repository.update_status(self.input_data, "DONE")
+        return
