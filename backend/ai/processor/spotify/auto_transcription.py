@@ -1,12 +1,11 @@
 import logging
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 import requests
+from django.conf import settings
 
 from ai.processor.audio.fragment import Fragment
 from ai.processor.audio.fragment_list import FragmentList
-from django.conf import settings
-
 
 logger = logging.getLogger(__name__)
 
@@ -14,6 +13,15 @@ logger = logging.getLogger(__name__)
 class SpotifyAutoTranscription:
     def __init__(self, input_url: str):
         self.input_url = input_url
+
+        if not settings.SPOTIFY_CLIENT_TOKEN:
+            logger.error("Spotify client token is not set")
+            return
+
+        if not settings.SPOTIFY_AUTHORIZATION:
+            logger.error("Spotify authorization is not set")
+            return
+
         self.headers = {
             "Host": "spclient.wg.spotify.com",
             "client-token": settings.SPOTIFY_CLIENT_TOKEN,
@@ -24,7 +32,7 @@ class SpotifyAutoTranscription:
     def get_transcription_url(input_id: str) -> str:
         return f"https://spclient.wg.spotify.com/transcript-read-along/v2/episode/{input_id}?format=json"
 
-    def get_transcription(self, url: str) -> Dict:
+    def get_transcription(self, url: str) -> Optional[Dict]:
         try:
 
             response = requests.get(url, headers=self.headers)
@@ -33,12 +41,15 @@ class SpotifyAutoTranscription:
 
         except requests.exceptions.HTTPError as err:
             logger.error("HTTP error:", err)
+            return
 
         except requests.exceptions.RequestException as err:
             logger.error("Request exception:", err)
+            return
 
         except Exception as err:
             logger.error("Exception:", err)
+            return
 
     def get_episode_id(self):
         return self.input_url.split("/")[-1]
@@ -75,12 +86,21 @@ class SpotifyAutoTranscription:
         return fragments
 
     def transcribe(self, fragment_duration_sec=180) -> FragmentList:
+        logger.info("Run Spotify transcription...")
+
         episode_id = self.get_episode_id()
+        logger.info(f"Episode ID: {episode_id}")
+
         transcription_url = self.get_transcription_url(episode_id)
+        logger.info(f"Transcription URL: {transcription_url}")
 
         transcription = self.get_transcription(transcription_url)
 
+        if not transcription:
+            logger.error("No transcription found")
+            return FragmentList(type_="GENERATED", fragments=[])
+
         formatted_transcription = self.format_transcription(transcription, fragment_duration_sec)
+        logger.info("Transcription formatted")
 
         return FragmentList(type_="GENERATED", fragments=formatted_transcription)
-

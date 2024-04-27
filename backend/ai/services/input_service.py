@@ -10,7 +10,7 @@ from ..models import InputData
 from ..repositories.fragment_repository import FragmentRepository
 from ..repositories.input_repository import InputDataRepository
 from ..repositories.result_repository import ResultRepository
-from ..tasks import run_youtube_processor
+from ..tasks import run_youtube_processor, run_spotify_processor
 
 
 class InputDataService:
@@ -49,6 +49,9 @@ class InputDataService:
         if transcription_type not in ["GENERATED", "MANUAL"] and not plan.ai_transcription:
             raise PermissionDenied("Your subscription doesn't allow you to process data from AI")
 
+        if transcription_type == "LLM" and source == "SPOTIFY":
+            raise APIException("Not implemented!")
+
         if not plan.change_lang and language != "English":
             raise PermissionDenied("Your subscription doesn't allow you to change language")
 
@@ -67,7 +70,12 @@ class InputDataService:
             return input_data_db
 
         if source == "SPOTIFY":
-            raise APIException("Not implemented!")
+            input_data_db = self.input_repository.create(data=data, user=user, source=source)
+            self.input_repository.update_status(input_data_db, "PROCESSING")
+            # TODO add celery task
+            run_spotify_processor(input_data_db, transcription_type)
+
+            return input_data_db
 
     def get_input_list_by_user(self, user: UserModel) -> List[InputData]:
         return self.input_repository.get_input_list_by_user(user)
