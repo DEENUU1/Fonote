@@ -10,7 +10,7 @@ import {toast} from "react-toastify";
 import {Spinner} from "@chakra-ui/react";
 
 async function getListInputData(access_token: string) {
-	const res = await fetch(process.env.API_URL + "ai/input/", {
+	const res = await fetch(process.env.API_URL + "ai/input/all/", {
 		method: "get",
 		headers: {
 			Authorization: `Bearer ${access_token}`

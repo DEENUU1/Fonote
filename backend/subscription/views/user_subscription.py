@@ -1,3 +1,5 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -15,6 +17,7 @@ class UserSubscriptionAPIView(APIView):
     permission_classes = (IsAuthenticated,)
     _service = UserSubscriptionService()
 
+    @method_decorator(cache_page(60 * 60 * 2))
     def get(self, request):
         """
         Retrieve the current subscription details for the authenticated user.

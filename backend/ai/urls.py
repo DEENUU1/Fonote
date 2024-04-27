@@ -9,7 +9,7 @@ from .views import (
 )
 
 urlpatterns = [
-    path("input/", input_get.InputListAPIView.as_view(), name="input_list"),
+    path("input/all/", input_get.InputListAPIView.as_view(), name="input_list"),
     path("input/", input_post.InputCreateAPIView.as_view(), name="input_create"),
     path("input/<str:pk>/", input_pk_get_delete.InputPkAPIView.as_view(), name="input_details"),
     path("result/", result_create.ResultCreateAPIView.as_view(), name="result_create"),

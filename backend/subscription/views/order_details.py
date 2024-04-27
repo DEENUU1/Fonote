@@ -1,3 +1,5 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -23,6 +25,7 @@ class OrderDetailsAPIView(APIView):
     permission_classes = (IsAuthenticated,)
     _order_service = OrderService()
 
+    @method_decorator(cache_page(60 * 60 * 2))
     def get(self, request, pk):
         """
         Retrieves details of the specified order for the authenticated user.

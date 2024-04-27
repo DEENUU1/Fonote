@@ -1,3 +1,4 @@
+from django.utils.decorators import method_decorator
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -5,7 +6,7 @@ from rest_framework.views import APIView
 
 from ..serializers.plan_serializer import PlanOutputSerializer
 from ..services.plan_service import PlanService
-
+from django.views.decorators.cache import cache_page
 
 class PlanListAPIView(APIView):
     """
@@ -23,6 +24,7 @@ class PlanListAPIView(APIView):
     permission_classes = (AllowAny,)
     _plan_service = PlanService()
 
+    @method_decorator(cache_page(60 * 60 * 2))
     def get(self, request):
         """
         Retrieves a list of active plans.

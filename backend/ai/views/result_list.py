@@ -1,3 +1,5 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -21,6 +23,7 @@ class ResultListAPIView(APIView):
     permission_classes = (IsAuthenticated,)
     _service = ResultService()
 
+    @method_decorator(cache_page(60 * 60 * 1))
     def get(self, request, pk):
         """
         Retrieves a list of results associated with the input data identified by the UUID.
