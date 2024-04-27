@@ -8,6 +8,18 @@ import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDis
 import {Input, Select, SelectItem} from "@nextui-org/react";
 import {toast} from "react-toastify";
 import {Spinner} from "@chakra-ui/react";
+import ReactMarkdown from 'react-markdown';
+
+
+const MarkdownRenderer = ({ markdown }) => {
+  return (
+    <div className="prose">
+      <ReactMarkdown>{markdown}</ReactMarkdown>
+    </div>
+  );
+};
+
+
 
 async function getListInputData(access_token: string) {
 	const res = await fetch(process.env.API_URL + "ai/input/all/", {
@@ -355,7 +367,7 @@ export default function Dashboard() {
 												<li key={result?.id} className={"mb-5 list-none"}>
 													<div>
 														<Chip color={"default"} variant={"bordered"}>{result?.result_type}</Chip>
-														<p>{result?.content}</p>
+														<MarkdownRenderer markdown={result?.content} />
 													</div>
 												</li>
 											))
