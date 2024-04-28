@@ -14,7 +14,7 @@ export default function OrderDetails() {
 	const [order, setOrder] = useState<any>(null);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const handleGetInvoice = async (orderId: str) => {
+	const handleGetInvoice = async (orderId: string) => {
 		setIsLoading(true);
 
 		try {
