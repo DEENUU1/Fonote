@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {signOut, useSession} from "next-auth/react";
 import {Box, Button, Code, HStack, Spinner, Text, VStack} from "@chakra-ui/react";
 import axios from "axios";
-import Layout from "@/components/Layout";
+import Layout from "@/components/global/Layout";
 import Link from "next/link";
 
 export default function Home() {

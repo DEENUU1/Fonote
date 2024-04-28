@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/global/Layout";
 
 export default function Failed() {
 

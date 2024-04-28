@@ -1,5 +1,5 @@
 import {useSession} from "next-auth/react";
-import Layout from "@/components/Layout";
+import Layout from "@/components/global/Layout";
 import React, {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 import {Spinner} from "@chakra-ui/react";

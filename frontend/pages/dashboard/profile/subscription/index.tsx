@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 import {Spinner} from "@chakra-ui/react";
-import Layout from "@/components/Layout";
+import Layout from "@/components/global/Layout";
 import Link from "next/link";
 import {toast} from "react-toastify";
 import {Button} from "@nextui-org/react";
