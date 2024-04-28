@@ -6,6 +6,7 @@ from django.conf import settings
 
 from ai.processor.audio.fragment import Fragment
 from ai.processor.audio.fragment_list import FragmentList
+from ai.processor.spotify.access import SpotifyAccess
 
 logger = logging.getLogger(__name__)
 
@@ -13,19 +14,29 @@ logger = logging.getLogger(__name__)
 class SpotifyAutoTranscription:
     def __init__(self, input_url: str):
         self.input_url = input_url
+        # self.spotify_access = SpotifyAccess()
 
-        if not settings.SPOTIFY_CLIENT_TOKEN:
-            logger.error("Spotify client token is not set")
-            return
-
-        if not settings.SPOTIFY_AUTHORIZATION:
-            logger.error("Spotify authorization is not set")
-            return
+        # if not settings.SPOTIFY_CLIENT_TOKEN:
+        #     logger.error("Spotify client token is not set")
+        #     return
+        #
+        # if not settings.SPOTIFY_AUTHORIZATION:
+        #     logger.error("Spotify authorization is not set")
+        #     return
 
         self.headers = {
-            "Host": "spclient.wg.spotify.com",
-            "client-token": settings.SPOTIFY_CLIENT_TOKEN,
-            "authorization": settings.SPOTIFY_AUTHORIZATION,
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0",
+            "Accept": "application/json",
+            "Accept-Language": "pl",
+            "Referer": "https://open.spotify.com/",
+            "client-token": "AACebEIdh33w5dB1aas/tgEcFanSoWkPFhZl08VigkC0swdo82/uOONra9FqHSzq2ke+5UyiOcoktfAI0dpJHpe00u41YFUZXGGPLkZVywL/+45uMZluIdnyulBHfd2AHyIcLRNLPgMSRlHxgMvxvuBu+bJj7afMm2xVAVfqQ+bNgCTiKXLFzmTaNr70DiQIu8bxSceeZmL2Y8Q+mH24le4W35Ewjei0Tga4DlIGQaGFnvZR4oBnFbPxa9Us2NqJVf8s4I3VJoI6wYojlZ4rIcTPVBdax8oEWP7McHXQJZ8=",
+            "Origin": "https://open.spotify.com",
+            "DNT": "1",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-site",
+            "authorization": "Bearer BQCg7WcENa09fg73COdU-jzRgj0-VL5P6CdNZlbiEmv4x4MTwFrweVxbzefsFClfAay-jshr7ufFnlPi1NhELF3l9PXLNcycIyNANSNbA_jZ2o3wvLxnbXGvjJl2ReMFTzCS6kZ2nBNkgco7wSgYZUWkEmBPm12XP1QQIRSzr0CXkSh_p4j0-vRom9y4ISWbmIjKI7DgWy0ZQKQ4T9gElAklk3DdDkG2_WYsvll2ocx0MphMcd33KVJ_ff7sxKy0KV2GC_cAtkKiPVpG8TDu4hsFBwE9waiFakhd-AhBy0Ou6qgo8KfHRQ-KjTSqYU7GkTsvJJT1KzfFCMdecGpat4drX3Hx",
+            "Connection": "keep-alive"
         }
 
     @staticmethod
@@ -34,7 +45,6 @@ class SpotifyAutoTranscription:
 
     def get_transcription(self, url: str) -> Optional[Dict]:
         try:
-
             response = requests.get(url, headers=self.headers)
             response.raise_for_status()
             return response.json()

@@ -5,7 +5,7 @@ import logging
 from django.conf import settings
 
 
-logger = logging.getLevelName(__name__)
+logger = logging.getLogger(__name__)
 
 
 class SpotifyAccess:

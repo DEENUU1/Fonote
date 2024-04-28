@@ -9,6 +9,7 @@ from ai.serializers.input_data_serializers import InputDataUpdateSerializer
 from .auto_transcription import SpotifyAutoTranscription
 from ..audio.fragment_list import FragmentList
 from ai.processor.llm.deepl import Translator
+from ai.processor.spotify.access import SpotifyAccess
 
 
 logger = logging.getLogger(__name__)
@@ -46,7 +47,7 @@ class SpotifyProcessor:
             "Danish": "da",
             "Czech": "cs",
             "Dutch": "nl",
-            "English": "en",
+            "English": "en-us",
             "German": "de",
             "French": "fr",
             "Italian": "it",
@@ -60,11 +61,11 @@ class SpotifyProcessor:
     def process(self) -> None:
         logger.info(f"Processing input data {self.input_data.id}")
 
-        spotify_data = ...  # TODO add this later
+        # spotify_data = ...  # TODO add this later
         transcription = self.get_transcription(self.input_data.source_url)
 
         lang_code = self.map_languages_to_code(self.input_data.language)
-        translator = Translator(lang_code)
+        # translator = Translator(lang_code)
 
         data = {
             "transcription_type": transcription.type_,
@@ -77,13 +78,13 @@ class SpotifyProcessor:
         self.input_repository.partial_update(input_data_update_serializer.validated_data, self.input_data)
 
         for idx, fragment in enumerate(transcription.fragments):
-            translated_text = translator.translate(fragment.transcriptions)
+            # translated_text = translator.translate(fragment.transcriptions)
 
             data = {
                 "start_time": fragment.start_time,
                 "end_time": fragment.end_time,
                 "order": idx,
-                "text": translated_text,
+                "text": fragment.transcriptions,  # translated_text,
                 "input_data": self.input_data.id
             }
             fragment_serializer = FragmentInputSerializer(data=data)
