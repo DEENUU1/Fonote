@@ -21,6 +21,8 @@ jobs:
 
       - name: Migrations
         working-directory: ./backend
+        env:
+          WORK_MODE: "TEST"
         run: |
           python manage.py makemigrations
           python manage.py migrate
