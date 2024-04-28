@@ -2,11 +2,9 @@ import logging
 from typing import List, Dict, Optional
 
 import requests
-from django.conf import settings
 
 from ai.processor.audio.fragment import Fragment
 from ai.processor.audio.fragment_list import FragmentList
-from ai.processor.spotify.access import SpotifyAccess
 
 logger = logging.getLogger(__name__)
 
@@ -14,16 +12,6 @@ logger = logging.getLogger(__name__)
 class SpotifyAutoTranscription:
     def __init__(self, input_url: str):
         self.input_url = input_url
-        # self.spotify_access = SpotifyAccess()
-
-        # if not settings.SPOTIFY_CLIENT_TOKEN:
-        #     logger.error("Spotify client token is not set")
-        #     return
-        #
-        # if not settings.SPOTIFY_AUTHORIZATION:
-        #     logger.error("Spotify authorization is not set")
-        #     return
-
         self.headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0",
             "Accept": "application/json",
@@ -35,7 +23,7 @@ class SpotifyAutoTranscription:
             "Sec-Fetch-Dest": "empty",
             "Sec-Fetch-Mode": "cors",
             "Sec-Fetch-Site": "same-site",
-            "authorization": "Bearer BQCg7WcENa09fg73COdU-jzRgj0-VL5P6CdNZlbiEmv4x4MTwFrweVxbzefsFClfAay-jshr7ufFnlPi1NhELF3l9PXLNcycIyNANSNbA_jZ2o3wvLxnbXGvjJl2ReMFTzCS6kZ2nBNkgco7wSgYZUWkEmBPm12XP1QQIRSzr0CXkSh_p4j0-vRom9y4ISWbmIjKI7DgWy0ZQKQ4T9gElAklk3DdDkG2_WYsvll2ocx0MphMcd33KVJ_ff7sxKy0KV2GC_cAtkKiPVpG8TDu4hsFBwE9waiFakhd-AhBy0Ou6qgo8KfHRQ-KjTSqYU7GkTsvJJT1KzfFCMdecGpat4drX3Hx",
+            "authorization": "Bearer BQCy2qSlITY2ifRJ1qP1-k8jyCh56tubxtajS6X0nC79auzj7hCnUX4rUP__d9RO4pEQSICVNTp271GPPx0hMHnwpHAFBXSzFLAHjb_XrjpQVyV1QSyHkYKMjoNe1Q8ualFqhOGhC0Wgbv_PZknXq6NEyA1Q0_qJQOfEXjefoOaApu_cUgb9_UNuMTlW7Q0mX7vr4KWRMRM-PsMWde99QiLjlJIdG1HmfJR_V1waYqQM9wprRSoXUmQpmKxzZNP25AUtWOlPZeIajxM__ZkKroVLkzwGW892qxWqAwcm4d-qiPrUdkd1jm15ATejuEsFOwo5nYIo9GrZK6IJZyDAH2cvUF_w",
             "Connection": "keep-alive"
         }
 

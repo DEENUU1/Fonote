@@ -10,12 +10,12 @@ logger = logging.getLogger(__name__)
 
 class SpotifyAccess:
     def __init__(self):
-        self.client_id: str = settings.SPOTIFY_CLIENT_ID
-        self.client_secret: str = settings.SPOTIFY_CLIENT_SECRET
+        self.__client_id: str = settings.SPOTIFY_CLIENT_ID
+        self.__client_secret: str = settings.SPOTIFY_CLIENT_SECRET
         self.base_url = "https://accounts.spotify.com/api/token"
 
     def get_token(self) -> str:
-        auth_string = f'{self.client_id}:{self.client_secret}'
+        auth_string = f'{self.__client_id}:{self.__client_secret}'
         auth_bytes = auth_string.encode('utf-8')
         auth_base64 = str(base64.b64encode(auth_bytes), "utf-8")
 
