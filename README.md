@@ -22,12 +22,27 @@
 </div>
 
 
+
 ## System Architecture
 <img src="assets/architecture.png" alt="system_architecture"/> TODO
 
 
-## Backend - Endpoints
+## Endpoints
 <img src="assets/endpoints.png" alt="endpoints"/> TODO
+
+
+## Frontend
+
+<img src="assets/home.png" alt="home"/>
+<img src="assets/contact.png" alt="contact"/>
+<img src="assets/pricing.png" alt="pricing"/>
+<img src="assets/login.png" alt="login"/>
+<img src="assets/dashboard1.png" alt="dashboard"/> 
+<img src="assets/dashboard2.png" alt="dashboard"/> 
+<img src="assets/dashboardform.png" alt="dashboard_form"/> 
+<img src="assets/profile.png" alt="profile"/>
+<img src="assets/orderhistory.png" alt="order_history"/> 
+<img src="assets/usersubscription.png" alt="user_subscription"/> 
 
 
 ## Features
@@ -55,11 +70,12 @@
 
 Backend in local mode use SQLite so there is no need to use Docker/Docker-compose
 
-#### Installation - without docker
+#### Without docker
 
+(backend)
 ```bash
 # Clone repository
-git clone <url>
+git clone https://github.com/DEENUU1/Fonote.git
 
 # Create .env file 
 cp .env_example .env
@@ -67,21 +83,38 @@ cp .env_example .env
 # Install libraries
 pip install -r requirements.txt
 
+# Change directory to ./backend
+cd ./backend
+
 # Apply migrations
 python manage.py migrate 
 
 # Create super user 
-python manage.py createsuperuser (in User Type type "USER")
+python manage.py createsuperuser
 
 # Run server 
 python manage.py runserver 
 ```
 
-#### Installation - with docker
+(frontend)
+```bash
+
+# Change directory to ./frontend
+cd ./frontend
+
+# Create .env.local file
+cp .env.local_example .env.local
+
+# Run Next.js server
+npm run dev
+```
+
+
+#### With docker
 
 ```bash
 # Clone repository
-git clone <url>
+git clone https://github.com/DEENUU1/Fonote.git
 
 # Create .env file 
 cp .env_example .env
@@ -92,18 +125,21 @@ docker-compose build
 # Run containers
 docker-compose up # -d 
 
-# Apply migrations
-python manage.py migrate 
-
-# 
-# Run this commands inside web container
-# 
-
-# Create super user 
-python manage.py createsuperuser (in User Type type "USER")
-
 # Run server 
 python manage.py runserver 
+```
+
+(frontend)
+```bash
+
+# Change directory to ./frontend
+cd ./frontend
+
+# Create .env.local file
+cp .env.local_example .env.local
+
+# Run Next.js server
+npm run dev
 ```
 
 #### Commands
