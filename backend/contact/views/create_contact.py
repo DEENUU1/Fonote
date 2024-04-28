@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -24,6 +25,7 @@ class ContactCreateAPIView(APIView):
     _contact_service = ContactService()
     throttle_classes = (ContactCreateThrottle, AnonContactCreateThrottle)
 
+    @swagger_auto_schema(operation_description="Create contact object", request_body=ContactInputSerializer)
     def post(self, request):
         """
         Creates a new contact entry.

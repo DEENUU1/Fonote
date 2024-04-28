@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -26,6 +27,7 @@ class InputCreateAPIView(APIView):
     _service = InputDataService()
     throttle_classes = (InputCreateThrottle, )
 
+    @swagger_auto_schema(operation_description="Create input object", request_body=InputDataInputSerializer)
     def post(self, request):
         """
         Creates a new input subscription.

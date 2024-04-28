@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -26,6 +27,7 @@ class ResultCreateAPIView(APIView):
     _service = ResultService()
     throttle_classes = (ResultCreateThrottle, )
 
+    @swagger_auto_schema(operation_description="Create result object", request_body=ResultInputSerializer)
     def post(self, request):
         """
         Creates a new result.
