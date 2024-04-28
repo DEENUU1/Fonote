@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "dj_rest_auth.registration",
     "corsheaders",
     "allauth.socialaccount.providers.google",
+    "drf_yasg",
 
     # project apps
     'authentication',
