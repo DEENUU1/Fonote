@@ -250,55 +250,55 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 # LOGGER
 
-if WORK_MODE != "TEST":
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'formatters': {
-            'verbose': {
-                'format': '%(levelname)s [%(asctime)s] %(message)s',
-                'datefmt': '%Y-%m-%d %H:%M:%S'
-            },
-            'simple': {
-                'format': '%(levelname)s %(message)s'
-            }
-        },
-        'handlers': {
-            'console': {
-                'level': 'DEBUG',
-                'class': 'logging.StreamHandler',
-                'formatter': 'simple'
-            },
-            'file': {
-                'level': 'INFO',
-                'class': 'logging.FileHandler',
-                'filename': 'logs/django.log',
-                'formatter': 'verbose'
-            }
-        },
-        'loggers': {
-            'django': {
-                'handlers': ['console', 'file'],
-                'level': 'INFO'
-            },
-            'ai': {
-                'handlers': ['console', 'file'],
-                'level': 'INFO'
-            },
-            'authentication': {
-                'handlers': ['console', 'file'],
-                'level': 'INFO'
-            },
-            'contact': {
-                'handlers': ['console', 'file'],
-                'level': 'INFO'
-            },
-            'subscription': {
-                'handlers': ['console', 'file'],
-                'level': 'INFO'
-            }
-        }
-    }
+# if WORK_MODE != "TEST":
+#     LOGGING = {
+#         'version': 1,
+#         'disable_existing_loggers': False,
+#         'formatters': {
+#             'verbose': {
+#                 'format': '%(levelname)s [%(asctime)s] %(message)s',
+#                 'datefmt': '%Y-%m-%d %H:%M:%S'
+#             },
+#             'simple': {
+#                 'format': '%(levelname)s %(message)s'
+#             }
+#         },
+#         'handlers': {
+#             'console': {
+#                 'level': 'DEBUG',
+#                 'class': 'logging.StreamHandler',
+#                 'formatter': 'simple'
+#             },
+#             'file': {
+#                 'level': 'INFO',
+#                 'class': 'logging.FileHandler',
+#                 'filename': 'logs/django.log',
+#                 'formatter': 'verbose'
+#             }
+#         },
+#         'loggers': {
+#             'django': {
+#                 'handlers': ['console', 'file'],
+#                 'level': 'INFO'
+#             },
+#             'ai': {
+#                 'handlers': ['console', 'file'],
+#                 'level': 'INFO'
+#             },
+#             'authentication': {
+#                 'handlers': ['console', 'file'],
+#                 'level': 'INFO'
+#             },
+#             'contact': {
+#                 'handlers': ['console', 'file'],
+#                 'level': 'INFO'
+#             },
+#             'subscription': {
+#                 'handlers': ['console', 'file'],
+#                 'level': 'INFO'
+#             }
+#         }
+#     }
 
 # CELERY
 
