@@ -10,6 +10,7 @@ from ai.serializers.input_data_serializers import InputDataUpdateSerializer
 from .api_wrapper import SpotifyAPIWrapper
 from .auto_transcription import SpotifyAutoTranscription
 from ..audio.fragment_list import FragmentList
+from .access import SpotifyAccess
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +64,8 @@ class SpotifyProcessor:
 
     def process(self) -> None:
         logger.info(f"Processing input data {self.input_data.id}")
-
+        # access = SpotifyAccess()
+        # print(access.get_token())
         api_wrapper = SpotifyAPIWrapper()
         spotify_data = api_wrapper.get_episode_data(self.get_episode_id(self.input_data.source_url))
         transcription = self.get_transcription(self.input_data.source_url)

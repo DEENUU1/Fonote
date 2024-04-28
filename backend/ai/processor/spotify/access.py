@@ -32,6 +32,7 @@ class SpotifyAccess:
 
             json_result = json.loads(result.content)
             token = json_result["access_token"]
+            print(token)
             return token
 
         except requests.exceptions.HTTPError as err:
