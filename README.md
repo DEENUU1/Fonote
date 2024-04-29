@@ -21,9 +21,10 @@
   </p>
 </div>
 
-## System Architecture
+## Processing
 
-<img src="assets/architecture.png" alt="system_architecture"/> TODO
+<img src="assets/Processor.excalidraw.png" alt="processor"/>
+
 
 ## Endpoints
 
@@ -80,10 +81,10 @@
     - React
     - Next.JS
 - Docker / Docker compose
-- Redis
-- CI/CD
 - SQLite
 - PostgreSQL
+- Redis
+- CI/CD
 - Stripe
 - Whisper OpenAI
 - Groq API
