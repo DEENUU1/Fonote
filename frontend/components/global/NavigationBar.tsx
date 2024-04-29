@@ -34,6 +34,9 @@ function Navbar() {
                 <Button className="px-3 py-2 cursor-pointer rounded font-extrabold hover:bg-blue-400" onClick={() => signIn(undefined, {callbackUrl: "/dashboard/profile"})}>
                     Login
                 </Button>
+                <Link className="px-3 py-2 cursor-pointer rounded font-extrabold hover:bg-blue-400" href={"/register"}>
+                    Register
+                </Link>
             </>
         );
     } else {
