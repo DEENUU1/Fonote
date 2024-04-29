@@ -6,47 +6,47 @@ import {toast} from "react-toastify";
 import Link from "next/link";
 
 
-export default function RegisterForm(){
+export default function RegisterForm() {
 	const [formData, setFormData] = useState({ // State to hold form data
-    email: "",
-    password1: "",
-    password2: ""
-  });
-  const router = useRouter();
+		email: "",
+		password1: "",
+		password2: ""
+	});
+	const router = useRouter();
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
+	const handleChange = (e: any) => {
+		const {name, value} = e.target;
+		setFormData(prevState => ({
+			...prevState,
+			[name]: value
+		}));
+	};
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+	const handleSubmit = async (e: any) => {
+		e.preventDefault();
 
-    try {
-      const response = await fetch('http://localhost:8000/api/auth/register/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
+		try {
+			const response = await fetch(process.env.API_URL + 'auth/register/', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(formData)
+			});
 
 			const res = await response.json();
 
-      if (response.ok) {
-        router.push("/dashboard/profile");
-      } else {
-        const firstErrorKey = Object.keys(res)[0];
-        const firstErrorMessage = res[firstErrorKey][0];
-        toast.error(firstErrorMessage);
-      }
-    } catch (error) {
-      toast.error("Error while creating user. Please try again.");
-    }
-  };
+			if (response.ok) {
+				router.push("/dashboard/profile");
+			} else {
+				const firstErrorKey = Object.keys(res)[0];
+				const firstErrorMessage = res[firstErrorKey][0];
+				toast.error(firstErrorMessage);
+			}
+		} catch (error) {
+			toast.error("Error while creating user. Please try again.");
+		}
+	};
 	return (
 
 		<>

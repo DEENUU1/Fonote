@@ -11,8 +11,7 @@ services:
             bash -c "
                 python manage.py collectstatic --no-input &&
                 python manage.py migrate --no-input &&
-                python manage.py runserver
-            "
+                gunicorn core.wsgi:application -w 4 -b 0.0.0.0:8000"
         volumes:
           - ./backend:/app
         ports:

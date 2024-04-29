@@ -63,7 +63,7 @@ class InputDataService:
 
         input_data_db = self.input_repository.create(data=data, user=user, source=source)
         self.input_repository.update_status(input_data_db, "PROCESSING")
-        run_processor(input_data_db, source, transcription_type)
+        run_processor.delay(input_data_db.pk, source, transcription_type)
 
         return input_data_db
 

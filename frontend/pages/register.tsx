@@ -8,9 +8,8 @@ export default function Register() {
 	const router = useRouter();
 	const {data: session, status} = useSession({required: false});
 
-
-	if(session){
-		router.push('/dashboard/profile');
+	if (session) {
+		return router.push('/dashboard/profile');
 	}
 
 	return (

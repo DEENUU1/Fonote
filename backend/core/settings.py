@@ -37,7 +37,7 @@ if WORK_MODE == "DEV" or "TEST":
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -227,13 +227,12 @@ REST_FRAMEWORK = {
 
 # Cors configuration
 
-if DEBUG:
-    CORS_ALLOW_ALL_ORIGINS = True
-else:
-    CORS_ALLOWED_ORIGINS = [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000",]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://127.0.0.1:3000", ]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
 
 # Google OAuth configuration
 
