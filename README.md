@@ -68,10 +68,6 @@
 
 ## Local environment installation
 
-Backend in local mode use SQLite so there is no need to use Docker/Docker-compose
-
-#### Without docker
-
 (backend)
 ```bash
 # Clone repository
@@ -80,53 +76,11 @@ git clone https://github.com/DEENUU1/Fonote.git
 # Create .env file 
 cp .env_example .env
 
-# Install libraries
-pip install -r requirements.txt
-
-# Change directory to ./backend
-cd ./backend
-
-# Apply migrations
-python manage.py migrate 
-
-# Create super user 
-python manage.py createsuperuser
-
-# Run server 
-python manage.py runserver 
-```
-
-(frontend)
-```bash
-
-# Change directory to ./frontend
-cd ./frontend
-
-# Create .env.local file
-cp .env.local_example .env.local
-
-# Run Next.js server
-npm run dev
-```
-
-
-#### With docker
-
-```bash
-# Clone repository
-git clone https://github.com/DEENUU1/Fonote.git
-
-# Create .env file 
-cp .env_example .env
-
 # Build image
-docker-compose build
+docker-compose -f docker-compose.dev.yml build
 
 # Run containers
-docker-compose up # -d 
-
-# Run server 
-python manage.py runserver 
+docker-compose -f docker-compose.dev.yml up # -d 
 ```
 
 (frontend)
@@ -142,15 +96,17 @@ cp .env.local_example .env.local
 npm run dev
 ```
 
-#### Commands
+### Commands
 
-Run pytest
+#### Run pytest
 
 ```bash
+# Inside backend container 
+
 pytest 
 ```
 
-### Stripe 
+#### Run Stripe webhook 
 To run stripe locally use this command to run a webhook
 ```bash
 stripe listen --forward-to localhost:8000/api/subscription/webhook/
