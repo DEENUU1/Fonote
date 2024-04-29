@@ -12,7 +12,7 @@
   <h3 align="center">Fonote</h3>
 
   <p align="center">
-    ...
+    Fonote allows you to generate transcriptions of materials from YouTube and Spotify and then create notes based on the received data
     <br />
     <br />
     <a href="https://github.com/DEENUU1/Fonote/issues">Report Bug</a>
@@ -21,15 +21,13 @@
   </p>
 </div>
 
-
-
 ## System Architecture
+
 <img src="assets/architecture.png" alt="system_architecture"/> TODO
 
-
 ## Endpoints
-<img src="assets/endpoints.png" alt="endpoints"/> TODO
 
+<img src="assets/endpoints.png" alt="endpoints"/> TODO
 
 ## Frontend
 
@@ -44,31 +42,56 @@
 <img src="assets/orderhistory.png" alt="order_history"/> 
 <img src="assets/usersubscription.png" alt="user_subscription"/> 
 
-
 ## Features
 
-1. ...
-2. ...
+1. **Subscription Management using Stripe Service**:
+   - Utilizes the Stripe API for handling subscription management.
+   - Implements secure payment processing and recurring billing functionalities.
 
+2. **YouTube Transcription Download**:
+   - Implements a feature to fetch generated transcriptions from YouTube videos.
+
+3. **YouTube Video Audio Processing using OpenAI's Whisper Model**:
+   - Allows users to download any YouTube video and extract its audio content.
+   - Utilizes OpenAI's Whisper model for converting audio into transcriptions.
+   - Implements efficient audio processing techniques for large video files.
+
+4. **Spotify Transcription Download**:
+   - Provides functionality to fetch transcriptions generated from Spotify audio content.
+
+5. **Transcription Translation using Deeply API**:
+   - Integrates the Deeply API for translating transcriptions into different languages.
+
+6. **Note Generation with Groq API (Llama 3 model)**:
+   - Employs the Groq API, specifically the Llama 3 model, for generating various types of notes.
+   - Utilizes natural language processing techniques to summarize, extract key points, and format notes.
+   - Customizes note generation based on user preferences and input parameters.
+   - Provides options for different note formats such as plain text, summary, bullet points, etc.
+
+7. **OAuth2 Authentication with Google**:
+   - Implements OAuth2 authentication flow for user authentication and authorization via Google.
+        
 ## Technologies:
 - Python
     - Django / Django Rest Framework
     - Celery
+    - Pytest
 - Typescript
-  - React
-  - Next.JS
+    - React
+    - Next.JS
 - Docker / Docker compose
 - Redis
 - CI/CD
 - SQLite
+- PostgreSQL
 - Stripe
 - Whisper OpenAI
 - Groq API
 
-
 ## Local environment installation
 
 (backend)
+
 ```bash
 # Clone repository
 git clone https://github.com/DEENUU1/Fonote.git
@@ -84,6 +107,7 @@ docker-compose -f docker-compose.dev.yml up # -d
 ```
 
 (frontend)
+
 ```bash
 
 # Change directory to ./frontend
@@ -106,12 +130,13 @@ npm run dev
 pytest 
 ```
 
-#### Run Stripe webhook 
+#### Run Stripe webhook
+
 To run stripe locally use this command to run a webhook
+
 ```bash
 stripe listen --forward-to localhost:8000/api/subscription/webhook/
 ```
-
 
 ## Authors
 
