@@ -84,10 +84,13 @@ class FragmentOutputSerializer(ModelSerializer):
         Returns:
             dict: A dictionary representing hours, minutes, and seconds.
         """
-        hours = int(time_in_seconds // 3600)
-        minutes = int((time_in_seconds % 3600) // 60)
-        seconds = int(time_in_seconds % 60)
-        return {'hours': hours, 'minutes': minutes, 'seconds': seconds}
+        try:
+            hours = int(time_in_seconds // 3600)
+            minutes = int((time_in_seconds % 3600) // 60)
+            seconds = int(time_in_seconds % 60)
+            return {'hours': hours, 'minutes': minutes, 'seconds': seconds}
+        except TypeError:
+            return {'hours':  0, 'minutes': 0, 'seconds': 0}
 
     class Meta:
         """Metadata options for the FragmentOutputSerializer."""

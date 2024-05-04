@@ -8,9 +8,8 @@ from ai.repositories.input_repository import InputDataRepository
 from ai.serializers.fragment_serializers import FragmentInputSerializer
 from ai.serializers.input_data_serializers import InputDataUpdateSerializer
 from .api_wrapper import SpotifyAPIWrapper
-from .auto_transcription import SpotifyAutoTranscription
 from ..audio.fragment_list import FragmentList
-from .access import SpotifyAccess
+from .generated_transcription import SpotifyGeneratedTranscription
 
 logger = logging.getLogger(__name__)
 
@@ -27,10 +26,9 @@ class SpotifyProcessor:
         if self.transcription_type == "LLM":
             raise ValueError("LLM transcription is not supported for Spotify")
 
-        auto_transcription = SpotifyAutoTranscription(source_url)
-        transcription = auto_transcription.transcribe()
+        generated_transcription = SpotifyGeneratedTranscription(source_url)
 
-        return transcription
+        return generated_transcription.run()
 
     @staticmethod
     def map_languages_to_code(language: str) -> str:
@@ -64,20 +62,18 @@ class SpotifyProcessor:
 
     def process(self) -> None:
         logger.info(f"Processing input data {self.input_data.id}")
-        # access = SpotifyAccess()
-        # print(access.get_token())
-        api_wrapper = SpotifyAPIWrapper()
-        spotify_data = api_wrapper.get_episode_data(self.get_episode_id(self.input_data.source_url))
-        transcription = self.get_transcription(self.input_data.source_url)
 
-        origin_language_code = spotify_data.language
+        # api_wrapper = SpotifyAPIWrapper()
+        # spotify_data = api_wrapper.get_episode_data(self.get_episode_id(self.input_data.source_url))
+        transcription = self.get_transcription(self.input_data.source_url)
+        # origin_language_code = spotify_data.language
 
         lang_code = self.map_languages_to_code(self.input_data.language)
 
         data = {
             "transcription_type": transcription.type_,
-            "audio_length": spotify_data.duration,
-            "source_title": spotify_data.title
+            "audio_length": 69, #spotify_data.duration,
+            "source_title": "title", #spotify_data.title
         }
 
         input_data_update_serializer = InputDataUpdateSerializer(data=data)
@@ -87,14 +83,14 @@ class SpotifyProcessor:
         for idx, fragment in enumerate(transcription.fragments):
             transcription_to_save = None
 
-            if origin_language_code != lang_code:
-                logger.info(f"Translate from {origin_language_code} to {lang_code}")
-                translator = Translator(lang_code)
-                translated_text = translator.translate(fragment.transcriptions)
-
-                transcription_to_save = translated_text
-            else:
-                transcription_to_save = fragment.transcriptions
+            # if origin_language_code != lang_code:
+            #     logger.info(f"Translate from {origin_language_code} to {lang_code}")
+            #     translator = Translator(lang_code)
+            #     translated_text = translator.translate(fragment.transcriptions)
+            #
+            #     transcription_to_save = translated_text
+            # else:
+            transcription_to_save = fragment.transcriptions
 
             data = {
                 "start_time": fragment.start_time,
