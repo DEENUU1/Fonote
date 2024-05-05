@@ -28,7 +28,6 @@ class PlanOutputSerializer(ModelSerializer):
             "description",
             "youtube",
             "spotify",
-            "max_length",
             "max_result",
             "duration",
             "price",

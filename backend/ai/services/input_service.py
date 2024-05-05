@@ -43,15 +43,24 @@ class InputDataService:
         plan = self.plan_repository.get_plan_by_uuid(user_subscription.plan.id)
         source = self.get_source_from_url(data.get("source_url"))
 
+        monthly_usages = self.input_repository.count_user_monthly_usage(user)
+
+        if monthly_usages >= plan.max_input:
+            raise PermissionDenied("You have reached your monthly usage limit.")
+
         transcription_type = data.get("transcription_type")
         language = data.get("language")
 
+        # Check if user has access to LLM transcription
         if transcription_type not in ["GENERATED", "MANUAL"] and not plan.ai_transcription:
             raise PermissionDenied("Your subscription doesn't allow you to process data from AI")
 
+        # Raise exception if user tries to process Spotify data with LLM transcription
+        # This feature is not yet implemented
         if transcription_type == "LLM" and source == "SPOTIFY":
             raise APIException("Not implemented!")
 
+        # Check if user has access to change language
         if not plan.change_lang and language != "English":
             raise PermissionDenied("Your subscription doesn't allow you to change language")
 
