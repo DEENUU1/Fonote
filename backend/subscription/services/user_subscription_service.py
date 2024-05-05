@@ -1,6 +1,6 @@
 import logging
-from datetime import date
-from typing import Dict, Any
+from datetime import date, datetime, timedelta
+from typing import Dict, Any, List
 from uuid import UUID
 
 from django.contrib.auth.backends import UserModel
@@ -170,3 +170,26 @@ class UserSubscriptionService:
             f"Subscription canceled successfully user: {user} subscription: {user_current_plan.subscription_id}"
         )
         return
+
+    def get_list_expired_user_subscription(self) -> List[UserSubscription]:
+        """
+        Retrieves a list of users with expired subscriptions.
+
+        Returns:
+            List[UserSubscription]: A list of users with expired subscriptions.
+        """
+        subscriptions = self.user_subscription_repository.get_list_user_subscription_status_active()
+
+        expired_users = []
+
+        today = datetime.now().date()
+
+        for subscription in subscriptions:
+            if subscription.end_date and subscription.end_date < today - timedelta(days=1):
+                expired_users.append(subscription)
+
+        return expired_users
+
+    def update_status(self, status: str, user_subscription: UserSubscription) -> bool:
+        return self.user_subscription_repository.update_status(status, user_subscription)
+

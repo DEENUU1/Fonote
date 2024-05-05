@@ -78,6 +78,6 @@ class ResultRepository:
         """
         current_month = datetime.now().month
         return self.model.objects.filter(
-            Q(user=user) &
+            Q(input__user=user) &
             Q(created_at__month=current_month)
         ).count()

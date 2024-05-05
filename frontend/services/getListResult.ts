@@ -5,5 +5,8 @@ export default async function getListResult(access_token: string, inputDataId: s
 			Authorization: `Bearer ${access_token}`
 		}
 	})
-	return await res.json()
+	const data = await res.json()
+	console.log(data);
+	console.log(res);
+	return data;
 }

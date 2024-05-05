@@ -66,7 +66,7 @@ class GroqLLM(LLM):
             return content
 
         except Exception as e:
-            logger.error(f"Error generating response: {e}")
+            print(f"Error generating response: {e}")
             return None
 
     def generate(self, result_type: str, input_data: str, language: str) -> Optional[str]:
@@ -83,7 +83,6 @@ class GroqLLM(LLM):
         chunks = self.split_text_to_chunks(input_data)
 
         result = ""
-
         for chunk in chunks:
             response = self.get_response(result_type, chunk.page_content, language)
             if response:

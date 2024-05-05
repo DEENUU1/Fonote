@@ -19,12 +19,13 @@ export default function Dashboard() {
 
 	const [listInputData, setListInputData] = useState([]);
 	const [detailInputData, setDetailInputData] = useState(null);
-	const [listResult, setListResult] = useState([]);
+	const [results, setListResult] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [url, setUrl] = useState("");
 	const [language, setLanguage] = useState("");
 	const [transcription, setTranscription] = useState("");
 
+	// console.log(detailInputData)
 	const handleSubmitCreateInputData = async (e: any) => {
 		e.preventDefault();
 
@@ -115,7 +116,7 @@ export default function Dashboard() {
 								<div className="p-4 sm:ml-64 flex flex-wrap h-[850px]">
 									<InputDataDetailsRender detailInputData={detailInputData}/>
 									<TranscriptionColumn detailInputData={detailInputData}/>
-									<ResultColumn listResult={listResult}/>
+									<ResultColumn listResult={results}/>
 									<ResultTypeButtonRender
 										handleResponseCreate={handleResponseCreate}
 										detailInputData={detailInputData}

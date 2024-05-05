@@ -23,7 +23,7 @@ class ResultListAPIView(APIView):
     permission_classes = (IsAuthenticated,)
     _service = ResultService()
 
-    @method_decorator(cache_page(60 * 60 * 1))
+    # @method_decorator(cache_page(60 * 60 * 1))
     def get(self, request, pk):
         """
         Retrieves a list of results associated with the input data identified by the UUID.

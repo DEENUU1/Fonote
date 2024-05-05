@@ -1,4 +1,4 @@
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 from uuid import UUID
 
 from django.contrib.auth.backends import UserModel
@@ -101,3 +101,25 @@ class UserSubscriptionRepository:
             Optional[UserSubscription]: The current user subscription, if any.
         """
         return self.model.objects.filter(user=user).first()
+
+    def get_list_user_subscription_status_active(self) -> List[UserSubscription]:
+        """
+        Retrieves a list of user subscriptions with status "ACTIVE".
+
+        Returns:
+            List[UserSubscription]: The list of user subscriptions.
+        """
+        return self.model.objects.filter(status="ACTIVE")
+
+    @staticmethod
+    def update_status(status: str, user_subscription: UserSubscription) -> bool:
+        """
+        Updates the status of a user subscription.
+
+        Args:
+            status (str): The new status.
+            user_subscription (UserSubscription): The user subscription to update.
+        """
+        user_subscription.status = status
+        user_subscription.save()
+        return True
