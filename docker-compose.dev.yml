@@ -41,3 +41,14 @@ services:
         depends_on:
             - redis
         restart: always
+
+    celery-beat:
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        container_name: fonote-celery-beat
+        command: celery -A core.celery beat -l info
+        volumes:
+            - ./backend:/app/
+        depends_on:
+            - redis
