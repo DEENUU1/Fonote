@@ -40,5 +40,5 @@ class ResultCreateAPIView(APIView):
         """
         result_serializer = ResultInputSerializer(data=request.data)
         result_serializer.is_valid(raise_exception=True)
-        result_db = self._service.create(result_serializer.validated_data)
+        result_db = self._service.create(result_serializer.validated_data, request.user)
         return Response(ResultOutputSerializer(result_db).data, status=status.HTTP_201_CREATED)

@@ -1,5 +1,9 @@
+from datetime import datetime
 from typing import Dict, Any, Optional
 from uuid import UUID
+
+from django.contrib.auth.backends import UserModel
+from django.db.models import Q
 
 from ..models import InputData
 from ..models.result import Result
@@ -62,3 +66,18 @@ class ResultRepository:
             QuerySet: A queryset containing the results associated with the input data.
         """
         return self.model.objects.filter(input=input_data)
+
+    def count_user_monthly_usage(self, user: UserModel) -> int:
+        """Count the number of results created by a user in the current month.
+
+        Args:
+            user (UserModel): The user associated with the input data.
+
+        Returns:
+            int: The number of results created by XXX user in the current month.
+        """
+        current_month = datetime.now().month
+        return self.model.objects.filter(
+            Q(user=user) &
+            Q(created_at__month=current_month)
+        ).count()
