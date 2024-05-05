@@ -7,7 +7,6 @@ class Plan(models.Model):
     description = models.TextField(null=True)
     youtube = models.BooleanField(default=True)
     spotify = models.BooleanField(default=False)
-    web = models.BooleanField(default=False)
     max_result = models.IntegerField(null=False, default=60)
     max_input = models.IntegerField(null=False, default=15)
     duration = models.IntegerField(null=False)
