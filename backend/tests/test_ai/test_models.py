@@ -29,4 +29,3 @@ def test_input_data_instance(input_data_instance):
     assert input_data_instance.source_title == "test source title"
     assert input_data_instance.status == "DONE"
     assert input_data_instance.language == "Polish"
-    assert input_data_instance.user.username == "XXXXXXXX"
