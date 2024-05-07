@@ -2,4 +2,4 @@ from rest_framework.throttling import UserRateThrottle
 
 
 class ResultCreateThrottle(UserRateThrottle):
-    rate = "10/min"
+    rate = "60/min"

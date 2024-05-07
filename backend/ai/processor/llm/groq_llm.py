@@ -20,7 +20,7 @@ class GroqLLM(LLM):
 
     def __init__(self):
         """Initialize the GroqLLM object."""
-        super().__init__(chunk_size=8000, chunk_overlap=100)
+        super().__init__(chunk_size=4000, chunk_overlap=100)
         self.model: str = "llama3-8b-8192"
 
         if not settings.GROQ_API_KEY:
@@ -82,12 +82,15 @@ class GroqLLM(LLM):
         """
         chunks = self.split_text_to_chunks(input_data)
 
-        result = ""
-        for chunk in chunks:
+        results = ""
+        for idx, chunk in enumerate(chunks):
             response = self.get_response(result_type, chunk.page_content, language)
             if response:
-                result += response + "\n\n"
+                results += response + "\n\n"
 
-        return result
+        if len(chunks) > 1:
+            response = self.get_response(result_type, input_data, language)
+            if response:
+                results = response
 
-
+        return results

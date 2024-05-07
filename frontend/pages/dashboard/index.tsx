@@ -25,7 +25,6 @@ export default function Dashboard() {
 	const [language, setLanguage] = useState("");
 	const [transcription, setTranscription] = useState("");
 
-	// console.log(detailInputData)
 	const handleSubmitCreateInputData = async (e: any) => {
 		e.preventDefault();
 

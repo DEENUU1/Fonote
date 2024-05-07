@@ -4,6 +4,8 @@ from langchain.text_splitter import CharacterTextSplitter
 
 from typing import Optional
 
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
 
 class LLM(ABC):
     """Abstract base class representing a Large Language Model (LLM).
@@ -13,7 +15,7 @@ class LLM(ABC):
         chunk_overlap (int): The amount of overlap between consecutive text chunks.
     """
 
-    def __init__(self, chunk_size: int = 8000, chunk_overlap: int = 100):
+    def __init__(self, chunk_size: int = 2000, chunk_overlap: int = 100):
         """Initialize the LLM object.
 
         Args:
@@ -32,7 +34,11 @@ class LLM(ABC):
         Returns:
             List[str]: A list of text chunks.
         """
-        text_splitter = CharacterTextSplitter(chunk_size=self.chunk_size, chunk_overlap=self.chunk_overlap)
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=self.chunk_size,
+            chunk_overlap=self.chunk_overlap,
+            length_function=len,
+        )
 
         split_text = text_splitter.create_documents([text])
         return split_text
